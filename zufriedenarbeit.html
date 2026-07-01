@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-indigo: #4f46e5;
+            --brand-indigo-light: #eeebff;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 500px 1fr;
+            }
+        }
+
+        /* 大厂科技感外壳卡片 */
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 歌德官方真题纸张排版仿真区 */
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14.5px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .goethe-bullet-list {
+            list-style: none;
+            margin-bottom: 20px;
+            padding-left: 5px;
+        }
+
+        .goethe-bullet-list li {
+            position: relative;
+            padding-left: 24px;
+            font-size: 14.5px;
+            color: #000000;
+            margin-bottom: 14px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .goethe-bullet-list li::before {
+            content: "■";
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            font-size: 10px;
+            color: #334155;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--amber-bg);
+            border-left: 4px solid #f59e0b;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #78350f;
+        }
+
+        /* 范文画布区 */
+        .essay-canvas {
+            font-size: 16.5px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--slate-900);
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .goethe-token {
+            background-color: #fef3c7;
+            border-bottom: 2.5px solid #f59e0b;
+            color: #92400e;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #fde68a;
+            color: #78350f;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+        }
+
+        /* 视窗中央浮动高光解析舱 - 支持手机端长内容自适应滚动 */
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-indigo);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-indigo);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="studio-grid">
+        
+        <!-- 左侧区域：1:1复刻歌德官方真题纸张 -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作真题沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 1</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Sie schreiben in einem Forum einen Beitrag über die Zufriedenheit von Arbeitnehmern mit ihrem Arbeitsplatz.
+                </div>
+
+                <ul class="goethe-bullet-list">
+                    <li>Welche Bedeutung hat Ihrer Meinung nach die Arbeit in unserem Leben?</li>
+                    <li>Nennen Sie Gründe, warum jemand unzufrieden mit seiner Arbeit sein könnte.</li>
+                    <li>Machen Sie Vorschläge, wie sich eine gute Arbeitsatmosphäre schaffen lässt.</li>
+                    <li>Nennen Sie Vorteile eines guten Arbeitsklimas für Arbeitnehmer und Arbeitgeber.</li>
+                </ul>
+
+                <div class="goethe-instructions">
+                    Denken Sie an eine Einleitung und einen Schluss. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Schreiben Sie mindestens 150 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 考官视角：审题核心要点提示</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. 必须包含完整的**引言**与**结论**。<br>2. 评分时不仅看上面 4 个黑点提示是否全部完整作答，更会严审句与句、段与段之间的**语篇逻辑连接**。<br>3. 记住底线要求：字数必须达到 **150 字以上**。</p>
+            </div>
+        </div>
+
+        <!-- 右侧区域：核心高分语料精读画布 -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分范文分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Zufriedenheit am Arbeitsplatz – Wie wichtig ist sie?</div>
+            
+            <div class="essay-canvas">
+                <span class="goethe-token" data-id="1">Meiner Meinung nach</span> spielt Arbeit <span class="goethe-token" data-id="2">eine sehr wichtige Rolle</span> in unserem Leben. Sie <span class="goethe-token" data-id="3">dient nicht nur dazu,</span> <span class="goethe-token" data-id="4">den Lebensunterhalt zu sichern</span>, <span class="goethe-token" data-id="5">sondern bietet uns auch die Möglichkeit</span>, unsere Fähigkeiten weiterzuentwickeln and persönliche Ziele zu erreichen. Deshalb wünschen sich die meisten Menschen einen Arbeitsplatz, an dem sie sich wohlfühlen.
+                <br><br>
+                <span class="goethe-token" data-id="6">Es gibt jedoch viele Gründe, warum</span> Arbeitnehmer mit ihrer Arbeit unzufrieden sein können. Ein häufiger Grund ist ein zu hoher Arbeitsdruck. Außerdem <span class="goethe-token" data-id="7">führen</span> ein niedriges Gehalt oder mangelnde Anerkennung <span class="goethe-token" data-id="7">oft zu Unzufriedenheit</span>. <span class="goethe-token" data-id="8">Meiner Ansicht nach</span> spielt auch das Arbeitsklima <span class="goethe-token" data-id="9">eine entscheidende Rolle</span>. Wenn Kollegen ständig streiten oder die Kommunikation mit den Vorgesetzten nicht gut funktioniert, macht die Arbeit deutlich weniger Spaß.
+                <br><br>
+                <span class="goethe-token" data-id="10">Um eine angenehme Arbeitsatmosphäre zu schaffen</span>, sollten <span class="goethe-token" data-id="11">sowohl</span> Arbeitgeber <span class="goethe-token" data-id="11">als auch</span> Arbeitnehmer <span class="goethe-token" data-id="11">ihren Beitrag leisten</span>. <span class="goethe-token" data-id="12">Einerseits</span> sollten Vorgesetzte ihre Mitarbeiter respektvoll behandeln, ihre Leistungen anerkennen und ihnen zuhören. <span class="goethe-token" data-id="12">Andererseits</span> ist es wichtig, dass Kollegen offen miteinander kommunizieren, sich gegenseitig unterstützen und Konflikte möglichst früh lösen. Regelmäßige Teambesprechungen oder gemeinsame Aktivitäten können ebenfalls <span class="goethe-token" data-id="13">dazu beitragen</span>, das Vertrauen innerhalb des Teams <span class="goethe-token" data-id="13">zu stärken</span>.
+                <br><br>
+                Ein gutes Arbeitsklima <span class="goethe-token" data-id="14">bringt viele Vorteile mit sich</span>. Zufriedene Mitarbeiter sind oft motivierter, arbeiten effizienter und melden sich seltener krank. <span class="goethe-token" data-id="15">Davon profitieren nicht nur</span> die Arbeitnehmer selbst, <span class="goethe-token" data-id="15">sondern auch</span> die Arbeitgeber. Denn motivierte Mitarbeiter leisten bessere Arbeit, was langfristig zum Erfolg eines Unternehmens beiträgt.
+                <br><br>
+                <span class="goethe-token" data-id="16">Zusammenfassend lässt sich sagen, dass</span> Geld zwar wichtig ist, ein respektvoller Umgang und eine angenehme Arbeitsatmosphäre jedoch genauso wichtig sind. Nur wenn sich Mitarbeiter am Arbeitsplatz wohlfühlen, können sie <span class="goethe-token" data-id="17">ihr volles Potenzial entfalten</span>.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 中央高光视窗解析舱 -->
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 核心语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "Meiner Meinung nach (+ Verb)",
+                cn: "释义：在我看来 / 依我之见",
+                tip: "这是表达观点的首选核心结构。<b>核心语法规矩</b>：Meiner Meinung nach 整体占据句子的【第一位】，因此其后紧接的必须是【变位动词】，接着才是主语（即主谓倒装）。千万不要像英语一样随手加逗号！整个大作文里用1-2次即可，注意与其它观点句型轮换。",
+                ex: "<b>核心拓展例句：</b><br><b>Meiner Meinung nach</b> bietet das flexible Homeoffice sowohl Vor- als auch Nachteile für die Angestellten.<br>(在我看来，弹性居家办公对员工而言既有利也有弊。)"
+            },
+            2: {
+                de: "spielt ... eine sehr wichtige Rolle (in + Dat.)",
+                cn: "释义：在……中扮演着非常重要的角色",
+                tip: "经典的<b>功能动词结构（Funktionsverbgefüge）</b>。用它来代替千篇一律的 'ist sehr wichtig'。注意：Rolle 后接介词 in 必须搭配第三格（Dativ），表示在某一个领域或范畴内起重要作用。",
+                ex: "<b>核心拓展例句：</b><br>Die kontinuierliche Weiterbildung <b>spielt eine sehr wichtige Rolle</b> im modernen Berufsleben.<br>(持续的进修在现代职场生活中扮演着非常重要的角色。)"
+            },
+            3: {
+                de: "dient nicht nur dazu, ...",
+                cn: "释义：不仅用于/有助于做某事……",
+                tip: "固定搭配 dienen dazu 意思是“目的是为了……”，后面引导一个 zu 不定式从句。当它与 nicht nur... sondern auch 联动时，不仅能够极大地拉长句子结构，还能向考官清晰展现你驾驭高级复合复句的深厚功底。",
+                ex: "<b>核心拓展例句：</b><br>Ein Universitätsstudium <b>dient nicht nur dazu</b>, theoretisches Fachwissen zu erwerben, sondern erweitert auch den Horizont.<br>(大学学业不仅用于获取理论专业知识，还能开阔眼界。)"
+            },
+            4: {
+                de: "den Lebensunterhalt zu sichern",
+                cn: "释义：维持生计 / 确保生活来源",
+                tip: "社会、职场话题中极其地道的<b>行业级动宾搭配</b>。Lebensunterhalt（生活费、生计）与动词 sichern（保障、确保）是固定黏合搭配。写作时作为 zu 不定式的核心，远比口语化的 'Geld verdienen（赚钱）' 更有学术书面语质感。",
+                ex: "<b>核心拓展例句：</b><br>In der heutigen Gesellschaft arbeiten viele Menschen Überstunden, um <b>den Lebensunterhalt zu sichern</b>.<br>(在当今社会，许多人为了保障生计而加班加点地工作。)"
+            },
+            5: {
+                de: "sondern bietet uns auch die Möglichkeit, ... zu ...",
+                cn: "释义：而且还为我们提供了……的可能性/机会",
+                tip: "完美承接前半句的 nicht nur。这里的核心加分项在于功能动词搭配 bieten die Möglichkeit（提供可能），用来高级替换单调的情态动词 können。注意：Möglichkeit 后面通常后挂一个完整的 zu 不定式从句进行概念拓展。",
+                ex: "<b>核心拓展例句：</b><br>Ein Auslandsjahr ist zwar teuer, <b>sondern bietet uns auch die Möglichkeit</b>, eine neue Kultur intensiv kennenzulernen.<br>(去国外待一年虽然昂贵，但它还为我们提供了深入了解一种新文化的机会。)"
+            },
+            6: {
+                de: "Es gibt jedoch viele Gründe, warum ...",
+                cn: "释义：然而，存在着很多为什么……的原因",
+                tip: "篇章承上启下的黄金转折过渡句型。副词 jedoch（然而）放在变位动词后第三位，语气比直接放在句首的 Aber 更为文雅严谨。注意：warum 引导的是<b>原因从句</b>，从句的变位动词必须雷打不动地移到【句末】。",
+                ex: "<b>核心拓展例句：</b><br><b>Es gibt jedoch viele Gründe, warum</b> immer mehr junge Menschen das Leben in der Großstadt bevorzugen.<br>(然而，有很多为什么越来越多的年轻人更偏爱大城市生活的理由。)"
+            },
+            7: {
+                de: "führen ... oft zu Unzufriedenheit",
+                cn: "释义：常常导致/引发不满意",
+                tip: "逻辑论证链条的核心动词搭配。führen zu + Dativ（导致……结果）。名词 Unzufriedenheit 也可以根据具体考试话题灵活替换为 Stress（压力）、Misserfolg（失败）或 Konflikten（冲突），是分析负面原因时的必背得分公式。",
+                ex: "<b>核心拓展例句：</b><br>Ein permanenter Zeitdruck und mangelnde Anerkennung <b>führen oft zu Unzufriedenheit</b> am Arbeitsplatz.<br>(长期的集体时间压力和缺乏认可常常导致职场中的不满意。)"
+            },
+            8: {
+                de: "Meiner Ansicht nach (+ Verb)",
+                cn: "释义：在我看来 / 我的观点是",
+                tip: "Meiner Meinung nach 的<b>高阶完美替换词</b>。歌德学院考官在批改B2作文时，极度看重词汇的丰富度。把 Meinung 换成 Ansicht，同样严格遵循【整体占第一位，后接变位动词】的语序规则，让文章瞬间不重复。",
+                ex: "<b>核心拓展例句：</b><br><b>Meiner Ansicht nach</b> sollten die Gebühren für den öffentlichen Nahverkehr komplett abgeschafft werden.<br>(在我看来，公共短途交通的费用应当完全取消。)"
+            },
+            9: {
+                de: "spielt eine entscheidende Rolle",
+                cn: "释义：起着决定性的 / 至关重要的作用",
+                tip: "对 wichtige Rolle 的强力升级版。entscheidend 意为“决定性的”。当你在论证中强调某个因素是解决问题的关键点时，使用这个词能让你的论证语势瞬间变得非常强而有力。",
+                ex: "<b>核心拓展例句：</b><br>Bei der Erziehung von Kindern <b>spielt</b> das Vorbild der Eltern <b>eine entscheidende Rolle</b>.<br>(在儿童教育中，父母的榜样作用起着决定性的作用。)"
+            },
+            10: {
+                de: "Um eine angenehme Arbeitsatmosphäre zu schaffen",
+                cn: "释义：为了创造一个舒适的工作氛围",
+                tip: "由 um...zu 引导的<b>目的状语从句</b>。当这个从句整体置于主句之前时（即占第一位），【主句必须紧跟动词开头】（置于逗号后面）。动词 schaffen（创造、建立）在职场和环保话题中比单纯的 machen 专业度高出很多。",
+                ex: "<b>核心拓展例句：</b><br><b>Um eine angenehme Arbeitsatmosphäre zu schaffen</b>, müssen Vorgesetzte und Mitarbeiter offen kommunizieren.<br>(为了营造舒适的工作氛围，管理层和员工必须进行坦诚的沟通。)"
+            },
+            11: {
+                de: "sowohl ... als auch ... ihren Beitrag leisten",
+                cn: "释义：无论是……还是……都应该做出自己的贡献",
+                tip: "双重并列连词 sowohl...als auch...（既……又……）与固定动宾搭配 einen Beitrag leisten zu + D（为……做出贡献）的强强联合。常用于呼吁多方共同承担责任的场景，是提升语篇统筹能力的满分句型。",
+                ex: "<b>核心拓展例句：</b><br><b>Sowohl</b> der Staat <b>als auch</b> die Bürger müssen <b>ihren Beitrag</b> zum Umweltschutz <b>leisten</b>.<br>(无论是国家还是公民，都必须为环境保护做出自己的贡献。)"
+            },
+            12: {
+                de: "Einerseits ..., andererseits ...",
+                cn: "释义：一方面……，另一方面……",
+                tip: "辩证思维（正反双向论证）的终极武器。这两个词分别属于副词，<b>各自占据所在分句的【第一位】</b>。因此它们后面都必须紧跟变位动词（即：Einerseits + 动词 + 主语，andererseits + 动词 + 主语），很多学生常在这里犯语序错误！",
+                ex: "<b>核心拓展例句：</b><br><b>Einerseits</b> bringt das Internet viel Komfort, <b>andererseits</b> erhöht es das Risiko von Cyber-Kriminalität.<br>(一方面互联网带来了许多便利，另一方面它也增加了网络犯罪的风险。)"
+            },
+            13: {
+                de: "dazu beitragen, ... zu stärken",
+                cn: "释义：有助于增强…… / 为增强……做出贡献",
+                tip: "这是 beitragen zu + D 结构的高级演变。当贡献的具体内容是一个动作时，德语习惯用<b>代副词 dazu</b> 先行占位，后面再精准引导一个 zu 不定式从句。动词 stärken（增强、巩固）在论述抽象概念（如信任、竞争力、身体素质）时极为地道。",
+                ex: "<b>核心拓展例句：</b><br>Regelmäßiger Sport kann <b>dazu beitragen</b>, das Immunsystem des Körpers <b>zu stärken</b>.<br>(规律的运动有助于增强身体的免疫系统。)"
+            },
+            14: {
+                de: "bringt viele Vorteile mit sich",
+                cn: "释义：随之带来许多好处 / 伴随着许多优势",
+                tip: "万能利弊论述结构：etwas (Akk.) mit sich bringen（随之带来……）。只要题目要求你分析某个现象、政策或选择的利弊（Vorteile und Nachteile），这个句型就是雷打不动的得分点，书面语感极强。",
+                ex: "<b>核心拓展例句：</b><br>Die Einführung von flexiblen Arbeitszeiten <b>bringt viele Vorteile</b> für berufstätige Eltern <b>mit sich</b>.<br>(弹性工作制的引入给在职父母带来了许多好处。)"
+            },
+            15: {
+                de: "Davon profitieren nicht nur ..., sondern auch ...",
+                cn: "释义：不仅……能从中受益，而且……也同样",
+                tip: "这里巧妙使用了<b>代副词 Davon（从中）</b>作前句内容的指代，起到了极其完美的段落内连贯（Kohärenz）作用。结合 profitierte von + D（从……中受益）和递进并列连词，逻辑层次非常紧密饱满。",
+                ex: "<b>核心拓展例句：</b><br>Wenn Firmen in Klimaschutz investieren, <b>davon profitieren nicht nur</b> die Natur, <b>sondern auch</b> das Image des Betriebs.<br>(如果企业投资气候保护，不仅自然界能从中受益，企业的形象也同样能得到提升。)"
+            },
+            16: {
+                de: "Zusammenfassend lässt sich sagen, dass ...",
+                cn: "释义：总而言之可以说 / 综上所述，……",
+                tip: "歌德官方阅卷人最爱的标准大作文结尾总括句！利用了固定被动替代结构 lässt sich sagen（可以说）。注意：后面的 dass 引导的是<b>宾语从句</b>，整句话的所有核心动词、变位动词必须<b>毫无例外地堆在句子的最末尾</b>。",
+                ex: "<b>核心拓展例句：</b><br><b>Zusammenfassend lässt sich sagen, dass</b> eine ausgewogene Work-Life-Balance für die Gesundheit unerlässlich ist.<br>(总而言之可以说，均衡的职场与生活平衡对健康是必不可少的。)"
+            },
+            17: {
+                de: "ihr volles Potenzial entfalten",
+                cn: "释义：充分发挥他们的潜能",
+                tip: "极具修辞美感和说服力的职场/教育话题终极升华短语。entfalten（展开、施展），这里生动地形容潜能像翅膀或花朵一样完全绽放。适合放在文章最后一段作为呼吁、总结或建议的价值拉满句使用。",
+                ex: "<b>核心拓展例句：</b><br>Nur in einer angstfreien und motivierenden Umgebung können Schüler <b>ihr volles Potenzial entfalten</b>.<br>(只有在没有恐惧且充满激励的环境中，学生们才能充分发挥出他们的潜能。)"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 深度语法剖析：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
