@@ -2,126 +2,255 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>身份验证 - 德语B2写作训练营</title>
-    
-    <!-- 引入 Tailwind CSS（与你的主页面保持高质感设计同步） -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>德语B2真题写作训练营</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
-        
-        body {
-            background-color: #FAFAFA;
-            font-family: 'Inter', 'Noto Sans SC', sans-serif;
-            color: #111827;
+        :root {
+            --bg-color: #f6f8fa;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-sub: #6b7280;
+            --text-link: #9ca3af;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans CJK SC", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             -webkit-tap-highlight-color: transparent;
-            letter-spacing: -0.01em;
         }
 
-        .premium-input {
-            background: #FFFFFF;
-            border: 1px solid rgba(229, 231, 235, 0.8);
+        body {
+            background-color: var(--bg-color);
+            font-family: var(--font-family);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px 16px;
+            color: var(--text-main);
+        }
+
+        /* 核心容器：兼顾手机全屏与电脑端居中视窗 */
+        .container {
+            width: 100%;
+            max-width: 540px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 0 auto;
+        }
+
+        /* 头部大卡片 */
+        .header-card {
+            background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+            border-radius: 24px;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* CEFR 标签 */
+        .badge {
+            background-color: #111827;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        /* 主标题 */
+        .main-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        /* 副标题描述 */
+        .description {
+            background-color: rgba(243, 244, 246, 0.6);
             border-radius: 16px;
-            transition: all 0.2s ease;
+            padding: 16px 20px;
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.6;
+            text-align: justify;
         }
 
-        .premium-input:focus {
-            border-color: #4F46E5;
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
-            outline: none;
+        /* 关卡列表容器 */
+        .level-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        /* 单个关卡卡片入口 */
+        .level-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.015);
+            border: 1px solid rgba(243, 244, 246, 0.8);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 电脑端悬浮反馈，手机端点按微缩 */
+        @media (hover: hover) {
+            .level-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+                border-color: rgba(209, 213, 219, 0.6);
+            }
+        }
+        .level-item:active {
+            transform: scale(0.98);
+            background-color: #f9fafb;
+        }
+
+        /* 关卡数字图标基础样式 */
+        .level-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-right: 16px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* 各关卡独立的渐变色方案（严格参考 3.jpg 视觉） */
+        .bg-level-1 { background: linear-gradient(135deg, #4f46e5, #3b82f6); }
+        .bg-level-2 { background: linear-gradient(135deg, #06b6d4, #0ea5e9); }
+        .bg-level-3 { background: linear-gradient(135deg, #a855f7, #ec4899); }
+        .bg-level-4 { background: linear-gradient(135deg, #f59e0b, #eab308); }
+
+        /* 文本内容区域 */
+        .level-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-right: 8px;
+        }
+
+        .level-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .level-subtitle {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-sub);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* 右侧箭头 */
+        .chevron {
+            color: var(--text-link);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+        
+        @media (hover: hover) {
+            .level-item:hover .chevron {
+                transform: translateX(2px);
+                color: var(--text-main);
+            }
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen px-5 antialiased bg-[#FDFDFD]">
+<body>
 
-    <div class="w-full max-w-[400px] relative z-10">
-        
-        <!-- 登录卡片容器 -->
-        <div class="relative p-8 rounded-[28px] bg-white border border-neutral-100 shadow-[0_12px_40px_rgba(0,0,0,0.03)] overflow-hidden">
-            <div class="absolute -right-12 -top-12 w-32 h-32 bg-indigo-100/40 rounded-full blur-2xl pointer-events-none"></div>
-            <div class="absolute -left-12 -bottom-12 w-32 h-32 bg-amber-50/50 rounded-full blur-2xl pointer-events-none"></div>
-            
-            <div class="relative z-10">
-                <!-- 头部徽章 -->
-                <div class="flex justify-center">
-                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-extrabold tracking-widest bg-neutral-900 text-neutral-100 shadow-sm uppercase">
-                        <span>GEHTALLES DEUTSCH</span>
-                    </div>
-                </div>
-                
-                <h1 class="text-2xl font-[900] text-center text-neutral-900 mt-5 mb-2 tracking-tight">
-                    专属训练营通道
-                </h1>
-                <p class="text-xs text-center text-neutral-400 font-medium mb-8">
-                    请输入授权凭证以开启 B2 高分特训
-                </p>
-
-                <!-- 表单处理 -->
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-[11px] font-bold text-neutral-500 uppercase tracking-wider mb-2 px-1">Access Token / 访问密码</label>
-                        <input 
-                            type="password" 
-                            id="token-input" 
-                            placeholder="请输入通关密码" 
-                            class="premium-input w-full px-4 py-3.5 text-sm font-medium tracking-wide text-neutral-800 placeholder-neutral-300"
-                            onkeydown="if(event.key==='Enter') verifyToken()"
-                        >
-                    </div>
-
-                    <!-- 错误提示（默认隐藏） -->
-                    <div id="error-msg" class="text-xs text-rose-500 font-bold px-1 hidden transition-all flex items-center gap-1">
-                        <span class="w-1 h-1 rounded-full bg-rose-500 animate-pulse"></span>
-                        密码错误或授权已过期，请联系刘老师
-                    </div>
-
-                    <!-- 验证按钮 -->
-                    <button 
-                        onclick="verifyToken()" 
-                        class="w-full mt-2 py-3.5 bg-gradient-to-r from-neutral-900 to-neutral-800 active:scale-[0.98] text-white text-sm font-bold rounded-2xl shadow-sm transition-all tracking-wide"
-                    >
-                        验证并进入系统
-                    </button>
-                </div>
+    <div class="container">
+        <!-- 头部大卡片 -->
+        <header class="header-card">
+            <div class="badge">CEFR GER • Niveau B2</div>
+            <h1 class="main-title">B2写作高分训练营</h1>
+            <div class="description">
+                全面掌握主流考试（歌德/Telc/ÖSD）B2真题写作核心框架、高分句型与话题破局逻辑。
             </div>
-        </div>
+        </header>
 
-        <footer class="mt-8 text-center">
-            <p class="text-[9px] text-neutral-400 font-bold tracking-widest uppercase">© 2026 GEHTALLES DEUTSCH教研室</p>
-        </footer>
+        <!-- 关卡入口列表 -->
+        <main class="level-list">
+            
+            <!-- 关卡 01 (已关联目标页面) -->
+            <a href="zufriedenarbeit.html" class="level-item">
+                <div class="level-number bg-level-1">01</div>
+                <div class="level-content">
+                    <span class="level-title">工作满意度</span>
+                    <span class="level-subtitle">Arbeitszufriedenheit</span>
+                </div>
+                <div class="chevron">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </a>
+
+            <!-- 关卡 02 -->
+            <a href="#" class="level-item">
+                <div class="level-number bg-level-2">02</div>
+                <div class="level-content">
+                    <span class="level-title">论坛议论文 (Teil 1) 黄金骨架</span>
+                    <span class="level-subtitle">Forumsbeitrag Struktur</span>
+                </div>
+                <div class="chevron">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </a>
+
+            <!-- 关卡 03 -->
+            <a href="#" class="level-item">
+                <div class="level-number bg-level-3">03</div>
+                <div class="level-content">
+                    <span class="level-title">官方邮件 (Teil 2) 格式指引</span>
+                    <span class="level-subtitle">Formelle E-Mail Regel</span>
+                </div>
+                <div class="chevron">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </a>
+
+            <!-- 关卡 04 -->
+            <a href="#" class="level-item">
+                <div class="level-number bg-level-4">04</div>
+                <div class="level-content">
+                    <span class="level-title">四大考点任务(Punkte)对齐</span>
+                    <span class="level-subtitle">Leitpunkte erfüllen</span>
+                </div>
+                <div class="chevron">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </a>
+
+        </main>
     </div>
 
-    <script>
-        // 在页面加载时，如果检查到已经有正确的 token，直接帮用户跳转，省去重复输入的麻烦
-        window.onload = function() {
-            if (localStorage.getItem('map_access') === "Hallo2026") {
-                // 请确保这里的文件名和你的B2主页面文件名完全一致（例如 b2-camp.html）
-                window.location.href = "b2-camp.html"; 
-            }
-        }
-
-        function verifyToken() {
-            const inputVal = document.getElementById('token-input').value.trim();
-            const errorMsg = document.getElementById('error-msg');
-
-            // 对应主页面的安全检测口令
-            if (inputVal === "Hallo2026") {
-                errorMsg.classList.add('hidden');
-                // 核心：成功时注入本地缓存，打通大门
-                localStorage.setItem('map_access', 'Hallo2026');
-                
-                // 验证成功后丝滑跳转到主列表页
-                // 【注意】请将下面的 "b2-camp.html" 修改为你实际的B2主页网页文件名
-                window.location.href = "b2-camp.html";
-            } else {
-                // 密码错误提示
-                errorMsg.classList.remove('hidden');
-                document.getElementById('token-input').focus();
-            }
-        }
-
-        // 防审查元素右键（与主页策略保持一致）
-        document.oncontextmenu = function() { return false; };
-    </script>
 </body>
 </html>
