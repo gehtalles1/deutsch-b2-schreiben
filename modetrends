@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio (Modetrends)</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-indigo: #4f46e5;
+            --brand-indigo-light: #eeebff;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        /* 顶部操作区 */
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        /* 返回键样式 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 500px 1fr;
+            }
+        }
+
+        /* 大厂科技感外壳卡片 */
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 歌德官方真题纸张排版仿真区 */
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14.5px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .goethe-bullet-list {
+            list-style: none;
+            margin-bottom: 20px;
+            padding-left: 5px;
+        }
+
+        .goethe-bullet-list li {
+            position: relative;
+            padding-left: 24px;
+            font-size: 14.5px;
+            color: #000000;
+            margin-bottom: 14px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .goethe-bullet-list li::before {
+            content: "■";
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            font-size: 10px;
+            color: #334155;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--amber-bg);
+            border-left: 4px solid #f59e0b;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #78350f;
+        }
+
+        /* 范文画布区 */
+        .essay-canvas {
+            font-size: 16.5px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--slate-900);
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .goethe-token {
+            background-color: #fef3c7;
+            border-bottom: 2.5px solid #f59e0b;
+            color: #92400e;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #fde68a;
+            color: #78350f;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+        }
+
+        /* 视窗中央浮动高光解析舱 */
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-indigo);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-indigo);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部返回操作栏 -->
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <!-- 左侧区域：1:1复刻歌德官方真题纸张 (依据 1_3.png) -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作真题沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 1</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Sie schreiben auf der Meinungsseite einer Modezeitschrift über die Kurzlebigkeit von Modetrends.
+                </div>
+
+                <ul class="goethe-bullet-list">
+                    <li>Äußern Sie Ihre Meinung zu wechselnden Modetrends.</li>
+                    <li>Nennen Sie Gründe, warum junge Menschen neue Modeerscheinungen mitmachen.</li>
+                    <li>Nennen Sie Möglichkeiten, wie man seine persönlichen Vorstellungen von Mode umsetzen kann.</li>
+                    <li>Nennen Sie Nachteile des ungefilterten Kopierens von Modetrends.</li>
+                </ul>
+
+                <div class="goethe-instructions">
+                    Denken Sie an eine Einleitung und einen Schluss. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Schreiben Sie mindestens 150 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 考官视角：审题核心要点提示</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. 必须包含完整的**引言**与**结论**。<br>2. 本题核心围绕**时尚潮流的短暂性**展开，需精准切入四个提示点。<br>3. 注意第3点要求写出**落实个人时尚设想的可能途径**，第4点需论述**盲目跟风/不加筛选复制潮流的弊端**。<br>4. 字数必须达到 **150 字以上**。</p>
+            </div>
+        </div>
+
+        <!-- 右侧区域：核心高分语料精读画布 -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分范文分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Mode im Wandel – Individueller Stil oder blinder Konsum?</div>
+            
+            <div class="essay-canvas">
+                <span class="goethe-token" data-id="1">Meiner Meinung nach</span> sind wechselnde Modetrends ein faszinierendes Phänomen, das unsere Kultur lebendig hält. Dennoch darf man nicht übersehen, dass Mode <span class="goethe-token" data-id="2">eine sehr wichtige Rolle</span> im Alltag vieler Menschen spielt, da sie eine Form des visuellen Selbstausdrucks darstellt. Allerdings <span class="goethe-token" data-id="3">dient die Modeindustrie heute oft dazu</span>, durch ständig neue Kollektionen den Konsum künstlich anzufeuern, anstatt echte Kreativität zu fördern. Daher betrachte ich die extreme Kurzlebigkeit von Trends eher kritisch.
+                <br><br>
+                <span class="goethe-token" data-id="4">Es gibt jedoch viele Gründe, warum</span> insbesondere junge Menschen fast jede neue Modeerscheinung mitmachen. Ein wesentlicher Faktor ist der Wunsch nach sozialer Zugehörigkeit und Anerkennung im Freundeskreis. Zudem <span class="goethe-token" data-id="5">führen</span> soziale Medien und der Einfluss von Influencern <span class="goethe-token" data-id="5">oft zu</span> einem enormen Gruppenzwang. <span class="goethe-token" data-id="6">Meiner Ansicht nach</span> spielen Plattformen wie Instagram oder TikTok hierbei <span class="goethe-token" data-id="7">eine entscheidende Rolle</span>, da sie Trends in Sekundenschnelle global verbreiten und Jugendliche zum schnellen Kauf verleiten.
+                <br><br>
+                <span class="goethe-token" data-id="8">Um seine persönlichen Vorstellungen von Mode umzusetzen</span>, muss man jedoch keineswegs jedem Trend blind hinterherlaufen. <span class="goethe-token" data-id="9">Sowohl</span> durch die Kombination von Second-Hand-Kleidung <span class="goethe-token" data-id="9">als auch</span> durch das gezielte Upcycling alter Kleidungsstücke kann jeder <span class="goethe-token" data-id="9">seinen eigenen Beitrag leisten</span>, um einen einzigartigen Stil zu kreieren. <span class="goethe-token" data-id="10">Einerseits</span> schont dies den Geldbeutel, <span class="goethe-token" data-id="10">andererseits</span> ermöglicht es eine bewusste Abgrenzung vom Massengeschmack. Auch der Fokus auf zeitlose Klassiker kann <span class="goethe-token" data-id="11">dazu beitragen</span>, das eigene Modebewusstsein nachhaltig <span class="goethe-token" data-id="11">zu stärken</span>.
+                <br><br>
+                Das ungefilterte Kopieren von Modetrends <span class="goethe-token" data-id="12">bringt jedoch erhebliche Nachteile mit sich</span>. Wer Trends unreflektiert übernimmt, verliert oft seine eigene Identität und wird austauschbar. <span class="goethe-token" data-id="13">Davon profitieren nicht nur</span> die großen Fast-Fashion-Konzerne, <span class="goethe-token" data-id="13">sondern auch</span> die Wegwerfkultur wird dadurch massiv gefördert, was gravierende ökologische Folgen hat.
+                <br><br>
+                <span class="goethe-token" data-id="14">Zusammenfassend lässt sich sagen, dass</span> Kleidung zwar ein wunderbares Mittel zur Selbstdarstellung ist, der blinde Gehorsam gegenüber wechselnden Trends jedoch die eigene Originalität einschränkt. Nur wer sich vom Konsumzwang befreit, kann seinen eigenen Modestil finden und <span class="goethe-token" data-id="15">seine Persönlichkeit voll entfalten</span>.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 中央高光视窗解析舱 -->
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 核心语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "Meiner Meinung nach (+ Verb)",
+                cn: "释义：在我看来 / 依我之见",
+                tip: "用于首段引言中直接切入核心话题并表达个人主观态度。<b>语法规则</b>：作为副词短语整体占据句子的【第一位】，后面必须紧跟【变位动词】（主谓倒装）。切忌像英语一样在其后加逗号。",
+                ex: "<b>核心拓展例句：</b><br><b>Meiner Meinung nach</b> sind wechselnde Modetrends ein Spiegelbild unserer dynamischen Gesellschaft.<br>(在我看来，交替变换的时尚潮流是我们动态社会的一面镜子。)"
+            },
+            2: {
+                de: "spielt ... eine sehr wichtige Rolle (in + Dat.)",
+                cn: "释义：扮演着非常重要的角色 / 起到十分重要的作用",
+                tip: "标准的<b>功能动词结构（Funktionsverbgefüge）</b>，用于高级替换千篇一律的 'ist sehr wichtig'。当提到抽象事物（如时尚、文化）在生活中具有不可忽视的地位时，这是必不可少的加分核心结构。",
+                ex: "<b>核心拓展例句：</b><br>Die Kleidung, die wir tragen, <b>spielt eine sehr wichtige Rolle</b> bei der nonverbalen Kommunikation.<br>(我们所穿的衣物在非语言沟通中扮演着非常重要的角色。)"
+            },
+            3: {
+                de: "dient ... oft dazu, ... zu ...",
+                cn: "释义：常常用于…… / 旨在达到……的目的",
+                tip: "dienen dazu 后接一个完整的 zu 不定式短语。此处用来批判性地分析现代时尚工业的商业目的，展示出考生不仅能陈述客观现象，还能熟练运用高级复合句进行深度的逻辑分析。",
+                ex: "<b>核心拓展例句：</b><br>Die ständige Werbung in sozialen Medien <b>dient oft dazu</b>, künstliche Bedürfnisse bei Konsumenten zu wecken.<br>(社交媒体上的持续广告往往旨在激起消费者虚假的需求。)"
+            },
+            4: {
+                de: "Es gibt jedoch viele Gründe, warum ...",
+                cn: "释义：然而，存在着许多为什么……的原因",
+                tip: "用于引出第二个黑点任务（分析年轻人追赶潮流的原因）。带有副词 jedoch（然而）的过渡句极富篇章逻辑连贯性（Kohärenz）。注意：warum 引导的是<b>从句</b>，其变位动词必须雷打不动地置于【句末】。",
+                ex: "<b>核心拓展例句：</b><br><b>Es gibt jedoch viele Gründe, warum</b> nachhaltige Mode in den letzten Jahren immer populärer geworden ist.<br>(然而，有很多为什么环保时尚在近几年变得越来越流行的理由。)"
+            },
+            5: {
+                de: "führen ... oft zu (+ Dat.)",
+                cn: "释义：常常导致 / 引发……（某种结果）",
+                tip: "固定动介搭配 führen zu + 第三格。在论证“原因与结果”的链条中，它是最高频也最稳健的因果推进动词，可完美用来替换口语化的 'machen' 或普通的 'deshalb' 逻辑。",
+                ex: "<b>核心拓展例句：</b><br>Der unüberlegte Kauf von Billigkleidung <b>führt oft zu</b> massiven Umweltproblemen in den Produktionsländern.<br>(不假思索地购买廉价衣物往往会导致生产国严重的环保问题。)"
+            },
+            6: {
+                de: "Meiner Ansicht nach (+ Verb)",
+                cn: "释义：在我看来 / 我的观点是",
+                tip: "这是 Meiner Meinung nach 的<b>高阶完美同义替换结构</b>。歌德B2写作的核心评分标准之一是词汇丰富度（Variabilität）。在第二段中变换使用此短语，同样严格遵循【整体占第一位，后接变位动词】的语序规则。",
+                ex: "<b>核心拓展例句：</b><br><b>Meiner Ansicht nach</b> vernachlässigen viele Jugendliche beim Kleidungskauf die Aspekte der Nachhaltigkeit.<br>(在我看来，许多年轻人在购买衣服时忽视了可持续性的层面。)"
+            },
+            7: {
+                de: "spielt eine entscheidende Rolle",
+                cn: "释义：起着决定性的 / 至关重要的作用",
+                tip: "对 wichtige Rolle 的强力升级。entscheidend（决定性的）。在剖析新媒体（如TikTok、网评网综）对年轻一代潮流观念的塑造时，该短语能让论证的语势和说服力瞬间达到B2+甚至C1的高度。",
+                ex: "<b>核心拓展例句：</b><br>Der Einfluss von Internet-Influencern <b>spielt eine entscheidende Rolle</b> bei der Entstehung neuer Modewellen.<br>(网络红人的影响在新型时尚浪潮的形成中起着决定性的作用。)"
+            },
+            8: {
+                de: "Um seine persönlichen Vorstellungen von Mode umzusetzen",
+                cn: "释义：为了践行/实现个人对时尚的设想",
+                tip: "由 um...zu 引导的<b>目的状语从句</b>，精准对应第三个黑点任务（如何落实个人时尚想法）。注意：umzusetzen 是可分动词 umsetzen 的不定式形式，zu 必须夹在中间。当此目的从句置于句首时，主句紧随其后必须【以动词开头】。",
+                ex: "<b>核心拓展例句：</b><br><b>Um seine persönlichen Vorstellungen von Mode umzusetzen</b>, kann man auch alte Kleidungsstücke kreativ umgestalten.<br>(为了展现自己对时尚的独特想法，人们也可以对旧衣物进行创造性的改制。)"
+            },
+            9: {
+                de: "sowohl ... als auch ... seinen Beitrag leisten",
+                cn: "释义：无论是……还是……都能做出属于自己的贡献/起到作用",
+                tip: "连词 sowohl...als auch...（既……又……）与高级功能动词短语 einen Beitrag leisten（做出贡献）的复合联动。常用于在文章中提出具体的解决对策、建议或行动方案时使用。",
+                ex: "<b>核心拓展例句：</b><br><b>Sowohl</b> Designer <b>als auch</b> Verbraucher können <b>ihren Beitrag</b> zu einer umweltfreundlicheren Modewelt <b>leisten</b>.<br>(无论是设计师还是消费者，都能为更环保的时尚界做出自己的贡献。)"
+            },
+            10: {
+                de: "Einerseits ..., andererseits ...",
+                cn: "释义：一方面……，另一方面……",
+                tip: "辩证思维（正反双向对比论证）的终极加分连词。这两个词作为副词，<b>各自强行占据所在分句的【第一位】</b>。因此它们后面都必须立即接【变位动词】，这是B2阶段考生极易写错语序的高危考点，必须格外留心！",
+                ex: "<b>核心拓展例句：</b><br><b>Einerseits</b> schont Fast Fashion das Budget, <b>andererseits</b> schadet sie der globalen Ökologie.<br>(一方面快时尚节省预算，另一方面它却损害着全球生态。)"
+            },
+            11: {
+                de: "dazu beitragen, ... zu stärken",
+                cn: "释义：有助于增强…… / 为强化……做出贡献",
+                tip: "动词 beitragen zu + D 的高级演变形式。当前面指代一个抽象动作或复杂概念时，德语极习惯用<b>代副词 dazu</b> 在主句中先行占位，后面再用一个 zu 不定式结构进行精准拓展。stärken（增强、巩固）在此处用来形容核心竞争力的提升或自我意识的稳固。",
+                ex: "<b>核心拓展例句：</b><br>Ein bewusster Konsum kann <b>dazu beitragen</b>, das eigene Selbstbewusstsein unabhängig von Trends <b>zu stärken</b>.<br>(理性消费有助于增强不依赖于潮流的自我自信心。)"
+            },
+            12: {
+                de: "bringt viele/erhebliche Nachteile mit sich",
+                cn: "释义：随之带来诸多/明显的弊端",
+                tip: "对应第四个黑点任务（盲目跟风复制潮流的缺点）。固定书面语搭配：etwas mit sich bringen（随之带来、伴随着……）。用此结构替代无聊的 'hat viele Nachteile'，能瞬间彰显纯正地道的德语论文质感。",
+                ex: "<b>核心拓展例句：</b><br>Das blinde Nachahmen von Prominenten <b>bringt erhebliche Nachteile mit sich</b> für die finanzielle Situation.<br>(盲目效仿名人会给个人的经济状况带来明显的弊端。)"
+            },
+            13: {
+                de: "Davon profitieren nicht nur ..., sondern auch ...",
+                cn: "释义：不仅……能从中受益/受影响，而且……也同样……",
+                tip: "巧妙使用<b>代副词 Davon（从中/因此）</b>置于句首，起到承接上句逻辑、实现段落内部完美连贯（Kohärenz）的功效。结合 nicht nur... sondern auch 递进连词，将批判的矛头由个体升华至对整个大环境（快时尚体系）的审视。",
+                ex: "<b>核心拓展例句：</b><br>Wenn Bürger auf Nachhaltigkeit achten, <b>davon profitieren nicht nur</b> sie selbst, <b>sondern auch</b> die nachfolgenden Generationen.<br>(如果公民注重可持续性，不仅他们自己从中受益，后代也同样受益。)"
+            },
+            14: {
+                de: "Zusammenfassend lässt sich sagen, dass ...",
+                cn: "释义：总而言之可以说…… / 综上所述……",
+                tip: "歌德学院官方阅卷人最期待、最标准的书面语大作文**结尾总结句**。利用了固定被动替代结构 lässt sich sagen。注意：后面由 dass 引导的是<b>宾语从句</b>，所有核心动词、变位动词必须<b>雷打不动地放在全句的最末尾</b>。",
+                ex: "<b>核心拓展例句：</b><br><b>Zusammenfassend lässt sich sagen, dass</b> wahrer Stil nicht käuflich ist, sondern auf Authentizität basiert.<br>(总而言之可以说，真正的风格是买不来的，而是基于真实与本色。)"
+            },
+            15: {
+                de: "seine Persönlichkeit voll entfalten",
+                cn: "释义：充分释放个性 / 展现个人人格魅力",
+                tip: "极具修辞美感和说服力的文化/教育/社会话题**终极价值升华短语**。entfalten（像花朵或翅膀一样完全绽放、施展）。非常适合放在大作文最后一段的最后一句话，作为呼吁、高级建议或点睛之笔，使整篇文章高度瞬间拔高。",
+                ex: "<b>核心拓展例句：</b><br>Erst wenn man sich von den Zwängen der Mode befreit, kann man <b>seine Persönlichkeit voll entfalten</b>.<br>(只有当人们从时尚的束缚中解放出来时，才能充分释放自己的个性。)"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 深度语法与考官视角剖析：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
