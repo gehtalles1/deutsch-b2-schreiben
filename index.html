@@ -3,15 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>德语B2真题写作训练营</title>
+    <title>身份验证 - 德语B2写作训练营</title>
     
-    <script>
-        // 大门安全检测
-        if (localStorage.getItem('map_access') !== "Hallo2026") {
-            window.location.href = "index.html";
-        }
-    </script>
-
+    <!-- 引入 Tailwind CSS（与你的主页面保持高质感设计同步） -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
@@ -24,384 +18,110 @@
             letter-spacing: -0.01em;
         }
 
-        /* 大厂高端质感轻量卡片 */
-        .premium-ui-card {
+        .premium-input {
             background: #FFFFFF;
-            border: 1px solid rgba(229, 231, 235, 0.7);
-            border-radius: 22px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.015);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+            border-radius: 16px;
+            transition: all 0.2s ease;
         }
 
-        .premium-ui-card:active {
-            transform: scale(0.975);
-            background-color: #F9FAFB;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
-        }
-
-        /* 大厂专属极为隐蔽的高级防盗水印 */
-        #watermark-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            opacity: 0.04;
-        }
-
-        .wm-text {
-            font-size: 32px;
-            font-weight: 900;
-            color: #000000;
-            transform: rotate(-20deg);
-            white-space: nowrap;
-            user-select: none;
-            letter-spacing: 6px;
+        .premium-input:focus {
+            border-color: #4F46E5;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+            outline: none;
         }
     </style>
 </head>
-<body class="py-10 px-5 antialiased bg-[#FDFDFD]">
+<body class="flex items-center justify-center min-h-screen px-5 antialiased bg-[#FDFDFD]">
 
-    <div id="watermark-layer">
-        <div class="wm-text">正版授权：gehtalles刘老师德语</div>
-    </div>
-
-    <div class="app-container max-w-[450px] mx-auto relative z-10">
+    <div class="w-full max-w-[400px] relative z-10">
         
-        <header class="relative mb-10 p-6 rounded-[28px] bg-white border border-neutral-100 shadow-[0_12px_40px_rgba(0,0,0,0.03)] overflow-hidden">
-            <div class="absolute -right-12 -top-12 w-36 h-36 bg-indigo-100/50 rounded-full blur-2xl pointer-events-none"></div>
-            <div class="absolute -left-12 -bottom-12 w-36 h-36 bg-amber-50/60 rounded-full blur-2xl pointer-events-none"></div>
+        <!-- 登录卡片容器 -->
+        <div class="relative p-8 rounded-[28px] bg-white border border-neutral-100 shadow-[0_12px_40px_rgba(0,0,0,0.03)] overflow-hidden">
+            <div class="absolute -right-12 -top-12 w-32 h-32 bg-indigo-100/40 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -left-12 -bottom-12 w-32 h-32 bg-amber-50/50 rounded-full blur-2xl pointer-events-none"></div>
             
-            <div class="relative z-10 text-center">
-                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-extrabold tracking-widest bg-neutral-900 text-neutral-100 shadow-sm uppercase">
-                    <span>CEFR GER</span>
-                    <span class="w-1 h-1 rounded-full bg-indigo-400 animate-pulse"></span>
-                    <span>Niveau B2</span>
+            <div class="relative z-10">
+                <!-- 头部徽章 -->
+                <div class="flex justify-center">
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-extrabold tracking-widest bg-neutral-900 text-neutral-100 shadow-sm uppercase">
+                        <span>GEHTALLES DEUTSCH</span>
+                    </div>
                 </div>
                 
-                <h1 class="text-3xl font-[900] text-neutral-900 mt-5 mb-4 tracking-wider">
-                    B2写作高分训练营
+                <h1 class="text-2xl font-[900] text-center text-neutral-900 mt-5 mb-2 tracking-tight">
+                    专属训练营通道
                 </h1>
-                
-                <div class="p-4 rounded-2xl bg-neutral-50/90 border border-neutral-100/60">
-                    <p class="text-[13.5px] text-neutral-600 font-bold leading-relaxed tracking-wide text-center">
-                        全面掌握主流考试（歌德/Telc/ÖSD）B2真题写作核心框架、高分句型与话题破局逻辑。
-                    </p>
-                </div>
-            </div>
-        </header>
+                <p class="text-xs text-center text-neutral-400 font-medium mb-8">
+                    请输入授权凭证以开启 B2 高分特训
+                </p>
 
-        <main class="space-y-3.5">
-            
-            <div onclick="go(1)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(79,70,229,0.2)]">01</div>
+                <!-- 表单处理 -->
+                <div class="space-y-4">
                     <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">工作满意度</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">arbeitszufriedenheit</p>
+                        <label class="block text-[11px] font-bold text-neutral-500 uppercase tracking-wider mb-2 px-1">Access Token / 访问密码</label>
+                        <input 
+                            type="password" 
+                            id="token-input" 
+                            placeholder="请输入通关密码" 
+                            class="premium-input w-full px-4 py-3.5 text-sm font-medium tracking-wide text-neutral-800 placeholder-neutral-300"
+                            onkeydown="if(event.key==='Enter') verifyToken()"
+                        >
                     </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+
+                    <!-- 错误提示（默认隐藏） -->
+                    <div id="error-msg" class="text-xs text-rose-500 font-bold px-1 hidden transition-all flex items-center gap-1">
+                        <span class="w-1 h-1 rounded-full bg-rose-500 animate-pulse"></span>
+                        密码错误或授权已过期，请联系刘老师
+                    </div>
+
+                    <!-- 验证按钮 -->
+                    <button 
+                        onclick="verifyToken()" 
+                        class="w-full mt-2 py-3.5 bg-gradient-to-r from-neutral-900 to-neutral-800 active:scale-[0.98] text-white text-sm font-bold rounded-2xl shadow-sm transition-all tracking-wide"
+                    >
+                        验证并进入系统
+                    </button>
                 </div>
             </div>
+        </div>
 
-            <div onclick="go(2)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(6,182,212,0.2)]">02</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">论坛议论文 (Teil 1) 黄金骨架</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">forumsbeitrag struktur</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(3)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(168,85,247,0.2)]">03</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">官方邮件 (Teil 2) 格式指引</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">formelle e-mail regel</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(4)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(245,158,11,0.2)]">04</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">四大考点任务(Punkte)对齐</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">leitpunkte erfüllen</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(5)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-rose-500 to-rose-600 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(244,63,94,0.2)]">05</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">多维度观点引出与表达</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">meinungsäußerung</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(6)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-sky-500 to-sky-600 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(14,165,233,0.2)]">06</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">因果推导与严密论证链</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">kausalverknüpfung</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(7)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(16,185,129,0.2)]">07</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">替代方案(Alternativen)陈述</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">alternativen nennen</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(8)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(13,148,136,0.2)]">08</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">利弊分析与折中话术</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">vor- und nachteile</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(9)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(249,115,22,0.2)]">09</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">让步从句与高级连接词</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">konzessivsätze</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(10)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-fuchsia-500 to-fuchsia-600 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(217,70,239,0.2)]">10</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">B2必备同义替换实验室</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">synonyme labor</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(11)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-violet-500 to-violet-600 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(139,92,246,0.2)]">11</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">话题一：科技、AI与数字化生活</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">technologie & ki</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(12)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-lime-600 to-lime-700 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(101,163,13,0.2)]">12</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">话题二：现代职场、加班与远程</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">arbeitswelt & homeoffice</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(13)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(236,72,153,0.2)]">13</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">话题三：环境保护与可持续消费</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">umweltschutz & konsum</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(14)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(37,99,235,0.2)]">14</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">话题四：教育资源与终身学习</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">bildung & lernen</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(15)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-slate-600 to-slate-700 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(71,85,105,0.2)]">15</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">情景模拟：工作调整与合理请假</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">krankmeldung & urlaub</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(16)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-yellow-600 to-yellow-700 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(202,138,4,0.2)]">16</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">情景模拟：失误道歉与危机公关</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">entschuldigung auffassung</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(17)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(5,150,105,0.2)]">17</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">情景模拟：信息垂询与商务合作</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">informationen bitten</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(18)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(220,38,38,0.2)]">18</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">B2高分魔板范文深度剖析</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">musteraufsetzanalyse</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(19)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-amber-600 to-amber-700 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(217,119,6,0.2)]">19</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">避坑指南：B2高频语法和标点错</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">typische fehler meiden</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(20)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(79,70,229,0.2)]">20</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">实战演练：Teil 1 限时模拟机考</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">prüfungssimulation t1</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-            <div onclick="go(21)" class="premium-ui-card p-4 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-11 h-11 shrink-0 bg-gradient-to-br from-neutral-800 to-neutral-950 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-[0_4px_12px_rgba(26,26,26,0.2)]">21</div>
-                    <div>
-                        <h3 class="text-[13.5px] font-bold text-neutral-800 tracking-tight">实战演练：Teil 2 限时模拟机考</h3>
-                        <p class="text-[9px] font-mono text-neutral-400 mt-0.5 tracking-widest uppercase">prüfungssimulation t2</p>
-                    </div>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-300 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-            </div>
-
-        </main>
-
-        <footer class="mt-14 text-center pb-8">
-            <p class="text-[10px] text-neutral-400 font-bold tracking-widest uppercase">© 2026 GEHTALLES DEUTSCH教研室</p>
+        <footer class="mt-8 text-center">
+            <p class="text-[9px] text-neutral-400 font-bold tracking-widest uppercase">© 2026 GEHTALLES DEUTSCH教研室</p>
         </footer>
     </div>
 
     <script>
-        function checkStatus() {
-            console.log("Premium UI Dashboard Ready.");
-        }
-
-        function go(n) {
-            const pages = {
-                1: 'zufriedenarbeit.html', 2: 'b2-writing-02.html', 3: 'b2-writing-03.html',
-                4: 'b2-writing-04.html', 5: 'b2-writing-05.html', 6: 'b2-writing-06.html',
-                7: 'b2-writing-07.html', 8: 'b2-writing-08.html', 9: 'b2-writing-09.html',
-                10: 'b2-writing-10.html', 11: 'b2-writing-11.html', 12: 'b2-writing-12.html',
-                13: 'b2-writing-13.html', 14: 'b2-writing-14.html', 15: 'b2-writing-15.html',
-                16: 'b2-writing-16.html', 17: 'b2-writing-17.html', 18: 'b2-writing-18.html',
-                19: 'b2-writing-19.html', 20: 'b2-writing-20.html', 21: 'b2-writing-21.html'
-            };
-            if(pages[n]) {
-                window.location.href = pages[n];
+        // 在页面加载时，如果检查到已经有正确的 token，直接帮用户跳转，省去重复输入的麻烦
+        window.onload = function() {
+            if (localStorage.getItem('map_access') === "Hallo2026") {
+                // 请确保这里的文件名和你的B2主页面文件名完全一致（例如 b2-camp.html）
+                window.location.href = "b2-camp.html"; 
             }
         }
 
-        // 防审查元素右键
+        function verifyToken() {
+            const inputVal = document.getElementById('token-input').value.trim();
+            const errorMsg = document.getElementById('error-msg');
+
+            // 对应主页面的安全检测口令
+            if (inputVal === "Hallo2026") {
+                errorMsg.classList.add('hidden');
+                // 核心：成功时注入本地缓存，打通大门
+                localStorage.setItem('map_access', 'Hallo2026');
+                
+                // 验证成功后丝滑跳转到主列表页
+                // 【注意】请将下面的 "b2-camp.html" 修改为你实际的B2主页网页文件名
+                window.location.href = "b2-camp.html";
+            } else {
+                // 密码错误提示
+                errorMsg.classList.remove('hidden');
+                document.getElementById('token-input').focus();
+            }
+        }
+
+        // 防审查元素右键（与主页策略保持一致）
         document.oncontextmenu = function() { return false; };
-        window.onload = checkStatus;
     </script>
 </body>
 </html>
