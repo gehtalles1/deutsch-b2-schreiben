@@ -68,7 +68,7 @@
             text-transform: uppercase;
         }
 
-        /* 主标题：已为您放大字体、加大了字间距 */
+        /* 主标题 */
         .main-title {
             font-size: 34px; 
             font-weight: 800;
@@ -77,16 +77,21 @@
             letter-spacing: 3px; 
         }
 
-        /* 副标题描述：已为您加粗、并变更为高级灰 */
+        /* 副标题描述：优化为大厂常用的居中画幅与舒适行高 */
         .description {
             background-color: rgba(243, 244, 246, 0.6);
             border-radius: 16px;
-            padding: 16px 20px;
+            padding: 16px 22px;
             font-size: 14px;
             color: var(--text-sub); 
             font-weight: 700; 
-            line-height: 1.6;
-            text-align: justify;
+            line-height: 1.7;
+            text-align: center; /* 居中对齐，打破死板的左对齐 */
+        }
+
+        /* 语义块样式：确保词组在移动端不被拆散折行 */
+        .phrase-block {
+            display: inline-block;
         }
 
         /* 关卡列表容器 */
@@ -193,15 +198,18 @@
         <header class="header-card">
             <div class="badge">CEFR GER • Niveau B2</div>
             <h1 class="main-title">B2写作高分训练营</h1>
+            <!-- 优化换行逻辑后的描述栏 -->
             <div class="description">
-                全面掌握主流考试（歌德/Telc/ÖSD）B2真题写作核心框架、高分句型与话题破局逻辑。
+                <span class="phrase-block">全面掌握主流考试（歌德/Telc/ÖSD）</span>
+                <span class="phrase-block">B2真题写作核心框架、</span>
+                <span class="phrase-block">高分句型与话题破局逻辑。</span>
             </div>
         </header>
 
         <!-- 关卡入口列表 -->
         <main class="level-list">
             
-            <!-- 关卡 01 (已关联目标页面) -->
+            <!-- 关卡 01 -->
             <a href="zufriedenarbeit.html" class="level-item">
                 <div class="level-number bg-level-1">01</div>
                 <div class="level-content">
