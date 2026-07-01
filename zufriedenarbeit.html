@@ -41,6 +41,38 @@
             body { padding: 32px; }
         }
 
+        /* 顶部操作区 */
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        /* 返回键样式 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
         .studio-grid {
             max-width: 1300px;
             margin: 0 auto;
@@ -206,7 +238,7 @@
             box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
         }
 
-        /* 视窗中央浮动高光解析舱 - 支持手机端长内容自适应滚动 */
+        /* 视窗中央浮动高光解析舱 */
         .popover-shroud {
             position: fixed;
             top: 0;
@@ -325,6 +357,13 @@
 </head>
 <body>
 
+    <!-- 顶部返回操作栏 -->
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
     <div class="studio-grid">
         
         <!-- 左侧区域：1:1复刻歌德官方真题纸张 -->
@@ -371,15 +410,15 @@
             <div class="essay-h1">Zufriedenheit am Arbeitsplatz – Wie wichtig ist sie?</div>
             
             <div class="essay-canvas">
-                <span class="goethe-token" data-id="1">Meiner Meinung nach</span> spielt Arbeit <span class="goethe-token" data-id="2">eine sehr wichtige Rolle</span> in unserem Leben. Sie <span class="goethe-token" data-id="3">dient nicht nur dazu,</span> <span class="goethe-token" data-id="4">den Lebensunterhalt zu sichern</span>, <span class="goethe-token" data-id="5">sondern bietet uns auch die Möglichkeit</span>, unsere Fähigkeiten weiterzuentwickeln and persönliche Ziele zu erreichen. Deshalb wünschen sich die meisten Menschen einen Arbeitsplatz, an dem sie sich wohlfühlen.
+                <span class="goethe-token" data-id="1">Meiner Meinung nach</span> spielt Arbeit <span class="goethe-token" data-id="2">eine sehr wichtige Rolle</span> in unserem Leben. Sie <span class="goethe-token" data-id="3">dient nicht nur dazu,</span> <span class="goethe-token" data-id="4">den Lebensunterhalt zu sichern</span>, <span class="goethe-token" data-id="5">sondern bietet uns auch die Möglichkeit</span>, unsere Fähigkeiten weiterzuentwickeln und persönliche Ziele zu erreichen. Deshalb wünschen sich die meisten Menschen einen Arbeitsplatz, an dem sie sich wohlfühlen.
                 <br><br>
                 <span class="goethe-token" data-id="6">Es gibt jedoch viele Gründe, warum</span> Arbeitnehmer mit ihrer Arbeit unzufrieden sein können. Ein häufiger Grund ist ein zu hoher Arbeitsdruck. Außerdem <span class="goethe-token" data-id="7">führen</span> ein niedriges Gehalt oder mangelnde Anerkennung <span class="goethe-token" data-id="7">oft zu Unzufriedenheit</span>. <span class="goethe-token" data-id="8">Meiner Ansicht nach</span> spielt auch das Arbeitsklima <span class="goethe-token" data-id="9">eine entscheidende Rolle</span>. Wenn Kollegen ständig streiten oder die Kommunikation mit den Vorgesetzten nicht gut funktioniert, macht die Arbeit deutlich weniger Spaß.
                 <br><br>
                 <span class="goethe-token" data-id="10">Um eine angenehme Arbeitsatmosphäre zu schaffen</span>, sollten <span class="goethe-token" data-id="11">sowohl</span> Arbeitgeber <span class="goethe-token" data-id="11">als auch</span> Arbeitnehmer <span class="goethe-token" data-id="11">ihren Beitrag leisten</span>. <span class="goethe-token" data-id="12">Einerseits</span> sollten Vorgesetzte ihre Mitarbeiter respektvoll behandeln, ihre Leistungen anerkennen und ihnen zuhören. <span class="goethe-token" data-id="12">Andererseits</span> ist es wichtig, dass Kollegen offen miteinander kommunizieren, sich gegenseitig unterstützen und Konflikte möglichst früh lösen. Regelmäßige Teambesprechungen oder gemeinsame Aktivitäten können ebenfalls <span class="goethe-token" data-id="13">dazu beitragen</span>, das Vertrauen innerhalb des Teams <span class="goethe-token" data-id="13">zu stärken</span>.
                 <br><br>
-                Ein gutes Arbeitsklima <span class="goethe-token" data-id="14">bringt viele Vorteile mit sich</span>. Zufriedene Mitarbeiter sind oft motivierter, arbeiten effizienter und melden sich seltener krank. <span class="goethe-token" data-id="15">Davon profitieren nicht nur</span> die Arbeitnehmer selbst, <span class="goethe-token" data-id="15">sondern auch</span> die Arbeitgeber. Denn motivierte Mitarbeiter leisten bessere Arbeit, was langfristig zum Erfolg eines Unternehmens beiträgt.
+                Ein gutes Arbeitsklima <span class="goethe-token" data-id="14">bringt viele Vorteile mit sich</span>. Zufriedene Mitarbeiter sind oft motivierter, arbeiten effizienter und melden sich seltener krank. <span class="goethe-token" data-id="15">Davon pfofitieren nicht nur</span> die Arbeitnehmer selbst, <span class="goethe-token" data-id="15">sondern auch</span> die Arbeitgeber. Denn motivierte Mitarbeiter leisten bessere Arbeit, was langfristig zum Erfolg eines Unternehmens beiträgt.
                 <br><br>
-                <span class="goethe-token" data-id="16">Zusammenfassend lässt sich sagen, dass</span> Geld zwar wichtig ist, ein respektvoller Umgang und eine angenehme Arbeitsatmosphäre jedoch genauso wichtig sind. Nur wenn sich Mitarbeiter am Arbeitsplatz wohlfühlen, können sie <span class="goethe-token" data-id="17">ihr volles Potenzial entfalten</span>.
+                <span class="goethe-token" data-id="16">Zusammenfassend lässt sich sagen, dass</span> Geld zwar重要是重要，但一个尊重的相处模式和舒适的工作氛围同样不可或缺。 Nur wenn sich Mitarbeiter am Arbeitsplatz wohlfühlen, können sie <span class="goethe-token" data-id="17">ihr volles Potenzial entfalten</span>.
             </div>
         </div>
 
@@ -461,7 +500,7 @@
                 de: "Um eine angenehme Arbeitsatmosphäre zu schaffen",
                 cn: "释义：为了创造一个舒适的工作氛围",
                 tip: "由 um...zu 引导的<b>目的状语从句</b>。当这个从句整体置于主句之前时（即占第一位），【主句必须紧跟动词开头】（置于逗号后面）。动词 schaffen（创造、建立）在职场和环保话题中比单纯的 machen 专业度高出很多。",
-                ex: "<b>核心拓展例句：</b><br><b>Um eine angenehme Arbeitsatmosphäre zu schaffen</b>, müssen Vorgesetzte und Mitarbeiter offen kommunizieren.<br>(为了营造舒适的工作氛围，管理层和员工必须进行坦诚的沟通。)"
+                ex: "<b>核心拓展例句：</b><br><b>Um eine angenehme Arbeitsatmosphäre zu schaffen</b>, müssen Vorgesetzte und Mitarbeiter offen kommunizieren.<br>(为了营造舒适的工作氛围，管理层 und 员工必须进行坦诚的沟通。)"
             },
             11: {
                 de: "sowohl ... als auch ... ihren Beitrag leisten",
