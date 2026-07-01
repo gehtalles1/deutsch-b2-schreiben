@@ -32,7 +32,7 @@
             color: var(--text-main);
         }
 
-        /* 核心容器：兼顾手机全屏与电脑端居中视窗 */
+        /* 核心容器 */
         .container {
             width: 100%;
             max-width: 540px;
@@ -68,22 +68,23 @@
             text-transform: uppercase;
         }
 
-        /* 主标题 */
+        /* 主标题：已为您放大字体、加大了字间距 */
         .main-title {
-            font-size: 28px;
+            font-size: 34px; 
             font-weight: 800;
             color: var(--text-main);
             margin-bottom: 18px;
-            letter-spacing: 0.5px;
+            letter-spacing: 3px; 
         }
 
-        /* 副标题描述 */
+        /* 副标题描述：已为您加粗、并变更为高级灰 */
         .description {
             background-color: rgba(243, 244, 246, 0.6);
             border-radius: 16px;
             padding: 16px 20px;
             font-size: 14px;
-            color: #4b5563;
+            color: var(--text-sub); 
+            font-weight: 700; 
             line-height: 1.6;
             text-align: justify;
         }
@@ -109,7 +110,6 @@
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* 电脑端悬浮反馈，手机端点按微缩 */
         @media (hover: hover) {
             .level-item:hover {
                 transform: translateY(-2px);
@@ -138,7 +138,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
 
-        /* 各关卡独立的渐变色方案（严格参考 3.jpg 视觉） */
+        /* 各关卡独立的渐变色方案 */
         .bg-level-1 { background: linear-gradient(135deg, #4f46e5, #3b82f6); }
         .bg-level-2 { background: linear-gradient(135deg, #06b6d4, #0ea5e9); }
         .bg-level-3 { background: linear-gradient(135deg, #a855f7, #ec4899); }
