@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio (Schulkantine)</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-indigo: #4f46e5;
+            --brand-indigo-light: #eeebff;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        /* 顶部操作区 */
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        /* 返回键样式 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 500px 1fr;
+            }
+        }
+
+        /* 大厂科技感外壳卡片 */
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 歌德官方真题纸张排版仿真区 */
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14.5px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .goethe-bullet-list {
+            list-style: none;
+            margin-bottom: 20px;
+            padding-left: 5px;
+        }
+
+        .goethe-bullet-list li {
+            position: relative;
+            padding-left: 24px;
+            font-size: 14.5px;
+            color: #000000;
+            margin-bottom: 14px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .goethe-bullet-list li::before {
+            content: "■";
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            font-size: 10px;
+            color: #334155;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--amber-bg);
+            border-left: 4px solid #f59e0b;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #78350f;
+        }
+
+        /* 范文画布区 */
+        .essay-canvas {
+            font-size: 16.5px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--slate-900);
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .goethe-token {
+            background-color: #fef3c7;
+            border-bottom: 2.5px solid #f59e0b;
+            color: #92400e;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #fde68a;
+            color: #78350f;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+        }
+
+        /* 视窗中央浮动高光解析舱 */
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-indigo);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-indigo);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部返回操作栏 -->
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <!-- 左侧区域：1:1复刻歌德官方真题纸张 (依据 2_2.png) -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作真题沙盒 (Teil 2)</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 2</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Die Kantine in Ihrer Schule bietet in letzter Zeit Produkte von schlechter Qualität zu überteuerten Preisen an. Als Schülersprecher schreiben Sie eine E-Mail an den Schuldirektor, Herrn Rauschel.
+                </div>
+
+                <ul class="goethe-bullet-list">
+                    <li>Erklären Sie, worum es geht.</li>
+                    <li>Geben Sie einige Beispiele, um die Situation zu verdeutlichen.</li>
+                    <li>Bitten Sie um Verständnis für die Verärgerung der Schüler.</li>
+                    <li>Machen Sie einen Vorschlag, was der Direktor unternehmen kann.</li>
+                </ul>
+
+                <div class="goethe-instructions">
+                    Überlegen Sie sich eine passende Reihenfolge für die Inhaltspunkte. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Vergessen Sie nicht Anrede und Gruß. Schreiben Sie mindestens 100 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 考官视角：书信/邮件审题核心要点提示</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. 本题为**半官方/正式邮件(Formelle E-Mail)**，必须包含符合身份的**称呼(Anrede)**与**问候信尾(Gruß)**。<br>2. 写作身份为**学生会主席/学生代表(Schülersprecher)**，需以集体名义向校长汇报，语气需严谨、礼貌且有说服力。<br>3. 必须自由组合并完整覆盖图片中的**4个核心提示点**，切忌漏选。<br>4. 核心字数需达到 **100 字以上**。</p>
+            </div>
+        </div>
+
+        <!-- 右侧区域：核心高分语料精读画布 -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 官方高分书信范文分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击黄色高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Beschwerde über das Kantinenangebot</div>
+            
+            <div class="essay-canvas">
+                <span class="goethe-token" data-id="1">Sehr geehrter Herr Rauschel,</span>
+                <br><br>
+                ich wende mich heute <span class="goethe-token" data-id="2">im Namen der gesamten Schülerschaft</span> und <span class="goethe-token" data-id="3">in meiner Funktion als</span> Schülersprecher an Sie. In letzter Zeit <span class="goethe-token" data-id="4">haben sich die Beschwerden über</span> unsere Schulkantine <span class="goethe-token" data-id="4">massiv gehäuft</span>, <span class="goethe-token" data-id="5">da dort</span> zunehmend Produkte <span class="goethe-token" data-id="6">von mangelhafter Qualität</span> <span class="goethe-token" data-id="7">zu völlig überhöhten Preisen</span> zum Verkauf angeboten werden. 
+                <br><br>
+                <span class="goethe-token" data-id="8">Um die Situation zu verdeutlichen</span>, möchte ich einige konkrete Beispiele anführen: Das täglich angebotene Gemüse ist häufig verkocht oder unfrisch, während die Portionsgrößen <span class="goethe-token" data-id="9">deutlich geschrumpft sind</span>. Parallel dazu wurden die Preise drastisch angehoben, was für viele Jugendliche <span class="goethe-token" data-id="10">finanziell kaum noch tragbar ist</span>. 
+                <br><br>
+                <span class="goethe-token" data-id="11">Angesichts dieser Umstände</span> <span class="goethe-token" data-id="12">bitte ich Sie um Verständnis für die</span> große <span class="goethe-token" data-id="12">Verärgerung unter den Schülern</span>. Eine gesunde und bezahlbare Verpflegung spielt eine entscheidende Rolle für unsere Konzentration im Schulalltag. 
+                <br><br>
+                Um dieses Problem zeitnah zu lösen, <span class="goethe-token" data-id="13">möchte ich vorschlagen, ein klärendes Gespräch</span> mit dem aktuellen Kantinenbetreiber <span class="goethe-token" data-id="13">zu führen</span>. Darüber hinaus <span class="goethe-token" data-id="14">wäre es äußerst sinnvoll</span>, eine anonyme Umfrage zu organisieren, um die genauen Wünsche der Schülerschaft zu erfassen.
+                <br><br>
+                Für eine baldige Berücksichtigung unseres Anliegens <span class="goethe-token" data-id="15">wäre ich Ihnen sehr dankbar</span>.
+                <br><br>
+                Mit freundlichen Grüßen
+                <br>
+                [Ihr Name]
+                <br>
+                Schülersprecher
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 中央高光视窗解析舱 -->
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 书信/邮件核心语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "Sehr geehrter Herr Rauschel,",
+                cn: "释义：尊敬的劳舍尔先生（正式书信传统称呼）",
+                tip: "标准的高级正式书信称呼。<b>考官提示</b>：后面必须加【逗号】，并且正文第一段的首字母（如这里的 'ich'）在没有专有名词的情况下，必须【小写】。这是德语写作极易扣分的细节考点。",
+                ex: "<b>规范拓展：</b><br>称呼女士时用：<b>Sehr geehrte Frau</b> Müller,<br>不确定收件人名字时用：<b>Sehr geehrte Damen und Herren</b>,"
+            },
+            2: {
+                de: "im Namen der gesamten Schülerschaft",
+                cn: "释义：代表全体学生",
+                tip: "介词短语结合<b>第二格（Genitiv）</b>的高级表达。通过使用 'der gesamten Schülerschaft' 替换普通的 'für alle Schüler'，瞬间突出了您作为Schülersprecher（学生会主席/代表）发信的官方与正式立场。",
+                ex: "<b>核心拓展例句：</b><br>Ich spreche heute <b>im Namen der gesamten Schülerschaft</b>, um unsere Sorgen zu teilen.<br>(我今天代表全体学生发言，以表达我们的担忧。)"
+            },
+            3: {
+                de: "in meiner Funktion als (+ Nominativ)",
+                cn: "释义：以我作为……的身份/职责",
+                tip: "公文式高级职场表达。als 后面直接接【第一格（名词原形）】，无需加冠词。在 Teil 2 各种职业、社会角色扮演的写信任务中，该结构是极佳的开篇破局句型。",
+                ex: "<b>核心拓展例句：</b><br><b>In meiner Funktion als</b> Klassensprecher möchte ich diesen Konflikt lösen.<br>(以我作为班长的身份，我希望解决这个冲突。)"
+            },
+            4: {
+                de: "haben sich die Beschwerden über ... massiv gehäuft",
+                cn: "释义：关于……的投诉/抱怨大量激增",
+                tip: "高级反身动词结构 <b>sich häufen（堆积、激增）</b>，配合修饰副词 massiv（大批地、猛烈地）。用来完美替换口语化的 'Viele Schüler sagen, dass...'，极具书面严肃感。",
+                ex: "<b>核心拓展例句：</b><br>In den letzten Wochen <b>haben sich die Beschwerden über</b> den Service <b>massiv gehäuft</b>.<br>(在过去的几周里，关于这项服务的投诉大量激增。)"
+            },
+            5: {
+                de: "da dort (+ 尾语序从句)",
+                cn: "释义：因为在那个地方……",
+                tip: "原因连词 da（因为）与地点副词 dort（在那里）的连用组合。注意：da 引导的是<b>从句</b>，变位动词（如 werden）必须雷打不动挪到该分句的【最末尾】。",
+                ex: "<b>核心拓展例句：</b><br>Ich gehe ungerne in den Supermarkt, <b>da dort</b> die Schlangen immer sehr lang sind.<br>(我不喜欢去那家超市，因为那里的队伍总是排得很长。)"
+            },
+            6: {
+                de: "von mangelhafter Qualität",
+                cn: "释义：质量存在瑕疵的 / 劣质的",
+                tip: "精准对应真题中 'schlechter Qualität' 的<b>B2高阶同义词替换</b>。mangelhaft（有缺陷的、不及格的）属于高级评价词汇，能让表达显得客观而尖锐。",
+                ex: "<b>核心拓展例句：</b><br>Niemand möchte Waren <b>von mangelhafter Qualität</b> zu hohen Preisen erwerben.<br>(没有人愿意以高昂的价格购买质量存在瑕疵的商品。)"
+            },
+            7: {
+                de: "zu völlig überhöhten Preisen",
+                cn: "释义：以完全过高的价格 / 价格高得离谱",
+                tip: "精准对应真题中 'überteuerten Preisen' 的高分替换。注意介词 <b>zu</b> 与价格名词的固定搭配，形容词 überhöht（过高的）比 überteuert 更有统计学和公文分析的质感。",
+                ex: "<b>核心拓展例句：</b><br>Die Mieten in der Innenstadt werden <b>zu völlig überhöhten Preisen</b> angeboten.<br>(市中心的房租正以完全过高的价格在对外提供。)"
+            },
+            8: {
+                de: "Um die Situation zu verdeutlichen",
+                cn: "释义：为了使情况更加清晰明了/为了阐明情况",
+                tip: "由 um...zu 引导的<b>目的状语从句</b>，完美承接真题中第2个提示点（Geben Sie einige Beispiele...）。当该目的从句置于句首时，主句必须立刻紧跟【变位动词】（主谓倒装语序）。",
+                ex: "<b>核心拓展例句：</b><br><b>Um die Situation zu verdeutlichen</b>, lade ich Sie zu einer Besichtigung ein.<br>(为了使情况更加明了，我邀请您进行一次实地考察。)"
+            },
+            9: {
+                de: "deutlich geschrumpft sind",
+                cn: "释义：明显缩水了 / 显著减少了",
+                tip: "动词 <b>schrumpfen（萎缩、变小）</b> 的现在完成时态。用它来形容分量（Portionen）减少，比用普通的 'kleiner geworden' 更加生动且符合B2高频专业词汇标准。",
+                ex: "<b>核心拓展例句：</b><br>Durch die Inflation <b>sind</b> die Ersparnisse der Bürger <b>deutlich geschrumpft</b>.<br>(由于通货膨胀，公民的储蓄已经明显缩水。)"
+            },
+            10: {
+                de: "finanziell kaum noch tragbar ist",
+                cn: "释义：在经济上几乎不再能承受/负担",
+                tip: "经典B2核心社会话题词汇 <b>tragbar（可承受的、可持续的）</b>。在论述成本、高昂物价或负担时，这个结构是考官最希望在B2及以上考生的试卷里看到的亮眼搭配。",
+                ex: "<b>核心拓展例句：</b><br>Diese zusätzlichen Kosten sind für einkommensschwache Familien <b>finanziell kaum noch tragbar</b>.<br>(这些额外的费用对于低收入家庭来说在经济上几乎不再能承受。)"
+            },
+            11: {
+                de: "Angesichts dieser Umstände",
+                cn: "释义：鉴于这些情况 / 面对这些环境",
+                tip: "高级<b>第二格介词 angesichts（鉴于、面对）</b> 的固定名次用法。属于纯正的书面论文与高级公文过渡词，能使段落之间的因果逻辑和语势瞬间拔高。",
+                ex: "<b>核心拓展例句：</b><br><b>Angesichts dieser Umstände</b> müssen wir unsere Strategie sofort ändern.<br>(鉴于这些情况，我们必须立刻改变我们的策略。)"
+            },
+            12: {
+                de: "bitte ich Sie um Verständnis für die ... Verärgerung",
+                cn: "释义：我请求您理解……的愤怒/不满",
+                tip: "精准对齐真题第3个提示点。核心固定动介搭配：<b>bitten jemanden(Akk) um etwas(Akk) für jemanden(Akk)</b>。在这里将动词 'Verständnis bitten' 与名词 'Verärgerung' 完美融合成一个高连贯性的复杂长句。",
+                ex: "<b>核心拓展例句：</b><br>Ich <b>bitte Sie um Verständnis für die</b> Verzögerung des Projekts.<br>(对项目的延期我请求您的理解。)"
+            },
+            13: {
+                de: "möchte ich vorschlagen, ein klärendes Gespräch ... zu führen",
+                cn: "释义：我想提议进行一次澄清性的谈话/面对面沟通",
+                tip: "精准对齐真题第4个提示点（做建议）。使用了固定高级词组 <b>ein Gespräch führen（进行谈话）</b>，中间修饰词 klärend（澄清性的/解决问题的）展示出极强的解决矛盾的正式公文素养。",
+                ex: "<b>核心拓展例句：</b><br>Wir sollten <b>ein klärendes Gespräch führen</b>, um alle Missverständnisse aus dem Weg zu räumen.<br>(我们应当进行一次澄清性的谈话，以消除所有的误会。)"
+            },
+            14: {
+                de: "wäre es äußerst sinnvoll",
+                cn: "释义：……将是极为有意义的/极其明智的",
+                tip: "使用<b>虚拟二式（Konjunktiv II）</b>表示委婉而礼貌的建议。在向校长或上级提意见时，使用 'wäre'（将会是）而不是强硬的 'ist' 或 'muss'，语气非常有分寸且非常得体。",
+                ex: "<b>核心拓展例句：</b><br>Zur Vermeidung von Plastikmüll <b>wäre es äußerst sinnvoll</b>, Mehrwegflaschen zu nutzen.<br>(为了避免塑料垃圾，使用可循环回收瓶将是极为明智的。)"
+            },
+            15: {
+                de: "wäre ich Ihnen sehr dankbar",
+                cn: "释义：我将对您不胜感激",
+                tip: "全德语官方正式求职信、投诉信、公文信件的<b>终极黄金结尾句</b>。由虚拟二式引导，在表达期望得到对方快速处理或回复的同时，保持了最高级别的法制和礼貌教养。",
+                ex: "<b>核心拓展例句：</b><br>Für eine zeitnahe Genehmigung meines Antrags <b>wäre ich Ihnen sehr dankbar</b>.<br>(若能及时批准我的申请，我将对您不胜感激。)"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 深度语法与考官视角剖析：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
