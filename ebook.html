@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio Teil 1</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-teal: #0d9488;
+            --brand-teal-light: #f0fdfa;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 520px 1fr;
+            }
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 1:1 仿真官方试卷质感 */
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* 拟真还原图中的四块胶带纸条卡片样式 */
+        .goethe-note-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .goethe-note-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .goethe-note-item {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.04);
+            padding: 14px;
+            font-size: 13.5px;
+            color: #111827;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            border-radius: 2px;
+            transform: rotate(-0.5deg);
+        }
+
+        .goethe-note-item:nth-child(even) {
+            transform: rotate(0.8deg);
+            background: #fdfdfd;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--brand-teal-light);
+            border-left: 4px solid var(--brand-teal);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #115e59;
+        }
+
+        /* 范文画布区 */
+        .essay-canvas {
+            font-size: 16px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 16px;
+            border-bottom: 1px dashed var(--border-crisp);
+            padding-bottom: 8px;
+            }
+
+        .goethe-token {
+            background-color: #ccfbf1;
+            border-bottom: 2.5px solid var(--brand-teal);
+            color: #115e59;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #99f6e4;
+            color: #134e4a;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        }
+
+        /* 浮动高光解析舱 */
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: var(--radius-md) ;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <!-- 左侧区域：1:1复刻真题纸张 (Teil 1) -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作真题沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 1</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Sie schreiben einen Forumsbeitrag zur Nutzung und Verbreitung von E-Books.
+                </div>
+
+                <div class="goethe-note-grid">
+                    <div class="goethe-note-item">Äußern Sie Ihre Meinung zur Nutzung von E-Books.</div>
+                    <div class="goethe-note-item">Nennen Sie Gründe, warum der Markt für elektronische Bücher ständig wächst.</div>
+                    <div class="goethe-note-item">Nennen Sie eventuelle Schwierigkeiten bei der Nutzung von E-Books.</div>
+                    <div class="goethe-note-item">Nennen Sie Alternativen für kostengünstige Lektüre.</div>
+                </div>
+
+                <div class="goethe-instructions">
+                    Denken Sie an eine Einleitung und einen Schluss. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Schreiben Sie mindestens 150 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 考官视角：Teil 1 论坛议论文核心要点提示</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. **语体色彩**：这是发表在网络论坛上的讨论，因此**不需要**像书信那样写“Sehr geehrte...”，应采用客观中性、面向公众讨论的议论文语体。<br>2. **结构完整度**：明确要求必须包含**引言（Einleitung）**与**结论（Schluss）**，且4个Leitpunkte缺一不可。<br>3. **字数底线**：本题要求至少写满 **150 字**。重点考察逻辑连词的灵活运用以及句型结构的丰富度。</p>
+            </div>
+        </div>
+
+        <!-- 右侧区域：核心高分语料精读画布 -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分论坛议论文分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Forumsbeitrag: Nutzung und Verbreitung von E-Books</div>
+            
+            <div class="essay-canvas">
+                <span class="goethe-token" data-id="1">In der heutigen Zeit gewinnt das Thema ... zunehmend an Bedeutung.</span> 
+                Besonders die Frage, wie sich elektronische Bücher auf unser Leseverhalten auswirken, wird heftig diskutiert. 
+                <span class="goethe-token" data-id="2">Ich persönlich stehe dieser Entwicklung überaus positiv gegenüber,</span> 
+                da digitale Medien den Alltag von Lesern erheblich erleichtern.
+                <br>
+                <span class="goethe-token" data-id="3">Es liegt auf der Hand, dass</span> der Markt für digitale Lektüre kontinuierlich wächst. 
+                <span class="goethe-token" data-id="4">Ein entscheidender Faktor hierfür ist</span> die enorme Flexibilität, da man eine ganze Bibliothek auf einem einzigen, leichten Gerät transportieren kann. Zudem sind neue Werke sofort per Mausklick verfügbar.
+                <br>
+                <span class="goethe-token" data-id="5">Allerdings sollte man auch die Schattenseiten nicht außer Acht lassen.</span> 
+                Für viele Menschen ist das dauerhafte Lesen auf Bildschirmen <span class="goethe-token" data-id="6">mit einer spürbaren Anstrengung für die Augen verbunden</span>. Zudem geht das traditionelle Gefühl, ein echtes Buch aus Papier in den Händen zu halten, verloren.
+                <br>
+                <span class="goethe-token" data-id="7">Wer nach kostengünstigen Alternativen sucht, für den</span> 
+                <span class="goethe-token" data-id="8">stellt die Nutzung von öffentlichen Bibliotheken eine hervorragende Option dar</span>. Auch der Kauf von gebrauchten Büchern oder der kostenlose Buchtausch im Freundeskreis sind sinnvolle Wege, um Geld zu sparen.
+                <br>
+                <span class="goethe-token" data-id="9">Zusammenfassend lässt sich sagen, dass</span> E-Books zwar unbestreitbare Vorteile bieten, das gedruckte Buch jedoch seinen festen Platz behalten wird.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 中央高光视窗解析舱 -->
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 (Teil 1) 议论文高级语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "In der heutigen Zeit gewinnt das Thema ... zunehmend an Bedeutung.",
+                cn: "释义：在当今时代，……这一主题正变得越来越重要。（万能引言句型）",
+                tip: "适用于绝大多数 B2 论坛议论文（Teil 1）的开头。<b>gewinnen an + Dat.</b> 是一个非常地道的固定搭配，表示“在……方面有所增长”。用它来代替千篇一律的 'Heutzutage ist ... sehr wichtig' 可以直接拉高文章的学术质感。",
+                ex: "<b>替换应用演示：</b><br><b>In der heutigen Zeit gewinnt das Thema</b> Umweltschutz <b>zunehmend an Bedeutung</b>.<br>(在当今时代，环境保护这一主题正变得越来越重要。)"
+            },
+            2: {
+                de: "Ich persönlich stehe dieser Entwicklung überaus positiv gegenüber,",
+                cn: "释义：我个人对这一发展持极其积极的态度。（表达个人观点）",
+                tip: "完美响应第一个提示点（Äußern Sie Ihre Meinung...）。使用 <b>jemandem/etwas gegenüberstehen</b>（对……持某种态度）结构，比普通的 'Ich finde E-Books gut' 高级得多。副词 <b>überaus</b>（极其、非常）起到了强烈的修饰作用。",
+                ex: "<b>核心拓展例句：</b><br><b>Ich persönlich stehe dieser Entwicklung überaus positiv gegenüber</b>, da sie neue Chancen eröffnet.<br>(我个人对这一发展持极其积极的态度，因为它开启了新的机遇。)"
+            },
+            3: {
+                de: "Es liegt auf der Hand, dass ...",
+                cn: "释义：显而易见的是，……（客观引出原因/论点）",
+                tip: "第二要点（Nennen Sie Gründe...）的绝佳引路句型。常用于德语学术或正式议论文中，用来引出一个毋庸置疑的事实或普遍现象，能够极大地增强文章的说服力和论证语气。注意：dass 引导的从句变位动词要置于句尾。",
+                ex: "<b>核心拓展例句：</b><br><b>Es liegt auf der Hand, dass</b> der Konsum von E-Books in den kommenden Jahren weiter steigen wird.<br>(显而易见的是，电子书的消费在未来几年将进一步增长。)"
+            },
+            4: {
+                de: "Ein entscheidender Faktor hierfür ist ...",
+                cn: "释义：对此的一个决定性因素是……（深度剖析原因）",
+                tip: "论证生长点句型。在列举原因时，用 <b>Faktor</b>（因素）或 <b>Kriterium</b>（标准/条件）来提领段落，能够体现出 B2 级别考生具备归纳和逻辑分类的能力。末尾的 ist 后面一般直接接名词短语或引导主语从句。",
+                ex: "<b>核心拓展例句：</b><br><b>Ein entscheidender Faktor hierfür ist</b> der günstige Preis im Vergleich zu gedruckten Büchern.<br>(对此的一个决定性因素是与纸质书相比其更低廉的价格。)"
+            },
+            5: {
+                de: "Allerdings sollte man auch die Schattenseiten nicht außer Acht lassen.",
+                cn: "释义：然而，人们也不应该忽视其负面影响/阴暗面。（完美转折过渡句）",
+                tip: "应对第三个提示点（Schwierigkeiten nennen）的黄金过渡句。<b>Schattenseite</b>（阴暗面/弊端）是 <b>Vorteile und Nachteile</b> 话题的高级替换词。固定短语 <b>etwas nicht außer Acht lassen</b> 意为“不容忽视/必须考虑到”。",
+                ex: "<b>核心拓展例句：</b><br><b>Allerdings sollte man auch die Schattenseiten nicht außer Acht lassen</b>, wenn man über Digitalisierung spricht.<br>(然而，当人们谈论数字化时，也不应该忽视其负面影响。)"
+            },
+            6: {
+                de: "... mit einer spürbaren Anstrengung für die Augen verbunden (sein)",
+                cn: "释义：给眼睛带来明显的负担/疲劳（具体阐述困难）",
+                tip: "描写生理或心理困难的高分功能结构。<b>mit etwas verbunden sein</b> 意为“与……相联系/伴随着……”。使用名词形式 <b>Anstrengung</b>（劳累/负担）加上形容词 <b>spürbar</b>（可感知的/明显的），比直接说 'Es tut den Augen weh' 更加学术和地道。",
+                ex: "<b>核心拓展例句：</b><br>Das stundenlose Arbeiten am PC ist oft <b>mit einer spürbaren Anstrengung für die Augen verbunden</b>.<br>(在电脑前工作数小时通常伴随着眼睛明显的疲劳。)"
+            },
+            7: {
+                de: "Wer nach kostengünstigen Alternativen sucht, für den ...",
+                cn: "释义：对于那些寻找经济实惠替代方案的人来说，……（条件状语关系句）",
+                tip: "精准对齐第四个提示点（Alternativen nennen）。采用 <b>Wer..., für den...</b> 的无先行词关系从句结构，是德语中用于对特定人群提出建议或方案的高级句法，能让句式呈现出极强的复句错落感。",
+                ex: "<b>核心拓展例句：</b><br><b>Wer nach kostengünstigen Alternativen sucht, für den</b> gibt es zahlreiche Plattformen im Internet.<br>(对于那些寻找经济实惠替代方案的人来说，网络上有无数的平台。)"
+            },
+            8: {
+                de: "... stellt eine hervorragende Option dar.",
+                cn: "释义：……构成了一个极佳的选择。（替代 'ist eine gute Möglichkeit'）",
+                tip: "B2 级别中高频使用的书面语动词。分离动词 <b>darstellen</b> 在此表示“呈现/构成”。用 <b>eine Option/Alternative darstellen</b> 彻底替代口语化的 'ist eine Möglichkeit'，是改写和升级词汇的高频得分点。",
+                ex: "<b>核心拓展例句：</b><br>Das Carsharing <b>stellt eine hervorragende Option dar</b>, um die CO2-Emissionen in Städten zu reduzieren.<br>(汽车共享构成了一个减少城市二氧化碳排放的极佳选择。)"
+            },
+            9: {
+                de: "Zusammenfassend lässt sich sagen, dass ...",
+                cn: "释义：总而言之，可以说……（议论文标准结尾句型）",
+                tip: "响应题目中对“Schluss（结论）”的明确要求。使用无人称被动语态变形 <b>lässt sich sagen</b>（可以说/可表述），语气客观严谨，非常适合用来为整篇论坛发言做最后的总结陈词。",
+                ex: "<b>核心拓展例句：</b><br><b>Zusammenfassend lässt sich sagen, dass</b> jede Medaille zwei Seiten hat.<br>(总而言之，可以说每枚硬币都有两面 / 凡事皆有两面性。)"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 深度语法与写作剖析：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
