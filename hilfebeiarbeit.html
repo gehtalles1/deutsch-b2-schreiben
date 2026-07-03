@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio Teil 2</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-teal: #0d9488;
+            --brand-teal-light: #f0fdfa;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 520px 1fr;
+            }
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 1:1 仿真官方试卷质感 */
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* 还原图2中的四块胶带纸条卡片样式 */
+        .goethe-note-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .goethe-note-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .goethe-note-item {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.04);
+            padding: 14px;
+            font-size: 13.5px;
+            color: #111827;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.04);
+            justify-content: center;
+            border-radius: 2px;
+            transform: rotate(-0.5deg);
+        }
+
+        .goethe-note-item:nth-child(even) {
+            transform: rotate(0.8deg);
+            background: #fdfdfd;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--brand-teal-light);
+            border-left: 4px solid var(--brand-teal);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #115e59;
+        }
+
+        /* 范文画布区 */
+        .essay-canvas {
+            font-size: 16px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 16px;
+            border-bottom: 1px dashed var(--border-crisp);
+            padding-bottom: 8px;
+        }
+
+        .goethe-token {
+            background-color: #ccfbf1;
+            border-bottom: 2.5px solid var(--brand-teal);
+            color: #115e59;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #99f6e4;
+            color: #134e4a;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        }
+
+        /* 浮动高光解析舱 */
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: var(--radius-md) ;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作真题沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 2</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Sie sind beruflich für Ihre Firma bei einem wichtigen Kunden vor Ort. Während des Meetings bittet der Kunde überraschend um eine detaillierte Projektübersicht, die Sie nicht auf Ihrem Laptop gespeichert haben. Schreiben Sie eine dringende Nachricht an Ihren Kollegen, Herrn Wagner.
+                </div>
+
+                <div class="goethe-note-grid">
+                    <div class="goethe-note-item">Schildern Sie die unerwartete Situation beim Kunden.</div>
+                    <div class="goethe-note-item">Erklären Sie genau, welche Unterlagen benötigt werden und wo diese zu finden sind.</div>
+                    <div class="goethe-note-item">Bitten Sie ihn höflich, Ihnen die Datei kurzfristig per E-Mail zu senden.</div>
+                    <div class="goethe-note-item">Zeigen Sie Verständnis für die zusätzliche Arbeit und die Eile.</div>
+                </div>
+
+                <div class="goethe-instructions">
+                    Überlegen Sie sich eine passende Reihenfolge für die Inhaltspunkte. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Vergessen Sie nicht Anrede und Gruß. Schreiben Sie mindestens 100 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 考官视角：Teil 2 职场紧急协助核心要点</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. **职场分寸感**：写给同事 **Herr Wagner**，虽然是内部协作，但题干给出了姓氏且属于正式突发公务，语体仍应采用**尊称 Sie**，语气需职业、严谨且充满感激。<br>2. **逻辑推进方案**：建议按照【寒暄开篇 -> 描述现场突发客户要求 -> 告知具体文件及路径 -> 发出紧急求助 -> 体谅对方加急辛苦 -> 结尾致谢】的流畅线索展开，字数控制在 100-120 字最佳。</p>
+            </div>
+        </div>
+
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分公文范文分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Dringende Bitte um Zusendung der Projektunterlagen</div>
+            
+            <div class="essay-canvas">
+                <span class="goethe-token" data-id="1">Sehr geehrter Herr Wagner,</span>
+                <br>
+                <span class="goethe-token" data-id="2">ich wende mich mit einem dringenden Anliegen an Sie,</span> <span class="goethe-token" data-id="3">da sich hier beim Kunden eine unerwartete Situation ergeben hat.</span> 
+                <br>
+                Während unserer laufenden Besprechung hat der Abteilungsleiter überraschend nach der vollständigen Übersicht für das anstehende Jahr gefragt. Da ich diese Datei vor meiner Abreise leider nicht lokal auf meinem Laptop gesichert habe, sitze ich nun etwas in der Klemme.
+                <br>
+                <span class="goethe-token" data-id="4">Es wäre von großem Vorteil, wenn Sie mir</span> den aktuellen Bericht so schnell wie möglich zukommen lassen könnten. <span class="goethe-token" data-id="5">Die besagten Dokumente befinden sich</span> auf unserem gemeinsamen Netzlaufwerk im Ordner „Projekte 2026“ unter dem Namen „Uebersicht_Finale.pdf“.
+                <br>
+                <span class="goethe-token" data-id="6">Ich bin mir vollkommen darüber im Klaren, dass</span> <span class="goethe-token" data-id="7">meine Anfrage sehr kurzfristig kommt</span> und Ihnen zusätzliche Mühe im Arbeitsalltag bereitet. Dennoch wäre ich Ihnen für eine kurze Unterstützung in dieser misslichen Lage unendlich dankbar.
+                <br>
+                <span class="goethe-token" data-id="8">Für Ihre schnelle Unterstützung und Ihre Bemühungen bedanke ich mich</span> im Voraus.
+                <br><br>
+                <span class="goethe-token" data-id="9">Mit freundlichen Grüßen</span>
+                <br>
+                [Ihr Vorname] [Ihr Nachname]
+            </div>
+        </div>
+
+    </div>
+
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 (Teil 2) 商务书信语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "Sehr geehrter Herr Wagner,",
+                cn: "释义：尊敬的瓦格纳先生，（正式商务书信对男性的标准称呼）",
+                tip: "写给男同事或合作伙伴时的标准严谨称呼。<b>高频易错点</b>：千万不要漏掉形容词词尾 **-er**（Sehr geehrt<b>er</b> Herr...）。结尾处必须加【逗号】，且下一行正文首字母在没有专有名词的情况下必须<b>小写</b>。",
+                ex: "<b>规范书写格式示范：</b><br>Sehr geehrter Herr Wagner,<br><b>i</b>ch hoffe, Sie hatten einen guten Start..."
+            },
+            2: {
+                de: "ich wende mich mit einem dringenden Anliegen an Sie,",
+                cn: "释义：我有一个极其紧急的事项想向您求助 / 寻取协助",
+                tip: "比单一贫乏的 'Ich schreibe Ihnen, weil...' 高级数倍的万能开篇公文句型。完美融合了高级反身动词短语 <b>sich wenden mit etwas (D) an jemanden (A)</b>，而名词 <b>das Anliegen</b>（诉求、关切事项）搭配 <b>dringend</b>（紧急的），瞬间确立了地道的职场交流语境。",
+                ex: "<b>核心拓展例句：</b><br><b>Ich wende mich mit einem dringenden Anliegen an Sie</b>, da ein technisches Problem aufgetreten ist.<br>(我有个紧急事项向您求助，因为系统出现了一个技术故障。)"
+            },
+            3: {
+                de: "da sich hier beim Kunden eine unerwartete Situation ergeben hat.",
+                cn: "释义：因为在客户现场这里出现了一个意料之外的突发状况。",
+                tip: "对应第一个核心要点。考官极度抗拒考生在 B2 阶段反复打出口语化的 'passiert ist'。此处使用高级反身动词 <b>sich ergeben</b>（产生、自...结果出现），配上形容词 <b>unerwartet</b>（始料未及的），使整句公文的客观描述感跃然纸上。",
+                ex: "<b>核心拓展例句：</b><br>Durch den plötzlichen Streik <b>hat sich eine unerwartete Situation ergeben</b>.<br>(由于突然的罢工，出现了一个始料未及的状况。)"
+            },
+            4: {
+                de: "Es wäre von großem Vorteil, wenn Sie mir ... zukommen lassen könnten.",
+                cn: "释义：如果您能让我收到/将...发给我，那将非常有帮助。",
+                tip: "提出核心诉求的得分利器。短语 <b>Es ist von Vorteil</b>（是有利的、有帮助的）是标准的 B2 级议论文/公文加分句型。而商务德语短语 <b>jemandem etwas zukommen lassen</b>（让某人收到某物/送交）是用来替换枯燥动词 'schicken'（寄发）的绝佳平替。",
+                ex: "<b>核心拓展例句：</b><br><b>Es wäre von großem Vorteil, wenn Sie mir</b> die Agenda vorab <b>zukommen lassen könnten</b>.<br>(如果您能提前把议程表发给我让我看一下，那将大有裨益。)"
+            },
+            5: {
+                de: "Die besagten Dokumente befinden sich",
+                cn: "释义：上述的这些文件目前正存放于……",
+                tip: "交代文件具体方位的丝滑过渡句。指示形容词 <b>besagt</b>（上述的、前文提及的）是极佳的语篇逻辑衔接词（Kohärenz），能把上下文紧密咬合。动词 <b>sich befinden</b>（处于、位于）也比普通的 'sein' 或 'liegen' 更具书面质感。",
+                ex: "<b>核心拓展例句：</b><br><b>Die besagten Dokumente befinden sich</b> bereits in Ihrem Posteingang.<br>(上述提及的文件目前已经发送到您的电子邮箱收件箱中了。)"
+            },
+            6: {
+                de: "Ich bin mir vollkommen darüber im Klaren, dass",
+                cn: "释义：我完全非常清楚/心里非常明白……",
+                tip: "对应第四个要点（表达体谅与理解）。此句动用了德语中极其地道的高级固定结构 <b>sich (D) über etwas (A) im Klaren sein</b>（对某事完全清醒、明白），比单调机械的 'Ich weiß, dass...' 语法架构更厚重，也是考官最爱看的句式之一。",
+                ex: "<b>核心拓展例句：</b><br><b>Ich bin mir vollkommen darüber im Klaren, dass</b> diese Aufgabe viel Geduld erfordert.<br>(我完全非常清楚，这项任务需要极大的耐心。)"
+            },
+            7: {
+                de: "meine Anfrage sehr kurzfristig kommt,",
+                cn: "释义：我的请求来得非常临时 / 突兀仓促",
+                tip: "体现职场高情商和分寸感（Pragmatische Kompetenz）的核心用词。形容词/副词 <b>kurzfristig</b>（临时的、时间紧迫的）是职场公文处理突发变故时的绝对灵魂词。主动承认自己的请求给对方添了麻烦，在德语写作德性（表达得体性）上拿分极高。",
+                ex: "<b>核心拓展例句：</b><br>Es tut mir leid, dass diese Programmänderung so <b>kurzfristig kommt</b>.<br>(非常抱歉，这次日程调整来得如此仓促临时。)"
+            },
+            8: {
+                de: "Für Ihre schnelle Unterstützung und Ihre Bemühungen bedanke ich mich",
+                cn: "释义：对于您的快速协助与付出的操劳，我在此表示感谢。",
+                tip: "结尾段致谢的强力组合拳。名词 <b>die Unterstützung</b>（支持）和 <b>die Bemühung</b>（努力、操劳）是公文谢幕致谢时的黄金搭档。通过介词 <b>für</b> 引导原因前置，整个句子紧凑干练，极具职场干练感。",
+                ex: "<b>核心拓展例句：</b><br><b>Für Ihre</b> unkomplizierte <b>Unterstützung bedanke ich mich</b> ganz herzlich.<br>(对您如此高效爽快的协助，我表示由衷的感谢。)"
+            },
+            9: {
+                de: "Mit freundlichen Grüßen",
+                cn: "释义：此致 敬礼（正式商务书信万能结尾）",
+                tip: "再次敲黑板的送分/扣分铁律：<b>Mit freundlichen Grüßen 后面绝对、绝对不可以加任何逗号或者句号！</b>直接空行写下自己的名字即可。误加标点符号在歌德官方评卷标准中属于硬性语法扣分点。",
+                ex: "<b>规范结尾演示：</b><br>Mit freundlichen Grüßen<br>Max Mustermann"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 深度语法与提分剖析：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
