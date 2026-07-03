@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio Teil 1 (Digitale Medien)</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-teal: #0d9488;
+            --brand-teal-light: #f0fdfa;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 520px 1fr;
+            }
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .goethe-note-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .goethe-note-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .goethe-note-item {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.04);
+            padding: 14px;
+            font-size: 13.5px;
+            color: #111827;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            border-radius: 2px;
+            transform: rotate(-0.5deg);
+        }
+
+        .goethe-note-item:nth-child(even) {
+            transform: rotate(0.8deg);
+            background: #fdfdfd;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--brand-teal-light);
+            border-left: 4px solid var(--brand-teal);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #115e59;
+        }
+
+        .essay-canvas {
+            font-size: 16px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 16px;
+            border-bottom: 1px dashed var(--border-crisp);
+            padding-bottom: 8px;
+        }
+
+        .goethe-token {
+            background-color: #ccfbf1;
+            border-bottom: 2.5px solid var(--brand-teal);
+            color: #115e59;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #99f6e4;
+            color: #134e4a;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        }
+
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: var(--radius-md) ;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <!-- 左侧区域：根据真题图片 1.png 1:1复刻试卷 (Teil 1) -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作真题沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 1</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Sie schreiben einen Forumsbeitrag zum Einsatz von digitalen Medien im Unterricht.
+                </div>
+
+                <div class="goethe-note-grid">
+                    <div class="goethe-note-item">Äußern Sie Ihre Meinung zu digitalen Medien im Unterricht.</div>
+                    <div class="goethe-note-item">Nennen Sie Gründe, warum Lehrer immer öfter digitale Medien in den Unterricht einbeziehen.</div>
+                    <div class="goethe-note-item">Schlagen Sie geeignete Medien für den Deutschunterricht vor.</div>
+                    <div class="goethe-note-item">Nennen Sie Vorteile oder auch Nachteile herkömmlicher Unterrichtsmethoden.</div>
+                </div>
+
+                <div class="goethe-instructions">
+                    Denken Sie an eine Einleitung und einen Schluss. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Schreiben Sie mindestens 150 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 考官视角：Teil 1 课堂数字化议论文核心要点</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. **语料升级**：避免频繁使用口语化的 "gut/schlecht"，应灵活代入能展示 B2 级语言厚度的固定搭配。<br>2. **结构连贯**：四个提示点需自然衔接，特别注意在论述“传统教学法的优缺点”时使用高分对比句型。<br>3. **字数控制**：紧扣提示点进行针对性铺陈，确保逻辑递进，字数达到 **150 字** 以上。</p>
+            </div>
+        </div>
+
+        <!-- 右侧区域：核心高分语料精读画布 -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分论坛议论文分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Forumsbeitrag: Einsatz von digitalen Medien im Unterricht</div>
+            
+            <div class="essay-canvas">
+                In der heutigen Zeit <span class="goethe-token" data-id="1">steht die Digitalisierung des Bildungswesens im Mittelpunkt lebhafter Diskussionen.</span> 
+                Besonders intensiv wird die Frage debattiert, ob Laptops und Tablets herkömmliche Kreidetafeln vollständig ersetzen sollten. 
+                <span class="goethe-token" data-id="2">Ich bin der festen Überzeugung, dass</span> der gezielte Einsatz digitaler Werkzeuge den Lernalltag massiv bereichert, da er komplexe Inhalte anschaulicher vermitteln kann.
+                <br>
+                <span class="goethe-token" data-id="3">Ein wesentlicher Grund für diese Entwicklung liegt darin, dass</span> visuelle und interaktive Medien die Motivation der Schüler steigern. Moderne Technik <span class="goethe-token" data-id="4">eröffnet völlig neue Möglichkeiten,</span> um den Unterricht abwechslungsreich zu gestalten, indem beispielsweise Lehrvideos oder Animationen live präsentiert werden.
+                <br>
+                <span class="goethe-token" data-id="5">Wenn es um den Deutschunterricht geht, eignen sich</span> interaktive Lernplattformen und Grammatik-Apps <span class="goethe-token" data-id="5-2">hervorragend.</span> Sie erlauben es den Lernenden, das Hör- und Leseverstehen in ihrem eigenen Tempo spielerisch zu trainieren.
+                <br>
+                <span class="goethe-token" data-id="6">Demgegenüber darf man nicht unerwähnt lassen, dass</span> traditionelle Unterrichtsmethoden, wie das Lesen gedruckter Bücher, ebenfalls <span class="goethe-token" data-id="7">einen unschätzbaren Vorteil</span> bieten: Sie fördern nachweislich die tiefere Konzentration und schützen Schüler vor der ständigen digitalen Ablenkung durch Pop-up-Nachrichten.
+                <br>
+                <span class="goethe-token" data-id="8">Aus den genannten Gründen komme ich zu dem Schluss, dass</span> weder eine rein digitale noch eine rein analoge Schule ideal ist. Vielmehr kommt es auf eine ausgewogene Kombination beider Ansätze an.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 中央高光视窗解析舱 -->
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 (Teil 1) 议论文高级语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "steht die Digitalisierung des Bildungswesens im Mittelpunkt lebhafter Diskussionen.",
+                cn: "释义：……正处于热烈讨论的中心。（高分学术引言句型）",
+                tip: "这是替代千篇一律的 'Heutzutage ist ... ein wichtiges Thema' 的完美方案。<b>im Mittelpunkt stehen</b>（处于中心地位）搭配形容词 <b>lebhaft</b>（热烈的），能够瞬间提升文章的客观论证感，是考官非常青睐的正式开头方式。",
+                ex: "<b>替换应用演示：</b><br>In der heutigen Zeit <b>steht das Thema</b> Umweltschutz <b>im Mittelpunkt lebhafter Diskussionen</b>.<br>(在当今时代，环境保护这一主题正处于热烈讨论的中心。)"
+            },
+            2: {
+                de: "Ich bin der festen Überzeugung, dass ...",
+                cn: "释义：我坚信…… / 我持有坚定的信念。（明确表达个人观点）",
+                tip: "完美响应第一个提示点（Äußern Sie Ihre Meinung...）。比普通的 'Ich denke, dass' 或 'Ich meine' 语气更加坚定且高级。属于 B2 议论文中用来确立个人鲜明立场的黄金句型。",
+                ex: "<b>核心拓展例句：</b><br><b>Ich bin der festen Überzeugung, dass</b> die Integration von Technik im Klassenzimmer unumgänglich ist.<br>(我坚信在教室内整合技术是不可避免的。)"
+            },
+            3: {
+                de: "Ein wesentlicher Grund für diese Entwicklung liegt darin, dass ...",
+                cn: "释义：这一发展的一个重要原因在于……（深度剖析原因）",
+                tip: "用于第二要点（Nennen Sie Gründe...）。<b>Grund liegt darin, dass...</b> 是德语书面语中极其正宗的因果论证结构，比用 Weil 引导原因显得更加有条理和逻辑性。注意 dass 引导的从句变位动词置于句尾。",
+                ex: "<b>核心拓展例句：</b><br><b>Ein wesentlicher Grund für diese Entwicklung liegt darin, dass</b> digitale Werkzeuge den Lehrern viel Zeit ersparen.<br>(这一发展的一个重要原因在于，数字工具有效节省了教师的大量时间。)"
+            },
+            4: {
+                de: "eröffnet völlig neue Möglichkeiten, ...",
+                cn: "释义：开启了全新的可能性/带来了全新的契机。（阐述数字化优势）",
+                tip: "论证生长点句型。在描写新事物带来的益处时，用 <b>Möglichkeiten eröffnen</b> 代替口语化的 'ist sehr praktisch'，能够展现出考生具备良好的词汇搭配能力（Kollokation）。",
+                ex: "<b>核心拓展例句：</b><br>Die künstliche Intelligenz <b>eröffnet völlig neue Möglichkeiten</b> für personalisiertes Lernen.<br>(人工智能为个性化学习开启了全新的可能性。)"
+            },
+            5: {
+                de: "Wenn es um den Deutschunterricht geht, eignen sich ... hervorragend.",
+                cn: "释义：当谈到德语教学时，……非常适合。（针对性提出建议）",
+                tip: "精准对齐第三个提示点（Schlagen Sie geeignete Medien vor）。采用 <b>Wenn es um ... geht</b>（当涉及到……时）引入话题，再配合反身动词 <b>sich eignen für</b>（适合于）加上副词 <b>hervorragend</b>（卓越地），句型错落有致，极富地道感。",
+                ex: "<b>核心拓展例句：</b><br><b>Wenn es um</b> die Grammatik <b>geht, eignen sich</b> diese Lern-Apps <b>hervorragend</b>.<br>(当谈到语法时，这些学习应用非常适合。)"
+            },
+            "5-2": {
+                de: "Wenn es um den Deutschunterricht geht, eignen sich ... hervorragend.",
+                cn: "释义：当谈到德语教学时，……非常适合。（针对性提出建议）",
+                tip: "精准对齐第三个提示点（Schlagen Sie geeignete Medien vor）。采用 <b>Wenn es um ... geht</b>（当涉及到……时）引入话题，再配合反身动词 <b>sich eignen für</b>（适合于）加上副词 <b>hervorragend</b>（卓越地），句型错落有致，极富地道感。",
+                ex: "<b>核心拓展例句：</b><br><b>Wenn es um</b> die Grammatik <b>geht, eignen sich</b> diese Lern-Apps <b>hervorragend</b>.<br>(当谈到语法时，这些学习应用非常适合。)"
+            },
+            6: {
+                de: "Demgegenüber darf man nicht unerwähnt lassen, dass ...",
+                cn: "释义：与此相对照，同样不容忽视/不可不提的是……（完美的转折对比句）",
+                tip: "应对第四个提示点（传统教学法优缺点）的黄金过渡句。<b>Demgegenüber</b>（与此相对）放在句首做副词性过渡，后接双重否定句式 <b>nicht unerwähnt lassen</b>（不能不提到），逻辑极其严密，非常有说服力。",
+                ex: "<b>核心拓展例句：</b><br><b>Demgegenüber darf man nicht unerwähnt lassen, dass</b> Bücher die Fantasie der Kinder stärker anregen.<br>(与此相对照，同样不可不提的是，书籍能更强烈地激发儿童的想象力。)"
+            },
+            7: {
+                de: "... einen unschätzbaren Vorteil (bieten)",
+                cn: "释义：给……带来无法估量的优势/绝佳的好处（强化传统优势）",
+                tip: "高级词汇升级点。不要总是使用 'ein großer Vorteil'。将形容词升级为 <b>unschätzbar</b>（无法估量的、极其宝贵的），能让考官直接感受到你具备超越普通 B2 水平的词汇储备。",
+                ex: "<b>核心拓展例句：</b><br>Der direkte Kontakt zu Mitschülern bietet <b>einen unschätzbaren Vorteil</b> für die soziale Entwicklung.<br>(与同学的直接接触对社交发展带来无法估量的优势。)"
+            },
+            8: {
+                de: "Aus den genannten Gründen komme ich zu dem Schluss, dass ...",
+                cn: "释义：基于上述原因，我得出的结论是……（议论文高分结尾句型）",
+                tip: "完美响应题目中对“Schluss（结论）”的明确要求。用固定短语 <b>zu dem Schluss kommen</b> 代替千篇一律的 'Zum Schluss denke ich'，使结尾显得结构完整、客观严谨，为整篇发言画上完美的句号。",
+                ex: "<b>核心拓展例句：</b><br><b>Aus den genannten Gründen komme ich zu dem Schluss, dass</b> Medienkompetenz ein Pflichtfach sein sollte.<br>(基于上述原因，我得出的结论是，媒介素养应当成为一门必修课。)"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 深度语法与写作剖析：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
