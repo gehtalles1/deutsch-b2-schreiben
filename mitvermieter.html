@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio Teil 2</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-teal: #0d9488;
+            --brand-teal-light: #f0fdfa;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 520px 1fr;
+            }
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 1:1 仿真官方试卷质感 */
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* 还原图2中的四块胶带纸条卡片样式 */
+        .goethe-note-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .goethe-note-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .goethe-note-item {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.04);
+            padding: 14px;
+            font-size: 13.5px;
+            color: #111827;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            border-radius: 2px;
+            transform: rotate(-0.5deg);
+        }
+
+        .goethe-note-item:nth-child(even) {
+            transform: rotate(0.8deg);
+            background: #fdfdfd;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--brand-teal-light);
+            border-left: 4px solid var(--brand-teal);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #115e59;
+        }
+
+        /* 范文画布区 */
+        .essay-canvas {
+            font-size: 16px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 16px;
+            border-bottom: 1px dashed var(--border-crisp);
+            padding-bottom: 8px;
+        }
+
+        .goethe-token {
+            background-color: #ccfbf1;
+            border-bottom: 2.5px solid var(--brand-teal);
+            color: #115e59;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #99f6e4;
+            color: #134e4a;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        }
+
+        /* 浮动高光解析舱 */
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: var(--radius-md) ;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作真题沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 2</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Sie haben eine Ferienwohnung für den Sommer gebucht, können aber in der Zeit doch keinen Urlaub nehmen, weil es in Ihrer Firma sehr viel zu tun gibt. Schreiben Sie eine Mail an das Vermieter-Ehepaar der Ferienwohnung, Frau und Herrn Schiemenz.
+                </div>
+
+                <div class="goethe-note-grid">
+                    <div class="goethe-note-item">Erläutern Sie, warum Sie schreiben.</div>
+                    <div class="goethe-note-item">Bitten Sie um Stornierung der Buchung.</div>
+                    <div class="goethe-note-item">Zeigen Sie Verständnis für die Situation der Vermieter.</div>
+                    <div class="goethe-note-item">Nennen Sie einen späteren Reisetermin.</div>
+                </div>
+
+                <div class="goethe-instructions">
+                    Überlegen Sie sich eine passende Reihenfolge für die Inhaltspunkte. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Vergessen Sie nicht Anrede und Gruß. Schreiben Sie mindestens 100 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 考官视角：Teil 2 房东夫妇度假信件核心要点</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. **语体与称呼分寸**：写给房东夫妇 **Frau und Herrn Schiemenz**，属于日常生活中略带正式的事务性沟通。称呼建议使用复数统称 **Sehr geehrte Familie Schiemenz**，或并列写出。语体必须全篇采用**尊称 Sie**，语气需礼貌、诚恳且带有歉意。<br>2. **逻辑推进方案**：建议按照【寒暄开篇 -> 阐明写信事由 -> 诚恳解释突发工作原因 -> 提出取消预订请求 -> 换位思考表达对房东损失的体谅 -> 主动提出未来替代日期挽回损失 -> 结尾致谢致歉】的线索展开，重点在于展现高情商的沟通技巧与扎实的 B2 级衔接词。</p>
+            </div>
+        </div>
+
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分公文范文分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Stornierung unserer Buchung für die Ferienwohnung</div>
+            
+            <div class="essay-canvas">
+                <span class="goethe-token" data-id="1">Sehr geehrte Familie Schiemenz,</span>
+                <br>
+                <span class="goethe-token" data-id="2">ich schreibe Ihnen heute bezüglich unserer Reservierung</span> der Ferienwohnung für den kommenden August. Leider muss ich Ihnen eine unerfreuliche Nachricht mitteilen.
+                <br>
+                <span class="goethe-token" data-id="3">Aufgrund der Tatsache, dass wir derzeit mit einem enormen Arbeitsaufwand konfrontiert sind,</span> ist es mir in diesem Zeitraum absolut unmöglich, Urlaub zu nehmen. In unserer Firma steht ein wichtiges Projekt an, das meine persönliche Anwesenheit erfordert. <span class="goethe-token" data-id="4">Aus diesem Grund muss ich Sie schweren Herzens darum bitten,</span> die Buchung zu stornieren.
+                <br>
+                <span class="goethe-token" data-id="5">Ich bin mir vollkommen bewusst, dass diese kurzfristige Absage Unannehmlichkeiten mit sich bringt,</span> da es für Sie nun schwierig sein könnte, so schnell neue Mieter zu finden. Dafür möchte ich mich aufrichtig entschuldigen.
+                <br>
+                <span class="goethe-token" data-id="6">Da wir den Aufenthalt bei Ihnen jedoch unbedingt nachholen möchten,</span> <span class="goethe-token" data-id="7">wollte ich mich erkundigen, ob das Apartment eventuell</span> im Spätherbst, beispielsweise im Oktober, noch für uns verfügbar wäre.
+                <br>
+                <span class="goethe-token" data-id="8">Für Ihre Bemühungen und Ihr Entgegenkommen bedanke ich mich</span> im Voraus und hoffe sehr auf Ihr Verständnis.
+                <br><br>
+                <span class="goethe-token" data-id="9">Mit freundlichen Grüßen</span>
+                <br>
+                [Ihr Vorname] [Ihr Nachname]
+            </div>
+        </div>
+
+    </div>
+
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 (Teil 2) 房东书信语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "Sehr geehrte Familie Schiemenz,",
+                cn: "释义：尊敬的席门茨一家/夫妇，（写给夫妇房东的标准地道统称）",
+                tip: "当题目要求写给一对夫妇（Frau und Herrn...）时，使用 <b>Sehr geehrte Familie + 姓氏</b> 既显得得体、地道，又避免了并列男女称呼时的冗长。<b>高频易错点</b>：注意形容词词尾，复数统称用 **-e**（Sehr geehrt<b>e</b> Familie）。结尾处必须加【逗号】，且下一行正文首字母在没有专有名词的情况下必须<b>小写</b>。",
+                ex: "<b>标准书写格式示范：</b><br>Sehr geehrte Familie Schiemenz,<br><b>i</b>ch wende mich heute an Sie..."
+            },
+            2: {
+                de: "ich schreibe Ihnen heute bezüglich unserer Reservierung ...",
+                cn: "释义：我今天写信给您，是关于我们预订的事情……",
+                tip: "对应第一个核心要点（阐明写信目的）。不要再用老套死板的 'Ich schreibe diesen Brief, weil...' 了！利用高级介词 <b>bezüglich + 第二格 (Genitiv)</b> 引导事由，是标准的 B2 级商务/事务公文开篇句型，语言风格瞬间变得高级且专业。",
+                ex: "<b>核心拓展例句：</b><br>Ich schreibe Ihnen heute <b>bezüglich</b> Ihrer Anzeige auf der Webseite.<br>(我今天写信给您，是关于您在网页上刊登的广告。)"
+            },
+            3: {
+                de: "Aufgrund der Tatsache, dass wir derzeit mit einem enormen Arbeitsaufwand konfrontiert sind,",
+                cn: "释义：鉴于我们目前面临着巨大的工作量这一事实……",
+                tip: "对应原因解释。考官极度喜欢考生用名词短语替代简单的从句连词。此处 <b>aufgrund der Tatsache, dass...</b>（由于……这一事实）比普通的 'weil' 更有结构厚重感。而 <b>mit etwas konfrontiert sein</b>（面临/遭遇某事）搭配 <b>der Arbeitsaufwand</b>（工作量），是职场与高级德语的得分核心词。",
+                ex: "<b>核心拓展例句：</b><br>Wir sind aktuell <b>mit einer schwierigen Situation konfrontiert</b>.<br>(我们目前正面一个棘手的局面。)"
+            },
+            4: {
+                de: "Aus diesem Grund muss ich Sie schweren Herzens darum bitten,",
+                cn: "释义：出于这个原因，我不得不怀着沉重的心情请求您……",
+                tip: "对应第二个要点（请求取消预订）。副词短语 <b>schweren Herzens</b>（怀着沉重的心情/无可奈何地）是体现考生表达得体性（Pragmatische Kompetenz）的灵魂用词，能够准确传达自己的歉意与无奈。后面搭配标准的 <b>jemanden darum bitten, + zu不定式从句</b>，语法结构扎实。",
+                ex: "<b>核心拓展例句：</b><br>Ich muss mich <b>schweren Herzens</b> von diesem Projekt zurückziehen.<br>(我不得不怀着沉重的心情退出这个项目。)"
+            },
+            5: {
+                de: "Ich bin mir vollkommen bewusst, dass diese kurzfristige Absage Unannehmlichkeiten mit sich brings,",
+                cn: "释义：我完全清楚这次临时的取消会给您带来不便……",
+                tip: "对应第三个要点（体谅房东处境）。反身代词结构 <b>sich (D) einer Sache (G) bewusst sein</b> 或搭配 dass 从句（意识到某事）是 B2 必背的高级句型。高级名词 <b>die Unannehmlichkeit</b>（不便、麻烦）与固定短语 <b>etwas mit sich bringen</b>（随之带来/不可避免地伴随）结合，高情商且极具书面质感。",
+                ex: "<b>核心拓展例句：</b><br>Jede Veränderung <b>bringt gewisse Unannehmlichkeiten mit sich</b>.<br>(每一次改变都会随之带来某些不便。)"
+            },
+            6: {
+                de: "Da wir den Aufenthalt bei Ihnen jedoch unbedingt nachholen möchten,",
+                cn: "释义：然而，由于我们非常希望能够补上在您那里的住宿/假期……",
+                tip: "极佳的语篇过渡句（Kohärenz）。连词 <b>jedoch</b>（然而）置于句中，使语气比句首的 'aber' 更加委婉平滑。可分离动词 <b>nachholen</b>（弥补、补办、补上错过的行程）在此处使用极其精准，展现了考生高超的词汇掌控力，说明自己不是故意找茬，而是确实渴望入住。",
+                ex: "<b>核心拓展例句：</b><br>Wir können die verpasste Prüfung in der nächsten Woche <b>nachholen</b>.<br>(我们可以在下周补考错过的考试。)"
+            },
+            7: {
+                de: "wollte ich mich erkundigen, ob das Apartment eventuell ... noch für uns verfügbar wäre.",
+                cn: "释义：我想咨询一下，这套公寓是否……还可供我们预订/使用。",
+                tip: "对应第四个要点（提出稍后 Reisetermin）。高级反身动词短语 <b>sich erkundigen nach... / ob...</b>（打听、咨询）是公文信件中替换 'fragen' 的不二之选。此处巧妙使用了<b>第二虚拟式 (Konjunktiv II) `wäre`</b>，使得语气委婉尊崇，符合德语中向他人提出请求时的最高礼貌规范。",
+                ex: "<b>核心拓展例句：</b><br>Ich <b>wollte mich erkundigen, ob</b> der Platz noch frei ist.<br>(我想咨询一下，这个位置是否还空着。)"
+            },
+            8: {
+                de: "Für Ihre Bemühungen und Ihr Entgegenkommen bedanke ich mich",
+                cn: "释义：对于您的操劳以及给我们的迁就/协助，我表示感谢。",
+                tip: "结尾段致谢的组合拳。名词 <b>die Bemühung</b>（努力、操劳）和 <b>das Entgegenkommen</b>（妥协、让步、迁就善意）是处理预订变更、退款或取消等纠纷/变动时，向对方表达谢意的黄金词汇。通过介词 <b>für</b> 引导原因前置，结构紧凑干练。",
+                ex: "<b>核心拓展例句：</b><br>Ich danke Ihnen vielmals für Ihr großes <b>Entgegenkommen</b> in dieser Angelegenheit.<br>(非常感谢您在此事中给予的大力迁就和协助。)"
+            },
+            9: {
+                de: "Mit freundlichen Grüßen",
+                cn: "释义：此致 敬礼（标准的信件结尾礼貌语）",
+                tip: "再次敲黑板的重磅扣分防线：<b>Mit freundlichen Grüßen 后面绝对、绝对不可以加任何标点符号（包括逗号和句号）！</b>直接空行签署姓名即可。误加标点在歌德官方评卷中属于硬性格式错误，容易被扣掉无谓的分数。",
+                ex: "<b>规范结尾演示：</b><br>Mit freundlichen Grüßen<br>Max Mustermann"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 深度语法与提分剖析：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
