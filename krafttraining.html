@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio Teil 1 (Krafttraining)</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-teal: #0d9488;
+            --brand-teal-light: #f0fdfa;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 520px 1fr;
+            }
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .goethe-note-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .goethe-note-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .goethe-note-item {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.04);
+            padding: 14px;
+            font-size: 13.5px;
+            color: #111827;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            border-radius: 2px;
+            transform: rotate(-0.5deg);
+        }
+
+        .goethe-note-item:nth-child(even) {
+            transform: rotate(0.8deg);
+            background: #fdfdfd;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--brand-teal-light);
+            border-left: 4px solid var(--brand-teal);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #115e59;
+        }
+
+        .essay-canvas {
+            font-size: 16px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 16px;
+            border-bottom: 1px dashed var(--border-crisp);
+            padding-bottom: 8px;
+        }
+
+        .goethe-token {
+            background-color: #ccfbf1;
+            border-bottom: 2.5px solid var(--brand-teal);
+            color: #115e59;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #99f6e4;
+            color: #134e4a;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        }
+
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: var(--radius-md) ;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <!-- 左侧区域：根据真题图片 1.jpg 1:1复刻试卷 (Teil 1 - Krafttraining) -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作真题沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 1</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Sie schreiben einen Forumsbeitrag über Krafttraining.
+                </div>
+
+                <div class="goethe-note-grid">
+                    <div class="goethe-note-item">Äußern Sie Ihre Meinung zu Krafttraining in Fitness-Zentren.</div>
+                    <div class="goethe-note-item">Nennen Sie Gründe für solch intensive sportliche Beschäftigung.</div>
+                    <div class="goethe-note-item">Nennen Sie weitere Möglichkeiten seinen Körper zu trainieren.</div>
+                    <div class="goethe-note-item">Nennen Sie Vorteile von sportlichen Anstrengungen.</div>
+                </div>
+
+                <div class="goethe-instructions">
+                    Denken Sie an eine Einleitung und einen Schluss. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Schreiben Sie mindestens 150 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 考官视角：Teil 1 力量训练论坛议论文核心要点</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. **逻辑流畅度**：流畅地衔接四个提示点（健身房力量训练的看法 -> 坚持高强度运动的原因 -> 其他锻炼身体的渠道 -> 体育锻炼的好处）。<br>2. **句型丰富性**：使用更丰富的 B2 论证关联词、双重连词和功能动词短语（如双重否定、固定搭配），替代普通的 "weil" 和 "ich finde".<br>3. **字数控制**：紧扣提示点进行针对性铺陈，确保逻辑递进，字数达到 **150 字** 以上。</p>
+            </div>
+        </div>
+
+        <!-- 右侧区域：核心高分语料精读画布 -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分论坛议论文分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Forumsbeitrag: Das Phänomen „Krafttraining“</div>
+            
+            <div class="essay-canvas">
+                In einer heutigen gesundheitsbewussten Gesellschaft <span class="goethe-token" data-id="1">ist Sport aus unserem modernen Lebensstil kaum noch wegzudenken.</span> Immer mehr Menschen investieren viel Zeit in ihr körperliches Wohlbefinden.
+                <br>
+                <span class="goethe-token" data-id="2">Ich persönlich stehe auf dem Standpunkt, dass</span> das Training im Studio eine hervorragende Möglichkeit bietet, gezielt Muskeln aufzubauen und fit zu bleiben. Die professionellen Geräte und die fachkundige Betreuung schaffen eine motivierende Atmosphäre.
+                <br>
+                <span class="goethe-token" data-id="3">Dafür spricht in erster Linie die Tatsache, dass</span> viele Menschen einen Ausgleich zu ihrem oft stressigen und bewegungsarmen Büroalltag suchen. Eine solche intensive sportliche Betätigung <span class="goethe-token" data-id="4">bringt nicht nur körperliche, sondern auch mentale Vorteile mit sich,</span> da sie nachweislich Stress abbaut.
+                <br>
+                Wenn man jedoch keine Lust auf überfüllte Fitnessstudios hat, gibt es gute Auswege. <span class="goethe-token" data-id="5">Als sinnvolle Alternativen sollte man</span> Sportarten an der frischen Luft wie Joggen, Schwimmen oder Calisthenics-Parks <span class="goethe-token" data-id="5-2">in Erwägung ziehen.</span>
+                <br>
+                <span class="goethe-token" data-id="6">Es steht außer Zweifel, dass</span> jegliche Form von sportlicher Anstrengung das Immunsystem stärkt und die allgemeine Lebensqualität langfristig verbessert. <span class="goethe-token" data-id="7">Allerdings darf man nicht unerwähnt lassen, dass</span> man es nicht übertreiben sollte, um Verletzungen zu vermeiden.
+                <br>
+                <span class="goethe-token" data-id="8">Alles in allem komme ich zu dem Schluss, dass</span> Krafttraining im Studio zwar sehr effektiv ist, aber jeder den für sich passenden Weg finden muss, um aktiv zu bleiben.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 中央高光视窗解析舱 -->
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 (Teil 1) 议论文高级语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "ist aus unserem modernen Lebensstil kaum noch wegzudenken.",
+                cn: "释义：……在我们的现代生活方式中是不可或缺的/几乎是无法想象的。（高分时代背景引入句）",
+                tip: "完美替代单调的 'Heutzutage ist ... sehr wichtig'。使用固定表达 <b>etwas ist kaum noch wegzudenken</b>（某事是不可或缺的），可以让考官一眼看出你对德语高级熟语的掌握，非常适合用于几乎所有社会现象、生活习惯话题的开头。",
+                ex: "<b>替换应用演示：</b><br>In der heutigen Gesellschaft <b>ist das Internet aus unserem Alltag kaum noch wegzudenken</b>.<br>(在当今社会，互联网在我们的日常生活中是不可或缺的。)"
+            },
+            2: {
+                de: "Ich persönlich stehe auf dem Standpunkt, dass ...",
+                cn: "释义：我个人持有这样一种观点，即……（高级观点表达）",
+                tip: "精准对接第一个提示点（表达个人观点/体验）。比普通的 'Ich finde, dass...' 或 'Meine Meinung ist...' 更加正式和书面化。<b>auf dem Standpunkt stehen</b> 是 B2 议论文中陈述立场的标准高级短语。",
+                ex: "<b>核心拓展例句：</b><br><b>Ich persönlich stehe auf dem Standpunkt, dass</b> Umweltschutz jeden Einzelnen angeht.<br>(我个人持有这样一种观点，即环境保护关乎每个人。)"
+            },
+            3: {
+                de: "Dafür spricht in erster Linie die Tatsache, dass ...",
+                cn: "释义：支持这一点的原因首先在于……这一事实。（有力的原因引出句）",
+                tip: "对应第二个提示点（列举原因）。取代普通的 weil 或 denn。利用 <b>Dafür spricht...</b>（支持该点的因素是……）加上名词结构 <b>die Tatsache, dass</b>，可以让你的因果论证结构更显严谨和客观，极具德语写作的逻辑美感。",
+                ex: "<b>核心拓展例句：</b><br><b>Dafür spricht in erster Linie die Tatsache, dass</b> man beim Online-Lernen flexibler ist.<br>(支持这一点的原因首先在于，线上学习更加灵活这一事实。)"
+            },
+            4: {
+                de: "... bringt nicht nur körperliche, sondern auch mentale Vorteile mit sich",
+                cn: "释义：……不仅带来身体上的、也带来心理上的好处。（递进式优势阐述）",
+                tip: "在讨论运动、健康或习惯时，使用 <b>nicht nur ..., sondern auch ...</b>（不仅……而且……）这一双重连词（Zweiteilige Konnektoren），是 B2 评分标准里‘语法丰富性’的直接得分点。搭配动词短语 <b>Vorteile mit sich bringen</b>（带来好处）非常地道。",
+                ex: "<b>核心拓展例句：</b><br>Eine gesunde Ernährung <b>bringt nicht nur</b> mehr Energie, <b>sondern auch</b> ein besseres Lebensgefühl <b>mit sich</b>.<br>(健康的饮食不仅带来更多的活力，而且带来更好的生活感受。)"
+            },
+            5: {
+                de: "Als sinnvolle Alternativen sollte man ... in Erwägung ziehen.",
+                cn: "释义：作为合理的替代方案，人们应该将……纳入考虑。（针对性提出替代方案）",
+                tip: "精准对齐第三个提示点（Nennen Sie weitere Möglichkeiten...）。高级功能动词固定搭配（Funktionsverbgefüge）<b>etwas in Erwägung ziehen</b>（考虑某事），是冲刺 B2 高分的‘考官最爱’。用它代替单调的 'Man kann auch ... machen'。",
+                ex: "<b>核心拓展例句：</b><br>Für das Pendeln zur Arbeit <b>sollte man</b> das Fahrrad <b>als sinnvolle Alternative in Erwägung ziehen</b>.<br>(对于上下班通勤，人们应该将自行车作为一种合理的替代方案纳入考虑。)"
+            },
+            "5-2": {
+                de: "Als sinnvolle Alternativen sollte man ... in Erwägung ziehen.",
+                cn: "释义：作为合理的替代方案，人们应该将……纳入考虑。（针对性提出替代方案）",
+                tip: "精准对齐第三个提示点（Nennen Sie weitere Möglichkeiten...）。高级功能动词固定搭配（Funktionsverbgefüge）<b>etwas in Erwägung ziehen</b>（考虑某事），是冲刺 B2 高分的‘考官最爱’。用它代替单调的 'Man kann auch ... machen'。",
+                ex: "<b>核心拓展例句：</b><br>Für das Pendeln zur Arbeit <b>sollte man</b> das Fahrrad <b>als sinnvolle Alternative in Erwägung ziehen</b>.<br>(对于上下班通勤，人们应该将自行车作为一种合理的替代方案纳入考虑。)"
+            },
+            6: {
+                de: "Es steht außer Zweifel, dass ...",
+                cn: "释义：毫无疑问的是……/毋庸置疑的是……（无可辩驳的优势引导句）",
+                tip: "用于第四个提示点（论述优缺点/好处）。这也是一个高级的介词动词固定搭配（固定短语）<b>außer Zweifel stehen</b>（毋庸置疑）。用来强调某一个观点的正确性或普遍真理，比说 'Es ist absolut sicher, dass...' 更加高级、书面化。",
+                ex: "<b>核心拓展例句：</b><br><b>Es steht außer Zweifel, dass</b> Bildung die Zukunftschancen von Kindern erhöht.<br>(毋庸置疑的是，教育能增加孩子未来的机会。)"
+            },
+            7: {
+                de: "Allerdings darf man nicht unerwähnt lassen, dass ...",
+                cn: "释义：然而，绝不能不提及的是……/同样值得注意的是……（严谨的补充与转折句型）",
+                tip: "同样用于第四点，用于在论述完主要优势后进行限制、补充或引出需要注意的负面因素。<b>nicht unerwähnt lassen</b>（不让它不被提及，即：必须提及）采用双重否定表肯定，语调极其地道、严谨，符合德语议论文全面思考的原则。",
+                ex: "<b>核心拓展例句：</b><br><b>Allerdings darf man nicht unerwähnt lassen, dass</b> dieses Projekt auch hohe Kosten verursacht.<br>(然而，绝不能不提及的是，这个项目也会产生高昂的成本。)"
+            },
+            8: {
+                de: "Alles in allem komme ich zu dem Schluss, dass ...",
+                cn: "释义：总而言之，我得出的结论是……（论坛发言高分总结句）",
+                tip: "满足题目对‘Schluss（结尾）’的结构要求。使用短语 <b>Alles in allem</b>（总而言之）配合动词短语 <b>zu dem Schluss kommen</b>（得出结论），可以给文章画上一个非常圆满且符合考试标准的句号，完美替代口语化的 'Mein Schlusswort ist'。",
+                ex: "<b>核心拓展例句：</b><br><b>Alles in allem komme ich zu dem Schluss, dass</b> Kompromisse in einer Partnerschaft notwendig sind.<br>(总而言之，我得出的结论是，伴侣关系中的妥协是必要的。)"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 深度语法与写作剖析：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
