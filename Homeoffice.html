@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio Teil 1 (Homeoffice)</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-teal: #0284c7; /* 更换为沉稳科技蓝，呼应远程办公主题 */
+            --brand-teal-light: #f0f9ff;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 520px 1fr;
+            }
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .goethe-note-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .goethe-note-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .goethe-note-item {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.04);
+            padding: 14px;
+            font-size: 13.5px;
+            color: #111827;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            border-radius: 2px;
+            transform: rotate(-0.5deg);
+        }
+
+        .goethe-note-item:nth-child(even) {
+            transform: rotate(0.8deg);
+            background: #fdfdfd;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--brand-teal-light);
+            border-left: 4px solid var(--brand-teal);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #0369a1;
+        }
+
+        .essay-canvas {
+            font-size: 16px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 16px;
+            border-bottom: 1px dashed var(--border-crisp);
+            padding-bottom: 8px;
+        }
+
+        .goethe-token {
+            background-color: #e0f2fe;
+            border-bottom: 2.5px solid var(--brand-teal);
+            color: #0369a1;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #bae6fd;
+            color: #0c4a6e;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+        }
+
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: var(--radius-md) ;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <!-- 左侧区域：根据真题图片 1:1复刻试卷 (Teil 1 - Homeoffice) -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作真题沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 1</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Sie schreiben einen Forumsbeitrag über das Thema „Homeoffice / Mobiles Arbeiten“.
+                </div>
+
+                <div class="goethe-note-grid">
+                    <div class="goethe-note-item">Äußern Sie Ihre Meinung zum Arbeiten von zu Hause aus.</div>
+                    <div class="goethe-note-item">Nennen Sie Gründe, warum diese Arbeitsform immer beliebter wird.</div>
+                    <div class="goethe-note-item">Nennen Sie andere Möglichkeiten, die Work-Life-Balance zu verbessern.</div>
+                    <div class="goethe-note-item">Nennen Sie Vorteile oder Nachteile von flexiblen Arbeitsmodellen.</div>
+                </div>
+
+                <div class="goethe-instructions">
+                    Denken Sie an eine Einleitung und einen Schluss. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Schreiben Sie mindestens 150 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 考官视角：Teil 1 远程办公论坛议论文得分策略</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. **结构严整**：无缝串联 4 个要点（对居家办公的看法 -> 流行原因 -> 改善工作生活平衡的其他途径 -> 弹性模式的利弊分析）。<br>2. **考官偏爱句式**：避免一成不变的短语，灵活运用动词名词化、双重关联词（sowohl... als auch）及高分功能动词，展现地道的 B2 级语篇衔接力。<br>3. **全面论证**：在谈及利弊时，使用双重否定或辩证转折词，使论证显得客观、逻辑缜密。</p>
+            </div>
+        </div>
+
+        <!-- 右侧区域：核心高分语料精读画布 -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分论坛议论文分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Forumsbeitrag: Flexibilität im Beruf – Fluch oder Segen?</div>
+            
+            <div class="essay-canvas">
+                In unserer modernen Arbeitswelt <span class="goethe-token" data-id="1">gewinnt das Konzept des Homeoffices zunehmend an Bedeutung.</span> Immer mehr Unternehmen ermöglichen ihren Mitarbeitern, flexibel aus der Ferne zu arbeiten.
+                <br>
+                <span class="goethe-token" data-id="2">Ich bin der festen Überzeugung, dass</span> diese Entwicklung eine enorme Erleichterung für viele Arbeitnehmer darstellt, da sie ein hohes Maß an Selbstbestimmung mit sich bringt.
+                <br>
+                <span class="goethe-token" data-id="3">Ein wesentlicher Grund hierfür liegt darin, dass</span> die Vereinbarkeit von Familie und Beruf für die jüngere Generation oberste Priorität hat. Das Arbeiten in den eigenen vier Wänden <span class="goethe-token" data-id="4">ist sowohl für die persönliche Zufriedenheit als auch für die Produktivität von großem Vorteil.</span>
+                <br>
+                Wer dennoch eine klare Trennung zwischen Wohn- und Arbeitsraum bevorzugt, für den <span class="goethe-token" data-id="5">stellt die Nutzung von sogenannten Co-Working-Spaces eine nennenswerte Option dar.</span> Auch flexible Gleitzeitmodelle direkt im Betrieb bieten gute Alternativen.
+                <br>
+                <span class="goethe-token" data-id="6">Es liegt auf der Hand, dass</span> diese Flexibilität unzählige Chancen bietet. <span class="goethe-token" data-id="7">Man darf jedoch die Kehrseite nicht aus den Augen verlieren, nämlich dass</span> die Gefahr der sozialen Isolation und der Selbstausbeutung steigen kann.
+                <br>
+                <span class="goethe-token" data-id="8">Zusammenfassend lässt sich sagen, dass</span> Homeoffice ein zukunftsweisendes Modell ist, sofern klare Grenzen zwischen Arbeitszeit und Freizeit gezogen werden.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 中央高光视窗解析舱 -->
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 (Teil 1) 议论文高级语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "gewinnt ... zunehmend an Bedeutung.",
+                cn: "释义：……越来越显现出其重要性 / 日益受到重视。（高级背景引出句）",
+                tip: "这是阅卷官极度喜欢看到的时代背景引入方式。成功摆脱了 'Heutzutage gibt es...' 或 '... ist sehr wichtig' 等初级表达。搭配固定搭配 <b>an Bedeutung gewinnen</b>（重要性提升），加上副词 <b>zunehmend</b>（日益、逐渐），立刻拉高文章开篇的整体格调。",
+                ex: "<b>替换应用演示：</b><br>In der heutigen Gesellschaft <b>gewinnt das lebenslange Lernen zunehmend an Bedeutung</b>.<br>(在当今社会，终身学习正变得日益重要。)"
+            },
+            2: {
+                de: "Ich bin der festen Überzeugung, dass ...",
+                cn: "释义：我深信…… / 我坚信……（强烈且优雅的观点表达）",
+                tip: "精准对接第一个提示点（表明个人立场）。比普通口语化的 'Ich denke, dass...' 或 'Ich glaube, dass...' 更加庄重且符合书面B2标准。名词结构 <b>die feste Überzeugung</b> 与动词 <b>sein</b> 组合，能够非常有说服力地引出自己的核心论点。",
+                ex: "<b>核心拓展例句：</b><br><b>Ich bin der festen Überzeugung, dass</b> digitale Medien den Unterricht bereichern.<br>(我深信，数字化媒体能丰富课堂教学。)"
+            },
+            3: {
+                de: "Ein wesentlicher Grund hierfür liegt darin, dass ...",
+                cn: "释义：对此的一个核心原因在于……（高级原因剖析句）",
+                tip: "对应第二个提示点（列举原因）。不要总是用 'weil' 或 'da' 连接长句。通过 <b>Ein wesentlicher Grund liegt darin, dass...</b> 这种复合句式，先用名词占位，再用从句具体展开，能使整段话的逻辑框架显得更加严密和具备学术感。",
+                ex: "<b>核心拓展例句：</b><br><b>Ein wesentlicher Grund hierfür liegt darin, dass</b> viele Menschen sich gesünder ernähren wollen.<br>(对此的一个核心原因在于，许多人希望自己的饮食能够更健康。)"
+            },
+            4: {
+                de: "ist sowohl für ... als auch für ... von großem Vorteil",
+                cn: "释义：不仅对……而且对……都大有裨益。（双重关联词兼高级功能动词短语）",
+                tip: "B2 评分标准明确要求学生展现复杂句法的组合能力。使用连词 <b>sowohl ... als auch ...</b>（不仅……而且……）能够完美替代简单的 'und'。同时，用 <b>von Vorteil sein</b> 代替普通形容词 'vorteilhaft' 或 'gut'，展现出纯正的德语名词化写作习惯。",
+                ex: "<b>核心拓展例句：</b><br>Diese Maßnahme <b>ist sowohl für</b> die Umwelt <b>als auch für</b> die Wirtschaft <b>von großem Vorteil</b>.<br>(这项举措不仅对环境而且对经济都大有裨益。)"
+            },
+            5: {
+                de: "stellt ... eine nennenswerte Option dar.",
+                cn: "释义：……构成了另一个值得提及的选择。（多元解决方案引出句）",
+                tip: "精准对齐第三个提示点（寻找其他替代方案）。用以替换陈旧的 'Man kann auch ... machen' 或 'Es gibt auch ...'。动词 <b>darstellen</b>（呈现/构成）加上形容词 <b>nennenswert</b>（值得一提的），是扩充议论文高分词汇量的加分法宝。",
+                ex: "<b>核心拓展例句：</b><br>Für Berufstätige <b>stellt</b> Volkshochschulen <b>eine nennenswerte Option dar</b>, um Sprachen zu lernen.<br>(对于在职人员而言，业余大学是学习语言的一个值得一提的选择。)"
+            },
+            6: {
+                de: "Es liegt auf der Hand, dass ...",
+                cn: "释义：显而易见的是…… / 毋庸置疑的是……（客观论证过渡句）",
+                tip: "用于第四个提示点（利弊分析）。在讨论优势时，用该短语引出一个公认的事实或显而易见的好处。它比 'Ich finde das gut, weil...' 更具客观色彩，能像报刊评论员一样引导读者思考。",
+                ex: "<b>核心拓展例句：</b><br><b>Es liegt auf der Hand, dass</b> regelmäßige Bewegung die Gesundheit fördert.<br>(显而易见的是，规律的运动能够促进健康。)"
+            },
+            7: {
+                de: "Man darf jedoch die Kehrseite nicht aus den Augen verlieren, nämlich dass ...",
+                cn: "释义：然而人们绝不能忽视其负面影响，即……（严谨辩证的转折句型）",
+                tip: "同样用于第四点，用于从正面向反面过渡，或者引出负面风险。<b>die Kehrseite</b>（反面/消极面）和固定短语 <b>etwas aus den Augen verlieren</b>（将某事遗忘/忽视）组合，加上 <b>namlich dass...</b> 具体解释，逻辑转换极为自然且充满高级感。",
+                ex: "<b>核心拓展例句：</b><br><b>Man darf jedoch die Kehrseite nicht aus den Augen verlieren, nämlich dass</b> Konsum oft zu Schulden führt.<br>(然而人们绝不能忽视其负面影响，即消费往往会导致债务。)"
+            },
+            8: {
+                de: "Zusammenfassend lässt sich sagen, dass ...",
+                cn: "释义：总而言之可以说……（完美的总结陈词）",
+                tip: "满足题目对文章必须有“Schluss（结尾）”的刚性结构要求。使用无人称被动语态表达法 <b>lässt sich sagen</b>（可以说/可以被表达），替代了口语化的 'Am Ende denke ich' 或 'Mein Schluss ist'，给考官呈现一个极为标准且大气的期末总结句。",
+                ex: "<b>核心拓展例句：</b><br><b>Zusammenfassend lässt sich sagen, dass</b> jede Medaille zwei Seiten hat.<br>(总而言之可以说，每枚硬币都有两面。)"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 深度语法与写作剖析：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
