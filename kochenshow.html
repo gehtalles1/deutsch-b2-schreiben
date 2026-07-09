@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio Teil 1 (Kochshows)</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-amber: #d97706; /* 温暖的美食媒介橙色，呼应电视烹饪节目主题 */
+            --brand-amber-light: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 520px 1fr;
+            }
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .goethe-note-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .goethe-note-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .goethe-note-item {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.04);
+            padding: 14px;
+            font-size: 13.5px;
+            color: #111827;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            border-radius: 2px;
+            transform: rotate(-0.5deg);
+        }
+
+        .goethe-note-item:nth-child(even) {
+            transform: rotate(0.8deg);
+            background: #fdfdfd;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--brand-amber-light);
+            border-left: 4px solid var(--brand-amber);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #b45309;
+        }
+
+        .essay-canvas {
+            font-size: 16px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 16px;
+            border-bottom: 1px dashed var(--border-crisp);
+            padding-bottom: 8px;
+        }
+
+        .goethe-token {
+            background-color: #fef3c7;
+            border-bottom: 2.5px solid var(--brand-amber);
+            color: #b45309;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #fde68a;
+            color: #78350f;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.15);
+        }
+
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-amber);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-amber);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: var(--radius-md) ;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <!-- 左侧区域：真题复刻与考官策略舱 -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作真题沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 1</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Sie schreiben einen Forumsbeitrag zu Kochshows im Fernsehen.
+                </div>
+
+                <div class="goethe-note-grid">
+                    <div class="goethe-note-item">Äußern Sie Ihre Meinung zu Kochshows im Fernsehen.</div>
+                    <div class="goethe-note-item">Nennen Sie Gründe, warum diese Sendungen so beliebt sind.</div>
+                    <div class="goethe-note-item">Geben Sie Beispiele für andere Fernseh-Formate, die sehr viele Zuschauer erreichen.</div>
+                    <div class="goethe-note-item">Nennen Sie Nachteile eines übermäßigen und einseitigen Fernsehkonsums.</div>
+                </div>
+
+                <div class="goethe-instructions">
+                    Denken Sie an eine Einleitung und einen Schluss. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Schreiben Sie mindestens 150 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 考官视角：Teil 1 电视料理节目论述得分策略</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. **要点完整度**：无缝链接 4 个提示点（表达对烹饪节目的看法 -> 阐述其风靡的原因 -> 举例其他高收视电视节目 -> 警惕过度且单一娱乐的弊端）。<br>2. **句型多元化**：考官青睐自然流畅、富有表现力的衔接词。应避免机械地使用单调词汇，通过灵活的无人称句、动名词搭配展现地道的 B2 级流利度。<br>3. **逻辑递进感**：尤其在指出消极影响（Schattenseiten）或替代方案时，使用稳健的连词和动词替代结构，提升语篇的客观性和说服力。</p>
+            </div>
+        </div>
+
+        <!-- 右侧区域：核心高分语料精读画布 -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分论坛议论文分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Forumsbeitrag: Kochshows im Fernsehen – Unterhaltung oder Inspiration?</div>
+            
+            <div class="essay-canvas">
+                In den letzten Jahren lässt sich beobachten, dass Unterhaltungssendungen in den Medien boomen. Insbesondere <span class="goethe-token" data-id="1">sind Kochshows aus unserem Alltag kaum noch wegzudenken.</span> Täglich laufen zahlreiche Programme, bei denen bekannte Köche kulinarische Meisterwerke kreieren.
+                <br>
+                <span class="goethe-token" data-id="2">Ich stehe auf dem Standpunkt, dass</span> diese Sendungen eine bereichernde Abwechslung bieten, da sie den Zuschauern die Freude am Kochen auf kreative Weise näherbringen.
+                <br>
+                <span class="goethe-token" data-id="3">Das lässt sich vor allem darauf zurückführen, dass</span> viele Menschen im hektischen Alltag nach Entspannung suchen. Zudem <span class="goethe-token" data-id="4">spielt das wachsende Bewusstsein für eine gesunde Ernährung eine entscheidende Rolle</span> bei der großen Beliebtheit dieser Sendeformate.
+                <br>
+                Abgesehen von kulinarischen Programmen gibt es jedoch auch andere erfolgreiche Sendungen. <span class="goethe-token" data-id="5">Eine sinnvolle Alternative stellen in diesem Zusammenhang Quizsendungen dar</span>, die ein breites Publikum fesseln und nebenbei Wissen vermitteln. Auch packende Kriminalfilme erreichen regelmäßig Spitzenquoten.
+                <br>
+                <span class="goethe-token" data-id="6">Es steht außer Frage, dass</span> das Fernsehen exzellente Unterhaltung liefert. <span class="goethe-token" data-id="7">Allerdings sollte man auch die Schattenseiten berücksichtigen, da</span> ein übermäßiger und einseitiger Konsum zu Bewegungsmangel und einer sozialen Entfremdung führen kann.
+                <br>
+                <span class="goethe-token" data-id="8">Abschließend lässt sich festhalten, dass</span> Medienkonsum eine Bereicherung ist, solange man eine gesunde Balance im Alltag bewahrt.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 中央高光视窗解析舱 -->
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 (Teil 1) 议论文高级语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "ist/sind aus unserem Alltag kaum noch wegzudenken.",
+                cn: "释义：……在我们的日常生活中几乎是不可或缺的。（生动加分背景句）",
+                tip: "用于文章开篇引入核心话题。比死板的 'Heutzutage gibt es viele...' 更加地道生动。<b>aus dem Alltag wegzudenken sein</b>（从日常生活中被省去/忽视）结合否定词 <b>kaum noch</b>，完美表达某物极其普及、极具影响力的社会现状，考官非常欣赏这种具有画面感的表达。",
+                ex: "<b>替换应用演示：</b><br>In der heutigen Zeit <b>sind Smartphones aus unserem Alltag kaum noch wegzudenken</b>.<br>(在当今时代，智能手机在我们的日常生活中几乎是不可或缺的。)"
+            },
+            2: {
+                de: "Ich stehe auf dem Standpunkt, dass ...",
+                cn: "释义：我持有的立场是…… / 我的看法是……（稳重得体的观点表达）",
+                tip: "精准对接第一个提示点（发表个人看法）。可以作为 'Ich denke/meine, dass...' 的高级替代。名词结构 <b>auf dem Standpunkt stehen</b> 表达态度坚定且客观，能在阐述个人见解时给人一种逻辑清晰、有备而来的成熟感，符合B2级别写作的语域要求。",
+                ex: "<b>核心拓展例句：</b><br><b>Ich stehe auf dem Standpunkt, dass</b> jeder Bürger sich für den Umweltschutz einsetzen sollte.<br>(我持有的立场是，每个公民都应当为环保贡献力量。)"
+            },
+            3: {
+                de: "Das lässt sich vor allem darauf zurückführen, dass ...",
+                cn: "释义：这主要可以归因于……（因果分析高级句型）",
+                tip: "对应第二个提示点（分析风靡原因）。避免通篇使用 'weil' 或 'da' 的单调句式。通过无人称被动表达 <b>lässt sich auf etwas zurückführen</b>（可归因于某事），把论证重心放在事物的内在因果逻辑上，使得文章的分析显得极具客观性和说服力。",
+                ex: "<b>核心拓展例句：</b><br>Der Erfolg des Projekts <b>lässt sich vor allem darauf zurückführen, dass</b> das Team perfekt kooperiert hat.<br>(该项目的成功主要可以归因于团队的完美协作。)"
+            },
+            4: {
+                de: "spielt eine entscheidende Rolle (bei ...)",
+                cn: "释义：在……中起到了决定性的作用。（高级功能动词短语）",
+                tip: "用于展开论证核心原因或重要性。用动词短语代替乏味的形容词短语（如 'ist sehr wichtig'）。搭配核心形容词 <b>entscheidend</b>（决定性的），能够瞬间提升句子的分量，非常适合对某种现象进行深度解剖。",
+                ex: "<b>核心拓展例句：</b><br>Die motivation der Lehrkräfte <b>spielt eine entscheidende Rolle beim</b> Lernerfolg der Schüler.<br>(教师的积极性在学生的学习成功中起到了决定性的作用。)"
+            },
+            5: {
+                de: "Eine sinnvolle Alternative stellen ... dar.",
+                cn: "释义：……构成了另一种有意义的替代方案。（拓展视角/替代方案引出句）",
+                tip: "精准对齐第三个提示点（举例其他电视节目/选择）。用于引入平行的其他范例。<b>eine sinnvolle Alternative darstellen</b>（构成一个合理的替代方案）不仅代替了平铺直叙的 'Es gibt auch...'，而且通过高级功能动词 <b>darstellen</b> 让句式结构产生极佳的错落感。",
+                ex: "<b>核心拓展例句：</b><br>Für Großstädter <b>stellen</b> öffentliche Verkehrsmittel <b>eine sinnvolle Alternative</b> zum eigenen Auto <b>dar</b>.<br>(对于大城市居民而言，公共交通工具构成了替代私家车的合理方案。)"
+            },
+            6: {
+                de: "Es steht außer Frage, dass ...",
+                cn: "释义：毫无疑问的是…… / 毋庸置疑的是……（强化论点的客观过渡句）",
+                tip: "用于第四点（利弊分析前的情感铺垫或事实引入）。介词动词固定搭配 <b>außer Frage stehen</b>（不容置疑）属于高质量的书面表达，常用来承接或引出一个公认的正面事实，为后面的转折做好极佳的逻辑铺垫。",
+                ex: "<b>核心拓展例句：</b><br><b>Es steht außer Frage, dass</b> die Digitalisierung viele Vorteile für die Wirtschaft bringt.<br>(毫无疑问的是，数字化为经济带来了许多益处。)"
+            },
+            7: {
+                de: "Allerdings sollte man auch die Schattenseiten berücksichtigen, da ...",
+                cn: "释义：然而，人们也应当考虑到其负面影响，因为……（辩证批判的经典转折）",
+                tip: "完美对应第四个提示点（阐述弊端）。从正面分析顺畅过渡到反面批判的满分句式。使用名词 <b>die Schattenseiten</b>（阴暗面/负面影响）代替普通的 'die Nachteile'，配合高频高级动词 <b>berücksichtigen</b>（考虑到/重视），展现出高水准的批判性辩证思维。",
+                ex: "<b>核心拓展例句：</b><br><b>Allerdings sollte man auch die Schattenseiten berücksichtigen, da</b> Tourismus oft die Natur belastet.<br>(然而，人们也应当考虑到其负面影响，因为旅游业往往会给自然带来负担。)"
+            },
+            8: {
+                de: "Abschließend lässt sich festhalten, dass ...",
+                cn: "释义：最后可以确定的是…… / 总之可以总结道……（完美的总结陈词）",
+                tip: "契合真题对文章必须有完整“Schluss（结尾）”的硬性结构指标。通过无人称被动结构 <b>lässt sich festhalten</b>（可以被记录/确定），优雅地给出自己的最终总结，替代了较为口语化的 'Am Ende will ich sagen...'，为全篇画上完美的句号。",
+                ex: "<b>核心拓展例句：</b><br><b>Abschließend lässt sich festhalten, dass</b> Bildung der Schlüssel zu einer gerechten Gesellschaft ist.<br>(最后可以确定的是，教育是通往公平社会的钥匙。)"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 深度语法与写作剖析：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
