@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio Teil 1 (Alkoholkonsum)</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-wine: #991b1b; 
+            --brand-wine-light: #fef2f2;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 520px 1fr;
+            }
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .goethe-note-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .goethe-note-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .goethe-note-item {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.04);
+            padding: 14px;
+            font-size: 13px;
+            color: #111827;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            border-radius: 2px;
+            transform: rotate(-0.5deg);
+        }
+
+        .goethe-note-item:nth-child(even) {
+            transform: rotate(0.8deg);
+            background: #fdfdfd;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--brand-wine-light);
+            border-left: 4px solid var(--brand-wine);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #991b1b;
+        }
+
+        .essay-canvas {
+            font-size: 16px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 16px;
+            border-bottom: 1px dashed var(--border-crisp);
+            padding-bottom: 8px;
+        }
+
+        .goethe-token {
+            background-color: #fee2e2;
+            border-bottom: 2.5px solid var(--brand-wine);
+            color: #991b1b;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #fca5a5;
+            color: #7f1d1d;
+            box-shadow: 0 4px 12px rgba(153, 27, 27, 0.15);
+        }
+
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-wine);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-wine);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #fffbeb;
+            padding: 16px;
+            border-radius: var(--radius-md) ;
+            border-left: 4px solid #d97706;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作全真模拟沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 1</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Sie schreiben einen Forumsbeitrag zum Thema „Alkoholkonsum“.
+                </div>
+
+                <div class="goethe-note-grid">
+                    <div class="goethe-note-item">• Äußern Sie Ihre Meinung zum freien Zugang zu Alkohol auch für Jugendliche.</div>
+                    <div class="goethe-note-item">• Nennen Sie Gründe, warum junge Menschen zu Alkohol greifen.</div>
+                    <div class="goethe-note-item">• Machen Sie Vorschläge, wie man dem entgegenwirken kann.</div>
+                    <div class="goethe-note-item">• Nennen Sie Nachteile eines übermäßigen Alkoholkonsums bei Jugendlichen.</div>
+                </div>
+
+                <div class="goethe-instructions">
+                    Denken Sie an eine Einleitung und einen Schluss. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Schreiben Sie mindestens 150 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 B2 官方评分标准拆解：如何稳拿高分？</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. **篇幅与结构**：字数在 180-220 字左右最佳。必须有完整的引入（Einleitung）和结尾（Schluss），4个要点一个都不能漏。<br>2. **句式丰富度**：B2 级别不需要写非常生涩的长难句，但要熟练运用从句嵌套、被动语态建议以及固定连接词，替代初级的 weil, und, aber。<br>3. **论证合乎逻辑**：阐述危害和原因时，论据要贴近生活且真实合理，语言表达自然流畅即可。</p>
+            </div>
+        </div>
+
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分论坛议论文分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Forumsbeitrag: Jugend und Alkohol – Eine unterschätzte Gefahr?</div>
+            
+            <div class="essay-canvas">
+                In der heutigen Zeit <span class="goethe-token" data-id="1">ist das Thema Alkoholkonsum ein wichtiges Thema, über das viel diskutiert wird.</span> Ich möchte in diesem Blog meine Meinung dazu äußern, da es uns alle betrifft.
+                <br>
+                <span class="goethe-token" data-id="2">Ich bin der Meinung, dass es problematisch ist, wenn</span> Jugendliche so leicht an Bier oder Wein kommen. In Supermärkten wird oft nicht streng genug kontrolliert, obwohl Alkohol für die Entwicklung von jungen Menschen sehr gefährlich ist. 
+                <br>
+                <span class="goethe-token" data-id="3">Dafür gibt es verschiedene Gründe. Ein Hauptgrund ist, dass</span> viele Jugendliche unter großem Stress in der Schule stehen und Alkohol als Entspannung sehen. Außerdem wollen sie oft ihren Freunden gefallen und trinken aus Gruppenzwang mit, um cool zu wirken.
+                <br>
+                <span class="goethe-token" data-id="4">Um dieses Problem zu lösen, könnte man beispielsweise</span> mehr Informationsprojekte an Schulen organisieren. Die Schüler müssen früh lernen, welche Gefahren Alkohol hat. <span class="goethe-token" data-id="5">Eine weitere Möglichkeit wäre, dass</span> die Strafen für Supermärkte erhöht werden, die Alkohol an Minderjährige verkaufen.
+                <br>
+                Man darf nicht vergessen: <span class="goethe-token" data-id="6">Ein großer Nachteil von zu viel Alkohol ist, dass</span> er die Konzentration zerstört. Dadurch werden die Noten in der Schule schlechter. <span class="goethe-token" data-id="7">Darüber hinaus kann es auch zu</span> schweren Krankheiten und einer schnellen Abhängigkeit führen.
+                <br>
+                <span class="goethe-token" data-id="8">Zusammenfassend lässt sich sagen, dass</span> wir Jugendliche besser aufklären müssen, damit sie eine gesunde Zukunft haben können.
+            </div>
+        </div>
+
+    </div>
+
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 (Teil 1) 议论文高级语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "... ist ein wichtiges Thema, über das viel diskutiert wird.",
+                cn: "释义：……是一个引发广泛讨论的重要话题。（B2最稳万能开篇句）",
+                tip: "这是歌德 B2 写作中**最标准、最不容易出错**的时代背景引出方式。它巧妙地运用了一个关系从句（über das viel diskutiert wird），既展现了你对 B2 语法（关系代词与介词搭配）的熟练掌握，又非常自然，完全没有死记硬背的学术生硬感。",
+                ex: "<b>替换应用演示：</b><br>In der heutigen Zeit <b>ist das Thema Umweltschutz ein wichtiges Thema, über das viel diskutiert wird</b>.<br>(在当今时代，环境保护是一个引发广泛讨论的重要话题。)"
+            },
+            2: {
+                de: "Ich bin der Meinung, dass es problematisch ist, wenn ...",
+                cn: "释义：我认为，如果……将会是一件很有问题/值得忧虑的事。（稳健表态句）",
+                tip: "精准对接第一个提示点（表明个人立场）。比初级的 'Ich finde...' 更加正式。通过嵌套一个 <b>wenn 从句</b>，能够清晰地向考官陈述你认为不合理的社会客观现象，逻辑过渡十分温和且语法正确率极高。",
+                ex: "<b>核心拓展例句：</b><br><b>Ich bin der Meinung, dass es problematisch ist, wenn</b> Kinder zu viel Zeit am Handy verbringen.<br>(我认为，如果孩子在手机上花太多时间是一件很有问题的事。)"
+            },
+            3: {
+                de: "Dafür gibt es verschiedene Gründe. Ein Hauptgrund ist, dass ...",
+                cn: "释义：对此有不同的原因。其中一个主要原因是……（清晰分层的原因剖析句）",
+                tip: "对应第二个提示点（列举原因）。B2 写作非常强调<b>条理性（Kohärenz）</b>。先用一句话做总括引出，再用 <b>Ein Hauptgrund ist, dass...</b> 引出具体原因。这样写不仅能稳步拉长文章篇幅，还能让考官一眼看清你的论证段落架构。",
+                ex: "<b>核心拓展例句：</b><br><b>Dafür gibt es verschiedene Gründe. Ein Hauptgrund ist, dass</b> gesunde Lebensmittel oft sehr teuer sind.<br>(对此有不同的原因。其中一个主要原因是健康食品往往非常贵。)"
+            },
+            4: {
+                de: "Um dieses Problem zu lösen, könnte man beispielsweise ...",
+                cn: "释义：为了解决这个问题，人们可以比如……（高分第二虚拟式对策句）",
+                tip: "对应第三个提示点（寻找对策建议）。B2 评分标准中明确提出，如果能**正确使用第二虚拟式（könnte/sollte）**来表达温和的建议，是绝佳的加分项。搭配 <b>beispielsweise</b>（例如），能让你的建议显得非常客观和具有可行性。",
+                ex: "<b>核心拓展例句：</b><br><b>Um dieses Problem zu lösen, könnte man beispielsweise</b> mehr Fahrradwege in der Stadt bauen.<br>(为了解决这个问题，人们可以比如在城市里修建更多的自行车道。)"
+            },
+            5: {
+                de: "Eine weitere Möglichkeit wäre, dass ...",
+                cn: "释义：另一个可能性是……（顺畅的第二建议递进句）",
+                tip: "同样用于第三点。当题目要求你“提出一些建议（复数形式 Vorschläge）”时，你必须给出至少两个办法。在写完第一个后，用 <b>Eine weitere Möglichkeit wäre, dass...</b> 顺畅递进，同样使用了第二虚拟式 <b>wäre</b>，语法丰富度直接拉满。",
+                ex: "<b>核心拓展例句：</b><br><b>Eine weitere Möglichkeit wäre, dass</b> Firmen ihren Mitarbeitern kostenlose Sportkurse anbieten.<br>(另一个可能性 spin 是公司为员工提供免费的体育课程。)"
+            },
+            6: {
+                de: "Ein großer Nachteil von ... ist, dass ...",
+                cn: "释义：……的一个巨大缺点/坏处在于……（直击要点的利弊分析句）",
+                tip: "精准对齐第四个提示点（利弊分析）。直接用名词 <b>Ein großer Nachteil</b> 作为主语开篇，句子结构非常清晰、直接。用 <b>dass 从句</b> 把具体的坏处包裹在后面，是 B2 写作中拿满结构分的经典句型。",
+                ex: "<b>核心拓展例句：</b><br><b>Ein großer Nachteil von</b> Autos <b>ist, dass</b> sie viel CO2 produzieren und die Luft verschmutzen.<br>(汽车的一个巨大缺点在于它们产生很多二氧化碳并污染空气。)"
+            },
+            7: {
+                de: "Darüber hinaus kann es auch zu ... führen.",
+                cn: "释义：除此之外，它还可能会导致……（万能危害递进、名词化结果句）",
+                tip: "同样用于第四点。当你想补充说明更严重的危害时，<b>Darüber hinaus</b>（除此之外）是 B2 必背的高级衔接词。搭配固定搭配 <b>zu etwas führen</b>（导致/引发某事），后面直接接名词（如 Krankheiten/Problemen），可以让句式产生长短变化的节奏感。",
+                ex: "<b>核心拓展例句：</b><br>Schlafmangel ist gefährlich. <b>Darüber hinaus kann es auch zu</b> Konzentrationsproblemen <b>führen</b>.<br>(睡眠不足很危险。除此之外，它还可能会导致注意力不集中的问题。)"
+            },
+            8: {
+                de: "Zusammenfassend lässt sich sagen, dass ...",
+                cn: "释义：总而言之可以说……（满分收尾总结句）",
+                tip: "满足题目对文章必须有“Schluss（结尾）”的刚性要求。通过无人称被动语态表达法 <b>lässt sich sagen</b>（可以说），代替了口语化的 'Am Ende denke ich'。句子既有 B2 阶段应有的端庄感，又不会显得高高在上，是完美的文章句号。",
+                ex: "<b>核心拓展例句：</b><br><b>Zusammenfassend lässt sich sagen, dass</b> man im Leben immer flexibel bleiben muss.<br>(总而言之可以说，人在生活中必须一直保持灵活。)"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 考官核心思维拆解：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
