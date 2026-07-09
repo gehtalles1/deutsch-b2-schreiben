@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio Teil 2 (Vertragskündigung)</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-teal: #0d9488;
+            --brand-teal-light: #f0fdfa;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 520px 1fr;
+            }
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .goethe-note-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .goethe-note-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .goethe-note-item {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.04);
+            padding: 14px;
+            font-size: 13.5px;
+            color: #111827;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            border-radius: 2px;
+            transform: rotate(-0.5deg);
+        }
+
+        .goethe-note-item:nth-child(even) {
+            transform: rotate(0.8deg);
+            background: #fdfdfd;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--brand-teal-light);
+            border-left: 4px solid var(--brand-teal);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #115e59;
+        }
+
+        .essay-canvas {
+            font-size: 16px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 16px;
+            border-bottom: 1px dashed var(--border-crisp);
+            padding-bottom: 8px;
+        }
+
+        .goethe-token {
+            background-color: #ccfbf1;
+            border-bottom: 2.5px solid var(--brand-teal);
+            color: #115e59;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #99f6e4;
+            color: #134e4a;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        }
+
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: var(--radius-md) ;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <!-- 左侧区域：真题1:1仿真试卷 (Teil 2 - Nachricht an den Geschäftsleiter) -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作真题沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 2</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Sie haben längere Zeit in einem Fitnessstudio Ihrer Nachbarschaft trainiert. Nun müssen Sie aus beruflichen Gründen in eine andere Stadt ziehen und wollen deshalb den Vertrag mit dem Fitnessstudio kündigen. Schreiben Sie eine Nachricht an den Geschäftsleiter, Herrn Neubauer.
+                </div>
+
+                <div class="goethe-note-grid">
+                    <div class="goethe-note-item">Schildern Sie Ihre Zukunftspläne.</div>
+                    <div class="goethe-note-item">Bitten Sie um Verständnis für Ihre Situation.</div>
+                    <div class="goethe-note-item">Begründen Sie, warum Sie bisher sehr zufrieden waren.</div>
+                    <div class="goethe-note-item">Machen Sie einen Vorschlag zum Kündigungstermin.</div>
+                </div>
+
+                <div class="goethe-instructions">
+                    Überlegen Sie sich eine passende Reihenfolge für die Inhaltspunkte. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Vergessen Sie nicht Anrede und Gruß. Schreiben Sie mindestens 100 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 考官视角：Teil 2 正式公文信函核心要点</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. **语体与格式**：严格遵守正式半正式书信的尊称（Sie/Ihnen/Ihr），必须包含完整的正式称呼（Anrede）与问候（Grußformel）。<br>2. **结构连贯性**：巧妙运用高级公文过渡句，将个人未来计划、满意度回馈、请求谅解和终止日期合理编排，使信函理据充分、措辞得体。<br>3. **语法高级感**：熟练运用功能动词短语（Funktionsverbgefüge）及第二虚拟式（Konjunktiv II），替代机械平庸的普通动词，展现纯正的行政和商务沟通能力。</p>
+            </div>
+        </div>
+
+        <!-- 右侧区域：核心高分语料精读画布 -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分商务信函分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Formelle Nachricht: Vertragskündigung</div>
+            
+            <div class="essay-canvas">
+                Sehr geehrter Herr Neubauer,
+                <br>
+                ich schreibe Ihnen bezüglich meines laufenden Mitgliedsvertrags. <span class="goethe-token" data-id="1">Zunächst möchte ich die Gelegenheit nutzen, um mich herzlich für</span> die hervorragende Betreuung in Ihrem Studio <span class="goethe-token" data-id="1-2">zu bedanken.</span> Ich war mit den modernen Geräten und der motivierenden Atmosphäre stets außerordentlich zufrieden.
+                <br>
+                <span class="goethe-token" data-id="2">Der Grund für mein Schreiben liegt darin, dass mir aus beruflichen Gründen eine große Veränderung bevorsteht:</span> Ich habe ein attraktives Stellenangebot erhalten und werde bereits nächsten Monat in eine andere Stadt umziehen, um dort eine neue Position anzutreten. <span class="goethe-token" data-id="3">Angesichts dieser unvorhersehbaren Situation bitte ich Sie vielmals um Verständnis dafür, dass</span> ich meinen Vertrag nicht bis zum regulären Laufzeitende fortführen kann.
+                <br>
+                Bezüglich der Vertragsbeendigung <span class="goethe-token" data-id="4">möchte ich Ihnen den Vorschlag unterbreiten, das Vertragsverhältnis</span> zum 31. Oktober dieses Jahres <span class="goethe-token" data-id="5">vorzeitig aufzulösen.</span> <span class="goethe-token" data-id="6">Für Ihr Entgegenkommen und eine kurze schriftliche Bestätigung wäre ich Ihnen äußerst dankbar.</span>
+                <br><br>
+                Mit freundlichen Grüßen
+                <br>
+                Max Mustermann
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 中央高光视窗解析舱 -->
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 (Teil 2) 书信高级语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "Zunächst möchte ich die Gelegenheit nutzen, um mich herzlich für ... zu bedanken.",
+                cn: "释义：首先，我想借此机会由衷地向您表示感谢。（高级客套/满意度引出句）",
+                tip: "完美应对第三个提示点（阐述此前非常满意的原因）。用固定句型 <b>die Gelegenheit nutzen, um zu...</b>（借此机会做某事）展现出极佳的正式公文写作礼仪，比单调的 'Ich war zufrieden und danke Ihnen' 更加专业、得体。",
+                ex: "<b>替换应用演示：</b><br>Zunächst möchte ich die Gelegenheit nutzen, um mich für Ihre Unterstützung zu bedanken.<br>(首先，我想借此机会由衷感谢您的支持。)"
+            },
+            "1-2": {
+                de: "Zunächst möchte ich die Gelegenheit nutzen, um mich herzlich für ... zu bedanken.",
+                cn: "释义：首先，我想借此机会由衷地向您表示感谢。（高级客套/满意度引出句）",
+                tip: "完美应对第三个提示点（阐述此前非常满意的原因）。用固定句型 <b>die Gelegenheit nutzen, um zu...</b>（借此机会做某事）展现出极佳的正式公文写作礼仪，比单调的 'Ich war zufrieden und danke Ihnen' 更加专业、得体。",
+                ex: "<b>替换应用演示：</b><br>Zunächst möchte ich die Gelegenheit nutzen, um mich für Ihre Unterstützung zu bedanken.<br>(首先，我想借此机会由衷感谢您的支持。)"
+            },
+            2: {
+                de: "Der Grund für mein Schreiben liegt darin, dass mir aus beruflichen Gründen eine große Veränderung bevorsteht:",
+                cn: "释义：我写这封信的原因在于，由于职业原因我即将迎来一个重大的改变：（清晰阐述未来计划/原因）",
+                tip: "对应第一个提示点（描述未来计划）。<b>Der Grund für mein Schreiben liegt darin, dass...</b> 是 B2 正式公文信函中标准的、考官极度青睐的陈述来信目的结构。使用 <b>etwas steht mir bevor</b>（某事即将到来）表述客观计划，语调严谨且流畅。",
+                ex: "<b>核心拓展例句：</b><br>Der Grund für mein Schreiben liegt darin, dass ich mich beruflich neu orientieren möchte.<br>(我写这封信的原因在于，我想在职业上进行重新定位。)"
+            },
+            3: {
+                de: "Angesichts dieser unvorhersehbaren Situation bitte ich Sie vielmals um Verständnis dafür, dass ...",
+                cn: "释义：鉴于这种不可预见的情况，我恳请您对……多多谅解。（极为得体的恳请谅解句）",
+                tip: "精准对接第二个提示点（请求对方理解自己的处境）。使用了高级介词 <b>Angesichts</b>（鉴于/面对，要求加第二格 Genitiv），搭配 <b>jemanden um Verständnis für etwas bitten</b> 固定搭配，是高级书信体现同理心和正式语体的核心高分句型。",
+                ex: "<b>核心拓展例句：</b><br>Angesichts des akuten Zeitmangels bitte ich Sie vielmals um Verständnis für die Verzögerung.<br>(鉴于时间紧迫，对于延迟我恳请您多多谅解。)"
+            },
+            4: {
+                de: "möchte ich Ihnen den Vorschlag unterbreiten, das Vertragsverhältnis ...",
+                cn: "释义：我想向您提出一个建议，即（提前终止）合同关系……（提出具体建议）",
+                tip: "精准对齐第四个提示点（提出关于解约日期的建议）。用高级功能动词短语（Funktionsverbgefüge）<b>einen Vorschlag unterbreiten</b> 替代普通的动词 'vorschlagen'，是冲刺 B2 写作高分的核心手段。用名词 <b>das Vertragsverhältnis</b> 代替普通的 'Vertrag'，更显商务风范。",
+                ex: "<b>核心拓展例句：</b><br>Ich möchte Ihnen den Vorschlag unterbreiten, die Besprechung auf nächsten Montag zu verschieben.<br>(我想向您提出一个建议，将会议推迟到下周一。)"
+            },
+            5: {
+                de: "... vorzeitig aufzulösen.",
+                cn: "释义：……提前予以解除/终止。（地道的商务法律用语）",
+                tip: "在德语商务和日常行政书信中，解约、终止合同除了使用 'kündigen' 之外，更高级、更地道的表达是 <b>ein Vertragsverhältnis auflösen</b>（解除合同关系）。搭配 <b>vorzeitig</b>（提前），完美扣住由于搬家需要破例提前解约的考试现实语境。",
+                ex: "<b>核心拓展例句：</b><br>Wir haben uns darauf geeignet, den Mietvertrag vorzeitig aufzulösen.<br>(我们已达成一致，提前解除租赁合同。)"
+            },
+            6: {
+                de: "Für Ihr Entgegenkommen und eine kurze schriftliche Bestätigung wäre ich Ihnen äußerst dankbar.",
+                cn: "释义：对于您的体谅以及一份简短的书面确认，我将不胜感激。（经典的商务书信完美结尾）",
+                tip: "一句话完美收尾。使用第二虚拟式（Konjunktiv II）<b>wäre ich Ihnen dankbar</b> 展示语法深度，名词 <b>das Entgegenkommen</b>（通融/体谅/支持）非常符合向商家请求破例提前解约的场景，符合公文信函中礼貌原则的高级要求。",
+                ex: "<b>核心拓展例句：</b><br>Für eine schnelle Bearbeitung meiner Angelegenheit wäre ich Ihnen äußerst dankbar.<br>(如果能迅速处理我的事务，我将不胜感激。)"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 深度语法与写作剖析：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
