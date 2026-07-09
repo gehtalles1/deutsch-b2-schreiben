@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio Teil 2</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-teal: #0d9488;
+            --brand-teal-light: #f0fdfa;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 520px 1fr;
+            }
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .goethe-note-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .goethe-note-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .goethe-note-item {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.04);
+            padding: 14px;
+            font-size: 13px;
+            color: #111827;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            border-radius: 2px;
+            transform: rotate(-0.5deg);
+        }
+
+        .goethe-note-item:nth-child(even) {
+            transform: rotate(0.8deg);
+            background: #fdfdfd;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--brand-teal-light);
+            border-left: 4px solid var(--brand-teal);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #115e59;
+        }
+
+        .essay-canvas {
+            font-size: 16px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 16px;
+            border-bottom: 1px dashed var(--border-crisp);
+            padding-bottom: 8px;
+        }
+
+        .goethe-token {
+            background-color: #ccfbf1;
+            border-bottom: 2.5px solid var(--brand-teal);
+            color: #115e59;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #99f6e4;
+            color: #134e4a;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        }
+
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: var(--radius-md) ;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <!-- 左侧区域：考试试卷复刻 (Teil 2) -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作真题沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 2</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    In Ihrer Firma wird in den nächsten Monaten eine Kollegin Erziehungsurlaub nehmen. Sie sollen ihre Arbeit zusätzlich übernehmen. Da Sie selbst sehr viel zu tun haben, befürchten Sie, dass Sie das nicht schaffen werden. Schreiben Sie an Ihren Vorgesetzten, Herrn Ackermann.
+                </div>
+
+                <div class="goethe-note-grid">
+                    <div class="goethe-note-item">Schildern Sie, womit Sie beschäftigt sind.</div>
+                    <div class="goethe-note-item">Zeigen Sie Verständnis für die Firma und die Kollegin.</div>
+                    <div class="goethe-note-item">Drücken Sie Ihr Bedauern aus, dass Sie die Arbeit nicht übernehmen können.</div>
+                    <div class="goethe-note-item">Machen Sie einen Vorschlag, wie die Arbeit verteilt werden kann.</div>
+                </div>
+
+                <div class="goethe-instructions">
+                    Überlegen Sie sich eine passende Reihenfolge für die Inhaltspunkte. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Vergessen Sie nicht Anrede und Gruß. Schreiben Sie mindestens 100 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 考官视角：Teil 2 职场公文信核心要点</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. **语气与格式**：致信对象为上司 Herr Ackermann，全文必须保持绝对礼貌的职场尊称（Sie/Ihr），并具备正确的称呼语和问候结尾。<br>2. **逻辑组合能力**：灵活安排四个提示点的顺序，建议先展现同理心，接着陈述自身工作负荷并表达遗憾，最后建设性地提出分摊方案。<br>3. **虚拟式的运用**：在提出建议和拒绝任务时，熟练使用第二虚拟式（Konjunktiv II），能够大幅提升语言的委婉度与得体性，是 B2 核心加分项。</p>
+            </div>
+        </div>
+
+        <!-- 右侧区域：核心高分语料精读画布 -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分公文信分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Formelle E-Mail: Vertretung der Kollegin</div>
+            
+            <div class="essay-canvas">
+                Sehr geehrter Herr Ackermann,
+                <br>
+                ich wende mich heute an Sie, da ich von dem bevorstehenden Erziehungsurlaub meiner Kollegin erfahren habe. 
+                <br>
+                <span class="goethe-token" data-id="1">Es liegt mir viel daran, zu betonen, dass ich volles Verständnis für</span> die Situation des Unternehmens und die Entscheidung der Kollegin aufbringe. Familie geht selbstverständlich vor, und wir sollten sie bestmöglich unterstützen.
+                <br>
+                <span class="goethe-token" data-id="2">Im Hinblick auf meine aktuellen Aufgaben muss ich jedoch darauf hinweisen, dass</span> ich momentan vollkommen ausgelastet bin. Aktuell <span class="goethe-token" data-id="3">bin ich intensiv mit der Fertigstellung des</span> Jahresberichts sowie der Betreuung unseres neuen Großprojekts <span class="goethe-token" data-id="3-2">beschäftigt.</span>
+                <br>
+                <span class="goethe-token" data-id="4">Aus diesem Grund bedauere ich es außerordentlich, dass es mir nicht möglich ist,</span> die zusätzlichen Aufgaben der Kollegin komplett zu übernehmen. Ohne eine Entlastung würde die Qualität meiner bisherigen Arbeit erheblich leiden.
+                <br>
+                <span class="goethe-token" data-id="5">Um eine optimale Lösung für alle Beteiligten zu finden, schlage ich vor,</span> die anstehende Arbeit auf mehrere Teammitglieder aufzuteilen oder eine studentische Aushilfe einzustellen. <span class="goethe-token" data-id="6">Für ein persönliches Gespräch stehe ich Ihnen selbstverständlich jederzeit zur Verfügung,</span> um die Details genauer zu besprechen.
+                <br>
+                Mit freundlichen Grüßen
+                <br>
+                [Ihr Vorname und Nachname]
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 中央高光视窗解析舱 -->
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 (Teil 2) 职场公文信高级语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "Es liegt mir viel daran, zu betonen, dass ich volles Verständnis für ... aufbringe.",
+                cn: "释义：我非常希望强调的是，我对……表示充分的理解。（委婉表达同理心）",
+                tip: "完美契合第二个提示点。使用高级句型 <b>es liegt jemandem viel an etwas (Dat.)</b>（某人非常重视某事），搭配 <b>Verständnis für etwas aufbringen</b>（对……产生理解），比单纯写 'Ich verstehe, dass...' 更加庄重和职业化。",
+                ex: "<b>替换应用演示：</b><br><b>Es liegt mir viel daran, zu betonen, dass ich volles Verständnis für</b> Ihre Entscheidung <b>aufbringe</b>.<br>(我非常希望强调的是，我对您的决定表示充分的理解。)"
+            },
+            2: {
+                de: "Im Hinblick auf meine aktuellen Aufgaben muss ich jedoch darauf hinweisen, dass ...",
+                cn: "释义：考虑到我目前的工作任务，然而我必须指出的是……（礼貌引出困难）",
+                tip: "用于职场信中引出转折或解释客观局限。介词短语 <b>im Hinblick auf (+ Akk.)</b> 意为‘鉴于/考虑到’。固定搭配 <b>auf etwas hinweisen</b>（指出某事）后面接 dass 从句，能在陈述不便时，给领导留下客观、理性的专业印象。",
+                ex: "<b>核心拓展例句：</b><br><b>Im Hinblick auf</b> den engen Zeitplan <b>muss ich jedoch darauf hinweisen, dass</b> wir Überstunden machen müssen.<br>(考虑到紧迫的时间表，然而我必须指出的是，我们必须加班。)"
+            },
+            3: {
+                de: "bin ich intensiv mit ... beschäftigt.",
+                cn: "释义：我正密集/全力投入于……的忙碌中。（精准交代工作内容）",
+                tip: "精准对齐第一个提示点（描述自己正在忙什么）。使用功能搭配 <b>mit etwas beschäftigt sein</b>，并在其中加入副词 <b>intensiv</b>（密集地、投入地），可以十分具体且有说服力地向考官和上司说明你无法分身的原因，拒绝得理直气壮且得体。",
+                ex: "<b>核心拓展例句：</b><br>Momentan <b>bin ich intensiv mit</b> der Vorbereitung der Präsentation <b>beschäftigt</b>.<br>(目前我正全力投入在汇报的准备工作中。)"
+            },
+            "3-2": {
+                de: "bin ich intensiv mit ... beschäftigt.",
+                cn: "释义：我正密集/全力投入于……的忙碌中。（精准交代工作内容）",
+                tip: "精准对齐第一个提示点（描述自己正在忙什么）。使用功能搭配 <b>mit etwas beschäftigt sein</b>，并在其中加入副词 <b>intensiv</b>（密集地、投入地），可以十分具体且有说服力地向考官和上司说明你无法分身的原因，拒绝得理直气壮且得体。",
+                ex: "<b>核心拓展例句：</b><br>Momentan <b>bin ich intensiv mit</b> der Vorbereitung der Präsentation <b>beschäftigt</b>.<br>(目前我正全力投入在汇报的准备工作中。)"
+            },
+            4: {
+                de: "Aus diesem Grund bedauere ich es außerordentlich, dass es mir nicht möglich ist, ...",
+                cn: "释义：因此我极其抱歉，我无法做到……（正式克制的遗憾表达）",
+                tip: "精准应对第三个提示点（表达遗憾并拒绝）。在职场写作中，直接说 'Ich kann nicht...' 会显得极不礼貌。用 <b>bedauern</b>（遗憾）搭配高级副词 <b>außerordentlich</b>（极其），再通过 <b>es ist mir nicht möglich</b> 委婉引出无能为力的事实，是 B2 职场公文的满分操作。",
+                ex: "<b>核心拓展例句：</b><br><b>Aus diesem Grund bedauere ich es außerordentlich, dass es mir nicht möglich ist,</b> am Treffen teilzunehmen.<br>(因此我极其抱歉，我无法参加本次会议。)"
+            },
+            5: {
+                de: "Um eine optimale Lösung für alle Beteiligten zu finden, schlage ich vor, ...",
+                cn: "释义：为了能找到一个对所有相关人员都最优的解决方案，我建议……（富有建设性的双赢提案）",
+                tip: "精准对接第四个提示点（提出建议）。<b>Um ... zu ...</b> 的目的从句是 B2 必备的语法结构。短语 <b>eine Lösung für alle Beteiligten finden</b>（为所有参与者寻找解决方案）展现了你的大局观和主动解决问题的职场软实力。",
+                ex: "<b>核心拓展例句：</b><br><b>Um eine optimale Lösung für alle Beteiligten zu finden, schlage ich vor,</b> einen neuen Termin zu vereinbaren.<br>(为了能找到一个对各方都最优的解决方案，我建议重新约定一个时间。)"
+            },
+            6: {
+                de: "Für ein persönliches Gespräch stehe ich Ihnen selbstverständlich jederzeit zur Verfügung ...",
+                cn: "释义：为了进一步面谈，我随时恭候您……（标准的职场商务结尾句）",
+                tip: "用于信件结尾的固定套话。高分功能动词短语 <b>jemandem zur Verfügung stehen</b>（供某人支配/恭候某人），完美取代了口语化的 'Sie können mich anrufen'。配合 <b>jederzeit</b>（随时），礼貌度拉满，给整封信画上完美的句号。",
+                ex: "<b>核心拓展例句：</b><br>Bei weiteren Fragen <b>stehe ich Ihnen selbstverständlich jederzeit zur Verfügung</b>.<br>(如有其它问题，我随时恭候您。)"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 深度语法与写作剖析：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
