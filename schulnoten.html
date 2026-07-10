@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio Teil 1 (Schulnoten)</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-wine: #0369a1; 
+            --brand-wine-light: #f0f9ff;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 520px 1fr;
+            }
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .goethe-note-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .goethe-note-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .goethe-note-item {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.04);
+            padding: 14px;
+            font-size: 13px;
+            color: #111827;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            border-radius: 2px;
+            transform: rotate(-0.5deg);
+        }
+
+        .goethe-note-item:nth-child(even) {
+            transform: rotate(0.8deg);
+            background: #fdfdfd;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--brand-wine-light);
+            border-left: 4px solid var(--brand-wine);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #0369a1;
+        }
+
+        .essay-canvas {
+            font-size: 16px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 16px;
+            border-bottom: 1px dashed var(--border-crisp);
+            padding-bottom: 8px;
+        }
+
+        .goethe-token {
+            background-color: #e0f2fe;
+            border-bottom: 2.5px solid var(--brand-wine);
+            color: #0369a1;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #bae6fd;
+            color: #0c4a6e;
+            box-shadow: 0 4px 12px rgba(3, 105, 161, 0.15);
+        }
+
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-wine);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-wine);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #fffbeb;
+            padding: 16px;
+            border-radius: var(--radius-md) ;
+            border-left: 4px solid #d97706;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作全真模拟沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 1</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Sie schreiben einen Forumsbeitrag zum Thema „Schulnoten“.
+                </div>
+
+                <div class="goethe-note-grid">
+                    <div class="goethe-note-item">• Äußern Sie Ihre Meinung zur Notwendigkeit von Schulnoten.</div>
+                    <div class="goethe-note-item">• Begründen Sie, warum Sie für oder gegen Schulnoten sind.</div>
+                    <div class="goethe-note-item">• Schlagen Sie andere Möglichkeiten der Leistungsbewertung vor.</div>
+                    <div class="goethe-note-item">• Nennen Sie die Vorteile der anderen Möglichkeiten.</div>
+                </div>
+
+                <div class="goethe-instructions">
+                    Denken Sie an eine Einleitung und einen Schluss. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Schreiben Sie mindestens 150 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 B2 官方评分标准拆解：如何稳拿高分？</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. **篇幅与结构**：字数在 180-220 字左右最佳。必须有完整的引入（Einleitung）和结尾（Schluss），4个要点一个都不能漏。<br>2. **句式丰富度**：B2 级别不需要写非常生涩的长难句，但要熟练运用从句嵌套、被动语态建议以及固定连接词，替代初级的 weil, und, aber。<br>3. **论证合乎逻辑**：阐述危害和原因时，论据要贴近生活且真实合理，语言表达自然流畅即可。</p>
+            </div>
+        </div>
+
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分论坛议论文分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Forumsbeitrag: Schulnoten – Noch zeitgemäß oder überholt?</div>
+            
+            <div class="essay-canvas">
+                In der heutigen Gesellschaft <span class="goethe-token" data-id="1">gewinnt die Frage, ob Schulnoten noch zeitgemäß sind, zunehmend an Bedeutung.</span> Ich möchte in diesem Forumsbeitrag meine Ansicht dazu teilen, da dieses Thema fast alle Familien betrifft.
+                <br>
+                <span class="goethe-token" data-id="2">Meiner Einsicht nach sind traditionelle Schulnoten in der heutigen Zeit nicht mehr unbedingt notwendig.</span> Viele Experten weisen darauf hin, dass Zensuren oft zu einer unfairen Bewertung führen und den individuellen Lernfortschritt vernachlässigen.
+                <br>
+                <span class="goethe-token" data-id="3">Ein wesentlicher Grund dafür liegt darin, dass</span> herkömmliche Noten enormen psychischen Druck auf Jugendliche ausüben. Anstatt aus reinem Interesse zu lernen, konzentrieren sich Schüler oft nur noch auf das Auswändiglernen für die nächste Prüfung.
+                <br>
+                <span class="goethe-token" data-id="4">Aus diesem Grund halte ich es für sinnvoll, wenn</span> Schulen vermehrt auf ausführliche, schriftliche Beurteilungen setzen würden. <span class="goethe-token" data-id="5">Als eine gute Alternative ließe sich</span> auch ein sogenanntes Portfolio-System einführen, bei dem die praktischen Arbeiten und langfristigen Projekte der Schüler gesammelt und bewertet werden.
+                <br>
+                <span class="goethe-token" data-id="6">Ein entscheidender Vorteil dieser Methoden besteht darin, dass</span> der Fokus viel stärker auf der persönlichen Weiterentwicklung des Kindes liegt. <span class="goethe-token" data-id="7">Hinzu kommt, dass</span> dadurch das ungesunde Konkurrenzdenken im Klassenzimmer deutlich reduziert werden kann.
+                <br>
+                <span class="goethe-token" data-id="8">Abschließend lässt sich feststellen, dass</span> eine modernere Art der Leistungsbewertung zu einer motivierenderen und gerechteren Schulzeit beitragen würde.
+            </div>
+        </div>
+
+    </div>
+
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 (Teil 1) 议论文高级语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "... gewinnt die Frage, ob ..., zunehmend an Bedeutung.",
+                cn: "释义：……这一问题正变得越来越重要。（高级引入句型）",
+                tip: "这是替代初级开篇“...ist ein wichtiges Thema”的绝佳高阶句式。它巧妙地结合了 <b>ob 引导的宾语从句</b> 和固定搭配 <b>zunehmend an Bedeutung gewinnen</b>（逐渐变得重要），能让考官眼前一亮，瞬间拉高整篇文章的书面语基调。",
+                ex: "<b>替换应用演示：</b><br>In der heutigen Gesellschaft <b>gewinnt die Frage, ob</b> Homeoffice effizienter ist, <b>zunehmend an Bedeutung</b>.<br>(在当今社会，居家办公是否更有效率这一问题正变得越来越重要。)"
+            },
+            2: {
+                de: "Meiner Einsicht nach sind ...",
+                cn: "释义: 依我之见/在我看来……（地道书面表态句）",
+                tip: "用于精准应对第一个提示点（表明个人立场）。许多考生习惯使用初级的 'Ich finde...' 或 'Meiner Meinung nach'，而使用 <b>Meiner Einsicht nach</b> 能让文章更具思辨和客观色彩。注意：该短语位于句首时，后面要紧跟变位动词（即反转语序）。",
+                ex: "<b>核心拓展例句：</b><br><b>Meiner Einsicht nach</b> sind Noten nicht mehr zeitgemäß, weil sie Schüler nur demotivieren.<br>(依我之见，分数已经不再合时宜，因为它们只会打击学生的积极性。)"
+            },
+            3: {
+                de: "Ein wesentlicher Grund dafür liegt darin, dass ...",
+                cn: "释义：其一个核心原因在于……（深度剖析原因句）",
+                tip: "对应第二个提示点（阐明支持或反对的理由）。相比于简单的 'weil' 或 'denn' 引导的原因从句，使用结构稳固的 <b>Ein wesentlicher Grund dafür liegt darin, dass...</b> 能够让你的长句显得非常有条理，展现出 B2 级别应有的逻辑框架感。",
+                ex: "<b>核心拓展例句：</b><br><b>Ein wesentlicher Grund dafür liegt darin, dass</b> viele Kinder unter starkem Leistungsdruck leiden.<br>(其一个核心原因在于，许多孩子正承受着巨大的成绩压力。)"
+            },
+            4: {
+                de: "Aus diesem Grund halte ich es für sinnvoll, wenn ...",
+                cn: "释义：基于此，我认为如果……是很有意义的（高分建议对策句）",
+                tip: "对应第三个提示点（寻找替代的成绩评定方式）。巧妙运用了 <b>halten für + 形容词</b> 的高级复合结构，再嵌套一个 <b>wenn 从句</b>，使得表达既客观委婉，又展现了极强的句法控制力，是提出对策的经典满分句型。",
+                ex: "<b>核心拓展例句：</b><br><b>Aus diesem Grund halte ich es für sinnvoll, wenn</b> man anstelle von Noten schriftliche Berichte verfasst.<br>(基于此，我认为如果用书面报告来代替分数是很有意义的。)"
+            },
+            5: {
+                de: "Als eine gute Alternative ließe sich ...",
+                cn: "释义：作为一个很好的替代方案，可以……（第二虚拟式无人称对策句）",
+                tip: "同样用于第三点。当题目要求你提出一些建议（复数形式 Vorschläge）时，你必须给出至少两个办法。在写完第一个后，用 <b>Als eine gute Alternative ließe sich...</b> 顺畅递进，这里使用了地道的无人称被动替代结构（ließe sich + 不定式），高级而不死板。",
+                ex: "<b>核心拓展例句：</b><br><b>Als eine gute Alternative ließe sich</b> ein Punktesystem oder ein Portfolio-Bericht einführen.<br>(作为一个很好的替代方案，可以引入积分系统或档案报告。)"
+            },
+            6: {
+                de: "Ein entscheidender Vorteil dieser Methoden besteht darin, dass ...",
+                cn: "释义：这些方法的决定性优势在于……（直击要点的优势分析句）",
+                tip: "精准对齐第四个提示点（分析其他方式的优点）。直接用名词词组作为主语开篇，句子结构非常清晰、直接。再搭配介词固定搭配 <b>bestehen darin, dass...</b>（在于……），能在一句话内把具体的长处包裹在后面，逻辑十分紧密。",
+                ex: "<b>核心拓展例句：</b><br><b>Ein entscheidender Vorteil dieser Methoden besteht darin, dass</b> die Schüler individueller gefördert werden.<br>(这些方法的决定性优势在于，学生能够获得更具个性化的提升。)"
+            },
+            7: {
+                de: "Hinzu kommt, dass ...",
+                cn: "释义：此外/另外，……（顺畅的递进衔接词）",
+                tip: "同样用于第四点。当你想补充说明第二个优点时，<b>Hinzu kommt, dass...</b> 是比单纯的 'Außerdem' 或 'Zudem' 更有动态衔接感的 B2 必背连词，能让整段的优点陈述层层递进，毫无生硬凑字数的痕迹。",
+                ex: "<b>核心拓展例句：</b><br><b>Hinzu kommt, dass</b> das ständige Konkurrenzdenken unter den Schülern abnimmt.<br>(此外，学生之间持久的竞争心理也会有所减弱。)"
+            },
+            8: {
+                de: "Abschließend lässt sich feststellen, dass ...",
+                cn: "释义：最后可以得出结论的是……（满分收尾总结句）",
+                tip: "满足题目对文章必须有“Schluss（结尾）”的刚性要求。通过无人称被动语态表达法 <b>lässt sich feststellen</b>（可以得出结论/确定），代替了口语化的 'Am Ende denke ich'。句子既有 B2 阶段应有的端庄感，又非常自然，能为文章画上完美的句号。",
+                ex: "<b>核心拓展例句：</b><br><b>Abschließend lässt sich feststellen, dass</b> eine Reform der Leistungsbewertung dringend notwendig ist.<br>(最后可以得出结论的是，成绩评定制的改革迫在眉睫。)"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 考官核心思维拆解：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
