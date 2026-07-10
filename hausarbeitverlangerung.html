@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="de" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Goethe-Zertifikat B2 - Interaktives Schreibstudio Teil 2</title>
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --brand-teal: #0d9488;
+            --brand-teal-light: #f0fdfa;
+            --amber-bright: #b45309;
+            --amber-bg: #fffbeb;
+            --text-main: #0f172a;
+            --border-crisp: #e2e8f0;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            body { padding: 32px; }
+        }
+
+        .top-actions {
+            max-width: 1300px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            color: var(--slate-700);
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .back-btn:hover {
+            background-color: var(--slate-100);
+            color: var(--slate-900);
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+
+        .studio-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .studio-grid {
+                grid-template-columns: 520px 1fr;
+            }
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-crisp);
+        }
+
+        .tech-header-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .goethe-exam-paper {
+            background: #ffffff;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+        }
+
+        .goethe-paper-header {
+            border-bottom: 3px double #334155;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .goethe-cert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .goethe-teil-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .goethe-context-text {
+            font-size: 14px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .goethe-note-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .goethe-note-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .goethe-note-item {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.04);
+            padding: 14px;
+            font-size: 13px;
+            color: #111827;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            border-radius: 2px;
+            transform: rotate(-0.5deg);
+        }
+
+        .goethe-note-item:nth-child(even) {
+            transform: rotate(0.8deg);
+            background: #fdfdfd;
+        }
+
+        .goethe-instructions {
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 14px;
+        }
+
+        .chinese-guard-panel {
+            background: var(--brand-teal-light);
+            border-left: 4px solid var(--brand-teal);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px;
+            font-size: 13px;
+            color: #115e59;
+        }
+
+        .essay-canvas {
+            font-size: 16px;
+            line-height: 2.4;
+            color: var(--slate-900);
+            text-align: justify;
+        }
+
+        .essay-h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 16px;
+            border-bottom: 1px dashed var(--border-crisp);
+            padding-bottom: 8px;
+        }
+
+        .goethe-token {
+            background-color: #ccfbf1;
+            border-bottom: 2.5px solid var(--brand-teal);
+            color: #115e59;
+            padding: 2px 4px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s ease-in-out;
+            display: inline;
+        }
+
+        .goethe-token:hover {
+            background-color: #99f6e4;
+            color: #134e4a;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        }
+
+        .popover-shroud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .popover-shroud.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-cabin {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-crisp);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .popover-shroud.active .popover-cabin {
+            transform: scale(1);
+        }
+
+        .cabin-top-bar {
+            background: var(--slate-900);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .cabin-meta-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .cabin-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .cabin-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .cabin-main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .phrase-de-display {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .phrase-cn-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-guide-box {
+            font-size: 14px;
+            color: var(--slate-700);
+            line-height: 1.6;
+            background: var(--slate-100);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--brand-teal);
+            margin-bottom: 16px;
+        }
+
+        .phrase-example-box {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: var(--radius-md) ;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-actions">
+        <a href="index.html" class="back-btn">
+            <span>←</span> Zurück zur Übersicht
+        </a>
+    </div>
+
+    <div class="studio-grid">
+        
+        <!-- 左侧区域：考试试卷复刻 (Teil 2) -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📋 歌德 B2 写作真题沙盒</div>
+            </div>
+            
+            <div class="goethe-exam-paper">
+                <div class="goethe-paper-header">
+                    <div class="goethe-cert-title">Goethe-Zertifikat B2<br><span style="font-size: 12px; font-weight: normal; color: #475569;">Modul Schreiben</span></div>
+                    <div class="goethe-teil-title">Teil 2</div>
+                </div>
+
+                <div class="goethe-context-text">
+                    Sie sind Student(in) und müssen bis zum Ende der Woche eine Hausarbeit abgeben. Sie waren jedoch mehrere Tage krank, sodass Sie den Termin nicht einhalten können. Schreiben Sie eine Nachricht an Ihren Professor, Herrn Dr. Kleinschmidt.
+                </div>
+
+                <div class="goethe-note-grid">
+                    <div class="goethe-note-item">Schildern Sie Ihr gesundheitliches Problem.</div>
+                    <div class="goethe-note-item">Entschuldigen Sie sich für die Verzögerung.</div>
+                    <div class="goethe-note-item">Bitten Sie höflich um einen neuen Abgabetermin.</div>
+                    <div class="goethe-note-item">Machen Sie einen Vorschlag, was Sie noch zusätzlich tun können, um das Seminar erfolgreich zu bestehen.</div>
+                </div>
+
+                <div class="goethe-instructions">
+                    Überlegen Sie sich eine passende Reihenfolge für die Inhaltspunkte. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Vergessen Sie nicht Anrede und Gruß. Schreiben Sie mindestens 100 Wörter.
+                </div>
+            </div>
+
+            <div class="chinese-guard-panel">
+                <p style="margin-bottom: 6px; font-weight: 800;">💡 考官视角：学术公文信核心要点</p>
+                <p style="line-height: 1.5; opacity: 0.9;">1. **尊称与头衔**：致信对象为教授 Herr Dr. Kleinschmidt，德语学术界非常看重头衔。称呼语必须使用严谨的 `Sehr geehrter Herr Dr. Kleinschmidt,`，切勿遗漏“Dr.”。<br>2. **病因陈述尺度**：描述健康问题时点到为止，重点应放在使用 `sodass` 或 `wegen` 等语法结构，将“生病”与“无法按时交付”的逻辑结果丝滑连结。<br>3. **主动性补救方案**：德国教授极度看重学生的主动性（Eigeninitiative）。在请求延期时，主动提出承担额外的补充任务以确保通过研讨课，是冲刺高分档的核心逻辑亮点。</p>
+            </div>
+        </div>
+
+        <!-- 右侧区域：核心高分语料精读画布 -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <div class="tech-header-title">📖 活化高分公文信分析</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748b;">点击高亮词直接激活视窗精析</div>
+            </div>
+            
+            <div class="essay-h1">Formelle Nachricht: Fristverlängerung Hausarbeit</div>
+            
+            <div class="essay-canvas">
+                Sehr geehrter Herr Dr. Kleinschmidt,
+                <br>
+                ich wende mich heute an Sie, <span class="goethe-token" data-id="1">um mich aufrichtig für die Verzögerung bei der Abgabe meiner Hausarbeit zu entschuldigen</span>.
+                <br>
+                <span class="goethe-token" data-id="2">Leider war ich in den letzten Tagen gesundheitlich stark angeschlagen</span> und bettlägerig, <span class="goethe-token" data-id="3">sodass es mir unmöglich war, den vereinbarten Termin einzuhalten</span>. Aus diesem Grund konnte ich nicht wie geplant am Schreibtisch arbeiten.
+                <br>
+                Angesichts dieser Situation <span class="goethe-token" data-id="4">möchte ich Sie höflich um eine kurze Fristverlängerung bitten</span>. Ein Aufschub um eine Woche würde mir sehr helfen, die Arbeit in der gewünschten Qualität fertigzustellen.
+                <br>
+                <span class="goethe-token" data-id="5">Um das Seminar dennoch erfolgreich zu bestehen, schlage ich vor,</span> zusätzlich ein detailliertes Handout auszuarbeiten oder eine ergänzende Aufgabe zu übernehmen.
+                <br>
+                Ich hoffe sehr auf Ihr Verständnis für meine Lage. <span class="goethe-token" data-id="6">Für Ihre Mühe und Ihre Rückmeldung danke ich Ihnen im Voraus.</span>
+                <br>
+                Mit freundlichen Grüßen
+                <br>
+                [Ihr Vorname und Nachname]
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 中央高光视窗解析舱 -->
+    <div id="popover-shroud" class="popover-shroud">
+        <div class="popover-cabin">
+            <div class="cabin-top-bar">
+                <div class="cabin-meta-title">歌德 B2 (Teil 2) 学术公文信高级语料精析舱</div>
+                <button class="cabin-close-btn" onclick="closePopover()">×</button>
+            </div>
+            <div class="cabin-main-content">
+                <div id="p-de" class="phrase-de-display"></div>
+                <div id="p-cn" class="phrase-cn-display"></div>
+                <div id="p-tip" class="phrase-guide-box"></div>
+                <div id="p-ex" class="phrase-example-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phraseRepo = {
+            1: {
+                de: "um mich aufrichtig für die Verzögerung bei ... zu entschuldigen",
+                cn: "释义：就……的延误向您表达诚挚的歉意。（完美的点题与开头）",
+                tip: "精准对齐第二个提示点。在正式的师生或职场书信中，使用 <b>sich für etwas entschuldigen</b> 结构，搭配副词 <b>aufrichtig</b>（诚挚地），比单纯写 'Es tut mir leid' 更加庄重。名词 <b>die Verzögerung</b>（延误）是高频的 B2 核心词汇，极受考官青睐。",
+                ex: "<b>替换应用演示：</b><br>Ich schreibe Ihnen, <b>um mich aufrichtig für die Verzögerung bei</b> der Einsendung des Dokuments <b>zu entschuldigen</b>.<br>(我写信给您，是想就文件提交的延误向您表达诚挚的歉意。)"
+            },
+            2: {
+                de: "Leider war ich in den letzten Tagen gesundheitlich stark angeschlagen ...",
+                cn: "释义：可惜前几天我身体状况非常糟糕……（得体且书面化的病情描述）",
+                tip: "精准对齐第一个提示点。<b>gesundheitlich angeschlagen sein</b>（身体抱恙/虚弱）是德语中非常地道、委婉且正式的请假表达。相比于死板的 'Ich war krank'，这个短语能体现高级词汇的灵活运用，非常符合向教授交代客观困难时的分寸感。",
+                ex: "<b>核心拓展例句：</b><br>Da unser Mitarbeiter <b>gesundheitlich stark angeschlagen</b> ist, kann er heute nicht kommen.<br>(由于我们的员工身体十分抱恙，他今天无法前来。)"
+            },
+            3: {
+                de: "sodass es mir unmöglich war, den vereinbarten Termin einzuhalten.",
+                cn: "释义：导致我无法遵守约定好的截止时间。（原因与结果的丝滑连结）",
+                tip: "结合了语法与高分功能搭配。<b>sodass</b> 引导的结果从句是 B2 写作中必须展示的核心从句结构。固定搭配 <b>einen Termin einhalten</b> 意为‘遵守期限/按时完成’，与 <b>es ist mir unmöglich</b>（对我来说是不可能的）组合，合情合理地阐述了未交作业的客观原因。",
+                ex: "<b>核心拓展例句：</b><br>Das System ist abgestürzt, <b>sodass es mir unmöglich war,</b> die Datei rechtzeitig zu speichern.<br>(系统崩溃了，导致我无法及时保存文件。)"
+            },
+            4: {
+                de: "möchte ich Sie höflich um eine kurze Fristverlängerung bitten.",
+                cn: "释义：我想冒昧地向您请求短暂延长截止日期。（表达核心诉求的满分句型）",
+                tip: "精准对齐第三个提示点。向长辈、上司或教授提出请求时，使用 <b>möchte ich ... höflich um etwas bitten</b> 结构，既保持了绝对的礼貌，又显得不卑不亢。复合词 <b>die Fristverlängerung</b>（延长截止日期）是学术和行政场景中的高频专业词汇，能有效替换口语化的 'mehr Zeit'。",
+                ex: "<b>核心拓展例句：</b><br>Wegen der laufenden Prüfungen <b>möchte ich Sie höflich um eine kurze Fristverlängerung bitten</b>.<br>(由于目前正在进行的考试，我想冒昧地向您请求短暂延长截止日期。)"
+            },
+            5: {
+                de: "Um das Seminar dennoch erfolgreich zu bestehen, schlage ich vor, ...",
+                cn: "释义：为了依然能够顺利通过本门课程，我建议……（体现主动性的补救提案）",
+                tip: "精准对齐第四个提示点。<b>Um ... zu ...</b> 目的从句置于句首能很好地变换句式结构。副词 <b>dennoch</b>（尽管如此，依然）在句中起到了承上启下的转折作用，向教授展现了你面对客观困难时依然积极、不放弃的学术态度。动词短语 <b>ein Seminar bestehen</b>（通过研讨课）切中题目核心。",
+                ex: "<b>核心拓展例句：</b><br><b>Um</b> die Prüfung <b>dennoch erfolgreich zu bestehen, schlage ich vor,</b> die verpassten Aufgaben nachzuholen.<br>(为了依然能顺利通过考试，我建议把错过的任务补上。)"
+            },
+            6: {
+                de: "Für Ihre Mühe und Ihre Rückmeldung danke ich Ihnen im Voraus.",
+                cn: "释义：对于您的费心与回复，我在此提前表示感谢。（标准的公文信收尾）",
+                tip: "用于正式信件结尾的黄金万能句。固定搭配 <b>jemandem für etwas danken</b> 加上 <b>im Voraus</b>（提前），既对教授的时间和付出表示了尊重，又非常得体地暗示了自己正在“期待收到对方的回信”。适用于所有求助信、请假信的末尾。",
+                ex: "<b>核心拓展例句：</b><br><b>Für Ihre Mühe</b> und Ihr Verständnis <b>danke ich Ihnen im Voraus</b>.<br>(对于您的费心与理解，我在此提前表示感谢。)"
+            }
+        };
+
+        const shroud = document.getElementById('popover-shroud');
+
+        document.querySelectorAll('.goethe-token').forEach(token => {
+            token.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                const data = phraseRepo[id];
+                
+                if (data) {
+                    document.getElementById('p-de').innerText = data.de;
+                    document.getElementById('p-cn').innerText = data.cn;
+                    document.getElementById('p-tip').innerHTML = `<strong>💡 深度语法与写作剖析：</strong><br>${data.tip}`;
+                    document.getElementById('p-ex').innerHTML = data.ex;
+                    shroud.classList.add('active');
+                }
+            });
+        });
+
+        function closePopover() {
+            shroud.classList.remove('active');
+        }
+
+        shroud.addEventListener('click', function(e) {
+            if (e.target === shroud) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+    </script>
+</body>
+</html>
